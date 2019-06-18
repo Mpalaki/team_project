@@ -83,7 +83,6 @@ public class User implements Serializable {
     @Column(name = "comments_no")
     private Integer commentsNo;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "role")
     private int role;
 

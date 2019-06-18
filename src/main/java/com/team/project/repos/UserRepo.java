@@ -7,6 +7,7 @@ package com.team.project.repos;
 
 import com.team.project.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -15,4 +16,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepo  extends JpaRepository<User,Integer>{
     
     public User findByUsername(String username);
+    
+    @Query("SELECT COUNT(u) FROM User u WHERE u.username=?1")
+    public Long countUsers(String username);
+    
 }

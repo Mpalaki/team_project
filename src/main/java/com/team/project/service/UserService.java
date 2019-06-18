@@ -26,6 +26,14 @@ public class UserService {
             return false;
         }
     }
-    
+
+    public boolean doesUsernameExist(String username) {
+        try {
+            User u = ur.findByUsername(username);
+            return true;
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
 
 }
