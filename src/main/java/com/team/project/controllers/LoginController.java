@@ -22,24 +22,38 @@ public class LoginController {
 
     @Autowired
     UserRepo ur;
-    
 
     @RequestMapping("LoginController")
     public String test(HttpServletRequest request) {
         String username = request.getParameter("username");
         try {
             User user = ur.findByUsername(username);
-            if (!user.equals(null)) {
-                String givenpass = request.getParameter("password");
-                UserService us = new UserService(); // check if there is any other way to avoid creating new
-                if(us.isPasswordValid(user, givenpass)){
-                return "welcome";}
-                else{return "test";}
+            String givenpass = request.getParameter("password");
+            UserService us = new UserService(); // check if there is any other way to avoid creating new
+            if (us.isPasswordValid(user, givenpass)) {
+                return "welcome";
+            } else {
+                return "test";
             }
         } catch (NullPointerException e) {
             return "null";
         }
-        return "test";
+    }
+    @RequestMapping("SignupController")
+    public String register(HttpServletRequest request) {
+        String username = request.getParameter("username");
+        try {
+            User user = ur.findByUsername(username);
+            String givenpass = request.getParameter("password");
+            UserService us = new UserService(); // check if there is any other way to avoid creating new
+            if (us.isPasswordValid(user, givenpass)) {
+                return "welcome";
+            } else {
+                return "test";
+            }
+        } catch (NullPointerException e) {
+            return "null";
+        }
     }
 
 }

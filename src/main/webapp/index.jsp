@@ -18,5 +18,6 @@
             <input type="password" name="password" placeholder="password">
             <input type="submit" value="login">
         </form>
+        <a href="SignupController">Sign up</a>
     </body>
 </html>
