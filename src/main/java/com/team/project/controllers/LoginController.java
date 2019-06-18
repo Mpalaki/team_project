@@ -8,6 +8,7 @@ package com.team.project.controllers;
 import com.team.project.model.User;
 import com.team.project.repos.UserRepo;
 import com.team.project.service.UserService;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,19 +29,14 @@ public class LoginController {
     @RequestMapping("LoginController")
     public String test(HttpServletRequest request) {
         String username = request.getParameter("username");
-        try {
-            User user = ur.findByUsername(username);
-            String givenpass = request.getParameter("password");
-            UserService us = new UserService(); // check if there is any other way to avoid creating new
-            if (us.isPasswordValid(user, givenpass)) {
+        String givenpass = request.getParameter("password");
+        List<User> l = ur.findByUsernameAndPassword(username, givenpass);
+        if (l.isEmpty()) {
 //                HttpSession session = request.getSession();
 //                session.setAttribute("username", username);
-                return "welcome";
-            } else {
-                return "test";
-            }
-        } catch (NullPointerException e) {
-            return "null";
+            return "test";
+        } else {
+            return "welcome";
         }
     }
 
@@ -50,13 +46,17 @@ public class LoginController {
     }
 
     @RequestMapping("RegisterController")
-    public String register(User user, @RequestParam("username") String givenun) {
+    public String register(User user, @RequestParam("username") String givenun, @RequestParam("wordpass") String wordpass) {
         if (ur.countUsers(givenun) > 0) {
             return "test";
         } else {
-            user.setRole(2);
-            ur.save(user);
-            return "welcome";
+            if (givenun.equals(wordpass)) {
+                user.setRole(2);
+                ur.save(user);
+                return "welcome";
+            } else {
+                return "test";
+            }
         }
     }
 
