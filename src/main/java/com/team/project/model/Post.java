@@ -37,10 +37,23 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p")
     , @NamedQuery(name = "Post.findByIdpost", query = "SELECT p FROM Post p WHERE p.idpost = :idpost")
     , @NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post p WHERE p.title = :title")
-    , @NamedQuery(name = "Post.findByForsale", query = "SELECT p FROM Post p WHERE p.forsale = :forsale")
     , @NamedQuery(name = "Post.findByDate", query = "SELECT p FROM Post p WHERE p.date = :date")
-    , @NamedQuery(name = "Post.findByPrice", query = "SELECT p FROM Post p WHERE p.price = :price")})
+    })
 public class Post implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "title")
+    private String title;
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 145)
+    @Column(name = "description")
+    private String description;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,23 +61,11 @@ public class Post implements Serializable {
     @Basic(optional = false)
     @Column(name = "idpost")
     private Integer idpost;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "title")
-    private String title;
-    @Column(name = "forsale")
-    private Short forsale;
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
-    @Basic(optional = false)
+    
 //    @NotNull
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    @Column(name = "price")
-    private BigInteger price;
     @JoinColumn(name = "iduser", referencedColumnName = "iduser")
     @ManyToOne(optional = false)
     private User iduser;
@@ -90,30 +91,6 @@ public class Post implements Serializable {
         this.idpost = idpost;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Short getForsale() {
-        return forsale;
-    }
-
-    public void setForsale(Short forsale) {
-        this.forsale = forsale;
-    }
-
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -122,14 +99,7 @@ public class Post implements Serializable {
         this.date = date;
     }
 
-    public BigInteger getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigInteger price) {
-        this.price = price;
-    }
-
+    
     public User getIduser() {
         return iduser;
     }
@@ -161,6 +131,30 @@ public class Post implements Serializable {
     @Override
     public String toString() {
         return "com.team.project.model.Post[ idpost=" + idpost + " ]";
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
 }

@@ -15,11 +15,8 @@
         <form action="insertpost" method="post">
             <input type="text" name="title" placeholder="insert post title"></br>
             <textarea rows = "5" cols = "50" name = "description">
-            Enter your name
-            </textarea></br>
-            <input type="checkbox" name="for sale" placeholder="username"></br>
-            Is it for sale? <input type="password" name="password" ></br>
-            <input type="price" name="price" placeholder="enter price"></br>
+            Enter your description
+            </textarea></br>           
 
             <input type="submit">
             </body>

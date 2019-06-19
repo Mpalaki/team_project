@@ -31,9 +31,10 @@ public class PostController {
     }
 
     @RequestMapping("insertpost")
-    public String register(HttpSession session, Post post) {
-        User u = (User) session.getAttribute("user");
+    public String register(HttpSession session, Post post, ModelMap mm) {
+        User u = (User) session.getAttribute("user");        
         post.setIduser(u);
+        mm.addAttribute(post);
         pr.save(post);
         return "welcome";
     }
