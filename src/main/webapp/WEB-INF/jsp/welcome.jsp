@@ -12,6 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>welcome ${username}</h1>
+        <h1>welcome ${user.username}</h1>
+        
+        <a href="addpost">post your art</a></br>
+        
+        ${post.title}
     </body>
 </html>

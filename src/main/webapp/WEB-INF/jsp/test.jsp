@@ -20,7 +20,7 @@
              <input type="password" name="password" placeholder="password"></br>
              <input type="password" name="wordpass" placeholder="repeat password"></br>
              <input type="text" name="emailAddress" placeholder="email address"></br>
-             <input type="text" name="phone_no" placeholder="telephone number"></br>
+             <input type="text" name="telephone" placeholder="telephone number"></br>
                 
             <input type="submit">
     </body>

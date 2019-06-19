@@ -7,12 +7,12 @@ package com.team.project.controllers;
 
 import com.team.project.model.User;
 import com.team.project.repos.UserRepo;
-import com.team.project.service.UserService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,15 +27,16 @@ public class LoginController {
     UserRepo ur;
 
     @RequestMapping("LoginController")
-    public String test(HttpServletRequest request) {
+    public String login(HttpServletRequest request, ModelMap mm) {
         String username = request.getParameter("username");
         String givenpass = request.getParameter("password");
-        List<User> l = ur.findByUsernameAndPassword(username, givenpass);
-        if (l.isEmpty()) {
-//                HttpSession session = request.getSession();
-//                session.setAttribute("username", username);
+        User u = ur.findByUsernameAndPassword(username, givenpass);
+        if (u == null) {
             return "test";
         } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", u);
+            mm.addAttribute("user", u);
             return "welcome";
         }
     }
@@ -51,7 +52,7 @@ public class LoginController {
             return "test";
         } else {
             if (givenun.equals(wordpass)) {
-                user.setRole(2);
+                user.setRole(2); // eisagontai oloi os aploi users, oi admins tha prostithentai kateutheian stin vasi
                 ur.save(user);
                 return "welcome";
             } else {

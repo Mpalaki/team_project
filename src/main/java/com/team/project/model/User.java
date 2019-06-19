@@ -7,7 +7,9 @@ package com.team.project.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,10 +18,12 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -42,12 +46,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role")})
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "iduser")
-    private Integer iduser;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -73,18 +71,26 @@ public class User implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "email_address")
     private String emailAddress;
-    @Column(name = "telephone")
-    private BigInteger telephone;
     @Lob
     @Column(name = "avatar")
     private byte[] avatar;
+    @Column(name = "role")
+    private Integer role;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    private Collection<Post> postCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "iduser")
+    private Integer iduser;
+    @Column(name = "telephone")
+    private BigInteger telephone;
     @Column(name = "posts_no")
     private Integer postsNo;
     @Column(name = "comments_no")
     private Integer commentsNo;
-    @Basic(optional = false)
-    @Column(name = "role")
-    private int role;
 
     public User() {
     }
@@ -127,21 +133,6 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getEmailAddress() {
         return emailAddress;
@@ -159,13 +150,6 @@ public class User implements Serializable {
         this.telephone = telephone;
     }
 
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
-    }
 
     public Integer getPostsNo() {
         return postsNo;
@@ -183,13 +167,6 @@ public class User implements Serializable {
         this.commentsNo = commentsNo;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
 
     @Override
     public int hashCode() {
@@ -214,6 +191,51 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.team.project.model.User[ iduser=" + iduser + " ]";
+    }
+
+    
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+   
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    @XmlTransient
+    public Collection<Post> getPostCollection() {
+        return postCollection;
+    }
+
+    public void setPostCollection(Collection<Post> postCollection) {
+        this.postCollection = postCollection;
     }
     
 }

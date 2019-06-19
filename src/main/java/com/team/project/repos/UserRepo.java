@@ -21,7 +21,6 @@ public interface UserRepo  extends JpaRepository<User,Integer>{
     @Query("SELECT COUNT(u) FROM User u WHERE u.username=?1")
     public Long countUsers(String username);
     
-    @Query("SELECT u FROM User u WHERE u.username=?1 and u.password=?2")
-    public List<User> findByUsernameAndPassword(String username, String password);
+    public  User findByUsernameAndPassword(String username, String password);
     
 }
