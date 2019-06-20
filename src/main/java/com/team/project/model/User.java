@@ -8,6 +8,7 @@ package com.team.project.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +21,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -74,6 +77,11 @@ public class User implements Serializable {
     @Lob
     @Column(name = "avatar")
     private byte[] avatar;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "signup_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date signupDate;
     @Column(name = "role")
     private Integer role;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
@@ -215,6 +223,8 @@ public class User implements Serializable {
 
     
 
+    
+
     public String getUsername() {
         return username;
     }
@@ -232,13 +242,20 @@ public class User implements Serializable {
     }
 
     
-
     public byte[] getAvatar() {
         return avatar;
     }
 
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
+    }
+
+    public Date getSignupDate() {
+        return signupDate;
+    }
+
+    public void setSignupDate(Date signupDate) {
+        this.signupDate = signupDate;
     }
     
 }

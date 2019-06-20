@@ -7,14 +7,19 @@ package com.team.project.controllers;
 
 import com.team.project.model.User;
 import com.team.project.repos.UserRepo;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -47,12 +52,17 @@ public class LoginController {
     }
 
     @RequestMapping("RegisterController")
-    public String register(User user, @RequestParam("username") String givenun, @RequestParam("wordpass") String wordpass) {
+    public String register(User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
+            @RequestParam("wordpass") String wordpass, @RequestParam("photo") MultipartFile image) throws IOException, ServletException {
         if (ur.countUsers(givenun) > 0) {
             return "test";
         } else {
-            if (givenun.equals(wordpass)) {
+            if (password.equals(wordpass)) {
+                byte[] img = image.getBytes();
+                user.setAvatar(img);
                 user.setRole(2); // eisagontai oloi os aploi users, oi admins tha prostithentai kateutheian stin vasi
+                java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+                user.setSignupDate(date);
                 ur.save(user);
                 return "welcome";
             } else {

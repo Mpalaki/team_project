@@ -34,6 +34,8 @@ public class PostController {
     public String register(HttpSession session, Post post, ModelMap mm) {
         User u = (User) session.getAttribute("user");        
         post.setIduser(u);
+        java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+        post.setDate(date);
         mm.addAttribute(post);
         pr.save(post);
         return "welcome";
