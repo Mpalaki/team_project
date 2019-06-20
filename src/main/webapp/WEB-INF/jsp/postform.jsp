@@ -12,11 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="insertpost" method="post">
+        <form action="insertpost" enctype="multipart/form-data" method="post">
             <input type="text" name="title" placeholder="insert post title"></br>
             <textarea rows = "5" cols = "50" name = "description">
             Enter your description
-            </textarea></br>           
+            </textarea></br>  
+            <input type="file" name="photo1">
 
             <input type="submit">
             </body>

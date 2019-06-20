@@ -12,7 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>welcome ${user.username}</h1>
+        <h1>welcome ${user.username}</h1></br>
+<!--        <img src="users/avatar"-->
         
         <a href="addpost">post your art</a></br>
         
