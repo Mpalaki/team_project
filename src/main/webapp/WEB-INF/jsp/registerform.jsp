@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>opus artis</title>
     </head>
     <body>
-        <h1>test</h1>
+        <h1>sign up</h1>
         <form action="RegisterController" enctype="multipart/form-data" method="post">
              <input type="text" name="firstName" placeholder="first name"></br>
              <input type="text" name="lastName" placeholder="last name"></br>

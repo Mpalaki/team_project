@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,10 +15,30 @@
     </head>
     <body>
         <h1>welcome ${user.username}</h1></br>
-<!--        <img src="users/avatar"-->
-        
+        <!--        <img src="users/avatar"-->
+
         <a href="addpost">post your art</a></br>
-        
-        ${post.title}
+        <a href="getLastPosts">last posts</a></br>
+
+        <table>
+            <tr>
+                <th>title</th>
+                <th>description</th>
+                <th>idpost</th>
+
+            </tr>
+            <c:forEach var = "l" items="${posts}">
+                <tr>
+                    <td>${l.title}</td>
+                    <td>${l.description}</td>
+                    <td>${l.idpost}</td>
+
+                </tr>
+
+            </c:forEach>
+        </table>
+
+
+
     </body>
 </html>

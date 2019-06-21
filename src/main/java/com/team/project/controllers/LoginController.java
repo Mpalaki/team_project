@@ -8,12 +8,9 @@ package com.team.project.controllers;
 import com.team.project.model.User;
 import com.team.project.repos.UserRepo;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,7 +34,7 @@ public class LoginController {
         String givenpass = request.getParameter("password");
         User u = ur.findByUsernameAndPassword(username, givenpass);
         if (u == null) {
-            return "test";
+            return "registerform";
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("user", u);
@@ -48,14 +45,14 @@ public class LoginController {
 
     @RequestMapping("SignupController")
     public String redirectToSignupForm() {
-        return "test";
+        return "registerform";
     }
 
     @RequestMapping("RegisterController")
     public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
             @RequestParam("wordpass") String wordpass, @RequestParam("photo") MultipartFile image) throws IOException, ServletException {
         if (ur.countUsers(givenun) > 0) {
-            return "test";
+            return "registerform";
         } else {
             if (password.equals(wordpass)) {
                 byte[] img = image.getBytes();
@@ -66,7 +63,7 @@ public class LoginController {
                 ur.save(user);
                 return "welcome";
             } else {
-                return "test";
+                return "registerform";
             }
         }
     }
