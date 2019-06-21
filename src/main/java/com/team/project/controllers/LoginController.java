@@ -52,7 +52,7 @@ public class LoginController {
     }
 
     @RequestMapping("RegisterController")
-    public String register(User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
+    public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
             @RequestParam("wordpass") String wordpass, @RequestParam("photo") MultipartFile image) throws IOException, ServletException {
         if (ur.countUsers(givenun) > 0) {
             return "test";

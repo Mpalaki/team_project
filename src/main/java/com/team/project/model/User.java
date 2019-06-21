@@ -82,6 +82,8 @@ public class User implements Serializable {
     @Column(name = "signup_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date signupDate;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
+    private Collection<Comment> commentCollection;
     @Column(name = "role")
     private Integer role;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
@@ -225,6 +227,16 @@ public class User implements Serializable {
 
     
 
+
+    public Date getSignupDate() {
+        return signupDate;
+    }
+
+    public void setSignupDate(Date signupDate) {
+        this.signupDate = signupDate;
+    }
+
+    
     public String getUsername() {
         return username;
     }
@@ -250,12 +262,14 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
-    public Date getSignupDate() {
-        return signupDate;
+   
+    @XmlTransient
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
     }
 
-    public void setSignupDate(Date signupDate) {
-        this.signupDate = signupDate;
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
     }
     
 }

@@ -32,7 +32,8 @@ public class PostController {
         mm.addAttribute("session", session);
         return "postform";
     }
-
+///////////// EHO VALEI TRIGGERS STIN VASI AFTER INSERT KAI DELETE NA THYMITHO NA TOUS ELEGKSO. EHO TSEKAREI MONO GIA AFTER INSERT POST//////////////
+    
     @RequestMapping("insertpost")
     public String register(HttpSession session, Post post, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {
         User u = (User) session.getAttribute("user");
