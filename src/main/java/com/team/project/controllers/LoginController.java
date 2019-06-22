@@ -47,6 +47,10 @@ public class LoginController {
     public String redirectToSignupForm() {
         return "registerform";
     }
+    @RequestMapping("home")
+    public String homePage() {
+        return "welcome";
+    }
 
     @RequestMapping("RegisterController")
     public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,

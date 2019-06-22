@@ -20,20 +20,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class ProfileController {
-    
+
     @Autowired
     UserRepo ur;
-    
+
     @RequestMapping("redirectToProfile")
-    public String redirectToProfile(HttpSession session, ModelMap mm){
+    public String redirectToProfile(HttpSession session, ModelMap mm) {
         User u = (User) session.getAttribute("user");
         mm.addAttribute("user", u);
-    return "profile";}
-    
+        return "profile";
+    }
+
     @RequestMapping("viewArtists")
-    public String showArtists(ModelMap mm){
+    public String showArtists(ModelMap mm) {
         List<User> artists = ur.getUsersWherePostsNoGreaterThanZero();
         mm.addAttribute("artists", artists);
-        return "welcome";}
-    
-}   
+        return "welcome";
+    }
+
+}

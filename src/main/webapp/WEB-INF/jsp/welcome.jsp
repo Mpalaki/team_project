@@ -41,7 +41,7 @@
     </head>
     <body>
         <ul>
-            <li><a class="active" href="#home">Home</a></li>
+            <li><a class="active" href="home">Home</a></li>
             <li><a href="SignupController">Sign up</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="#about">About</a></li>
@@ -76,7 +76,10 @@
                         </div>
                         <div class="col-md-5">                            
                             <p>${l.description}</p>
-                            <a class="btn btn-primary" href="viewPost">View Project</a>
+
+                            <a class="btn btn-primary" href="<c:url value="viewPost">
+                                   <c:param name="idpost" value="${l.idpost}"/>
+                               </c:url>">View Project</a>
                         </div>
                     </div>
 

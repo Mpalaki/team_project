@@ -10,6 +10,7 @@ import com.team.project.model.User;
 import com.team.project.repos.PostRepo;
 import java.io.IOException;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,12 +48,23 @@ public class PostController {
         pr.save(post);
         return "welcome";
     }
-    
+
     @RequestMapping("getLastPosts")
     public String getLastPosts(ModelMap mm) {
-        List<Post> posts = pr.getLastPosts();  
+        List<Post> posts = pr.getLastPosts();
         mm.addAttribute("posts", posts);
-        
+
         return "welcome";
     }
+// TODO: below i bring from jsp only the idpost and inside the method i create the post and then pass it to other jsp.
+// should check if there is a way to pass str8 the post from first jsp...(with session it didnt work)
+
+    @RequestMapping("viewPost")
+    public String viewPost(HttpServletRequest req, ModelMap mm) {
+        int idpost = Integer.parseInt(req.getParameter("idpost"));
+        Post post = pr.getPostByIdpost(idpost);
+        mm.addAttribute("post", post);
+        return "postpage";
+    }
+
 }
