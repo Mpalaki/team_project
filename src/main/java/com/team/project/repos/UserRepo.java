@@ -23,4 +23,7 @@ public interface UserRepo  extends JpaRepository<User,Integer>{
     
     public  User findByUsernameAndPassword(String username, String password);
     
+    @Query("SELECT u from User u where u.postsNo>0 ")
+    public List<User> getUsersWherePostsNoGreaterThanZero();
+    
 }

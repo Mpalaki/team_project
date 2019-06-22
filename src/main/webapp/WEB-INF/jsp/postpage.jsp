@@ -1,6 +1,6 @@
 <%-- 
-    Document   : null
-    Created on : 17-Jun-2019, 16:39:47
+    Document   : postpage
+    Created on : 21-Jun-2019, 23:34:08
     Author     : Makis
 --%>
 
@@ -9,10 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>  postpage</title>
     </head>
     <body>
-        <h1>null</h1>
-        
+        <h1>postpage</h1>
     </body>
 </html>

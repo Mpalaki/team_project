@@ -1,6 +1,6 @@
 <%-- 
-    Document   : null
-    Created on : 17-Jun-2019, 16:39:47
+    Document   : profile
+    Created on : 21-Jun-2019, 16:43:54
     Author     : Makis
 --%>
 
@@ -9,10 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>profile</title>
     </head>
     <body>
-        <h1>null</h1>
-        
+        <h1>profile</h1>
+        ${user.username}</br>
+        ${user.postsNo}
     </body>
 </html>
