@@ -5,9 +5,12 @@
  */
 package com.team.project.controllers;
 
+import com.team.project.model.Post;
 import com.team.project.model.User;
+import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,6 +30,8 @@ public class LoginController {
 
     @Autowired
     UserRepo ur;
+    @Autowired
+    PostRepo pr;
 
     @RequestMapping("LoginController")
     public String login(HttpServletRequest request, ModelMap mm) {
@@ -39,6 +44,8 @@ public class LoginController {
             HttpSession session = request.getSession();
             session.setAttribute("user", u);
             mm.addAttribute("user", u);
+            List<Post> posts = pr.getLastPosts();
+            mm.addAttribute("posts", posts);
             return "welcome";
         }
     }
@@ -47,6 +54,7 @@ public class LoginController {
     public String redirectToSignupForm() {
         return "registerform";
     }
+
     @RequestMapping("home")
     public String homePage() {
         return "welcome";

@@ -56,6 +56,13 @@ public class PostController {
 
         return "welcome";
     }
+    @RequestMapping("/")
+    public String index(ModelMap mm) {
+        List<Post> posts = pr.getLastPosts();
+        mm.addAttribute("posts", posts);
+
+        return "welcome";
+    }
 // TODO: below i bring from jsp only the idpost and inside the method i create the post and then pass it to other jsp.
 // should check if there is a way to pass str8 the post from first jsp...(with session it didnt work)
 
