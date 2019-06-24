@@ -43,6 +43,7 @@ public class LoginController {
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("user", u);
+            session.setAttribute("username", username);
             mm.addAttribute("user", u);
             List<Post> posts = pr.getLastPosts();
             mm.addAttribute("posts", posts);

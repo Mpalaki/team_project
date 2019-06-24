@@ -37,14 +37,19 @@ public class PostController {
 ///////////// EHO VALEI TRIGGERS STIN VASI AFTER INSERT KAI DELETE NA THYMITHO NA TOUS ELEGKSO. EHO TSEKAREI MONO GIA AFTER INSERT POST//////////////
 
     @RequestMapping("insertpost")
-    public String addPost(HttpSession session, Post post, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {
+    public String addPost(HttpServletRequest request, Post post, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {
+        HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
+        String username = u.getUsername();
         byte[] img = image.getBytes();
         post.setPhoto(img);
         post.setIduser(u);
         java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
         post.setDate(date);
         mm.addAttribute(post);
+        mm.addAttribute("username",username);
+        session.setAttribute("user", u);
+        session.setAttribute("username", username);
         pr.save(post);
         return "welcome";
     }

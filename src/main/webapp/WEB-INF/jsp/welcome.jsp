@@ -40,8 +40,7 @@
         </style>
     </head>
     <body>
-<!--        an den ehei kanei login: -->
-        <% String username = request.getParameter("username");
+        <% String username = (String) session.getAttribute("username");
             if (username == null) {%>
 
         <ul>
@@ -56,13 +55,12 @@
             <input type="password" name="password" placeholder="password">
             <input type="submit" value="login">
         </form>
-            <!--            an ehei kanei login-->
+        <!--            an ehei kanei login-->
         <% } else { %>
 
         <!-- Menu -->
         <ul>
             <li><a class="active" href="home">Home</a></li>
-            <li><a href="SignupController">Sign up</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="viewArtists">Artists</a></li>
@@ -72,25 +70,24 @@
             </br>
 
         </ul>
-        <h1>welcome ${user.username}</h1></br>
-        <% }%>
-
-        <div class="container">
-
+        <h1> ${user.username}</h1></br>
+        <% }%><div class="container">
             <!-- Page Heading -->
-            <h1 class="my-4">OpusArtis.gr
-                <small>post your art</small>
+            <h1 class="my-4">OpusArtis.gr</br>
+                <small>last posts</small>
             </h1>
-
             <!-- posts -->
             <table>
-
                 <c:forEach var = "l" items="${posts}">
                     <tr>
                     <div class="row">
                         <div class="col-md-5">
                             <h3>${l.idpost}</h3>
                             <h3>${l.title}</h3>
+                            <h3>${photos}</h3>
+                            <td>
+                                <img src="data:image/jpg;base64,${photos}" alt="No image">
+                            </td>
                         </div>
                         <div class="col-md-7">
                             <a href="#">

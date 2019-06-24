@@ -6,7 +6,7 @@
 package com.team.project.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Post.findByIdpost", query = "SELECT p FROM Post p WHERE p.idpost = :idpost")
     , @NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post p WHERE p.title = :title")
     , @NamedQuery(name = "Post.findByDate", query = "SELECT p FROM Post p WHERE p.date = :date")
-    })
+})
 public class Post implements Serializable {
 
     @Basic(optional = false)
@@ -67,7 +67,7 @@ public class Post implements Serializable {
     @Basic(optional = false)
     @Column(name = "idpost")
     private Integer idpost;
-    
+
 //    @NotNull
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -105,7 +105,6 @@ public class Post implements Serializable {
         this.date = date;
     }
 
-    
     public User getIduser() {
         return iduser;
     }
@@ -172,4 +171,15 @@ public class Post implements Serializable {
         this.commentCollection = commentCollection;
     }
     
+//    public String getStringPhoto() {
+//        return convertBinImageToString(photo);
+//    }
+//
+//    public static String convertBinImageToString(byte[] accPicture) {
+//        if (accPicture != null && accPicture.length > 0) {
+//            return Base64.getEncoder().encodeToString(accPicture);
+//        } else {
+//            return "";
+//        }
+//    }
 }
