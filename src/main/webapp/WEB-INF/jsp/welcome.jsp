@@ -40,7 +40,12 @@
         </style>
     </head>
     <body>
-        <% String username = (String) session.getAttribute("username");
+        <% 
+            response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");// htttp 1.1
+            response.setHeader("Pragma", "no-cache"); // http 1/0
+            response.setHeader("Expires", "0"); // proxies
+            
+            String username = (String) session.getAttribute("username");
             if (username == null) {%>
 
         <ul>
@@ -48,7 +53,7 @@
             <li><form action="LoginController" method="post">
             <input type="text" name="username" placeholder="username">
             <input type="password" name="password" placeholder="password">
-            <input type="submit" value="login">
+            <input type="submit" value="login"></li>
             <li><a class="active" href="#home">Home</a></li>
             <li><a href="SignupController">Sign up</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -70,6 +75,8 @@
             <li><a href="addpost">post your art</a></li>
             <li><a href="getLastPosts">last posts</a></li>
             <li><a href="redirectToProfile">my profile</a></li>
+            <li><form action="logout" method="post">            
+            <input type="submit" value="logout"></li>
             </br>
 
         </ul>

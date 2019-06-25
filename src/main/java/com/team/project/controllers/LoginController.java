@@ -48,12 +48,18 @@ public class LoginController {
             session.setAttribute("user", u);
             session.setAttribute("username", username);
             mm.addAttribute("user", u);
-            List<Post> posts = pr.getLastPosts();
+            List<Post> posts = ps.getTenLastsPosts();
             mm.addAttribute("posts", posts);
             return "welcome";
         }
     }
 
+    @RequestMapping("logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("username");
+        session.invalidate();        
+        return "welcome";
+    }
     @RequestMapping("SignupController")
     public String redirectToSignupForm() {
         return "registerform";
