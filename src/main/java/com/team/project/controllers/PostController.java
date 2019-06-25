@@ -8,6 +8,7 @@ package com.team.project.controllers;
 import com.team.project.model.Post;
 import com.team.project.model.User;
 import com.team.project.repos.PostRepo;
+import com.team.project.service.PostService;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,8 @@ public class PostController {
 
     @Autowired
     PostRepo pr;
+    @Autowired
+    PostService ps;
 
     @RequestMapping("addpost")
     public String redirectToInsertPostForm(HttpSession session, ModelMap mm) {
@@ -47,7 +50,7 @@ public class PostController {
         java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
         post.setDate(date);
         mm.addAttribute(post);
-        mm.addAttribute("username",username);
+        mm.addAttribute("username", username);
         session.setAttribute("user", u);
         session.setAttribute("username", username);
         pr.save(post);
@@ -56,14 +59,79 @@ public class PostController {
 
     @RequestMapping("getLastPosts")
     public String getLastPosts(ModelMap mm) {
-        List<Post> posts = pr.getLastPosts();
+        List<Post> posts = ps.getTenLastsPosts();
         mm.addAttribute("posts", posts);
 
         return "welcome";
     }
+
+    @RequestMapping("2")
+    public String get11to20Posts(ModelMap mm) {
+        List<Post> posts = ps.get11to20Posts();
+        mm.addAttribute("posts", posts);
+
+        return "welcome";
+    }
+
+    @RequestMapping("3")
+    public String get21to30Posts(ModelMap mm) {
+        List<Post> posts = ps.get21to30Posts();
+        mm.addAttribute("posts", posts);
+
+        return "welcome";
+    }
+
+    @RequestMapping("4")
+    public String get31to40Posts(ModelMap mm) {
+        List<Post> posts = ps.get31to40Posts();
+        mm.addAttribute("posts", posts);
+
+        return "welcome";
+    }
+
+    @RequestMapping("5")
+    public String get41to50Posts(ModelMap mm) {
+        List<Post> posts = ps.get41to50Posts();
+        mm.addAttribute("posts", posts);
+
+        return "welcome";
+    }
+
+    @RequestMapping("6")
+    public String get51to60Posts(ModelMap mm) {
+        List<Post> posts = ps.get51to60Posts();
+        mm.addAttribute("posts", posts);
+
+        return "welcome";
+    }
+
+    @RequestMapping("7")
+    public String get61to70Posts(ModelMap mm) {
+        List<Post> posts = ps.get61to70Posts();
+        mm.addAttribute("posts", posts);
+
+        return "welcome";
+    }
+
+    @RequestMapping("8")
+    public String get71to80Posts(ModelMap mm) {
+        List<Post> posts = ps.get71to80Posts();
+        mm.addAttribute("posts", posts);
+
+        return "welcome";
+    }
+
+    @RequestMapping("9")
+    public String get81to90Posts(ModelMap mm) {
+        List<Post> posts = ps.get81to90Posts();
+        mm.addAttribute("posts", posts);
+
+        return "welcome";
+    }
+
     @RequestMapping("/")
     public String index(ModelMap mm) {
-        List<Post> posts = pr.getLastPosts();
+        List<Post> posts = ps.getTenLastsPosts();
         mm.addAttribute("posts", posts);
 
         return "welcome";

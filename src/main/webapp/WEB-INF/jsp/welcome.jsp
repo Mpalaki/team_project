@@ -44,17 +44,20 @@
             if (username == null) {%>
 
         <ul>
+            
+            <li><form action="LoginController" method="post">
+            <input type="text" name="username" placeholder="username">
+            <input type="password" name="password" placeholder="password">
+            <input type="submit" value="login">
             <li><a class="active" href="#home">Home</a></li>
             <li><a href="SignupController">Sign up</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="viewArtists">Artists</a></li>
+        </form></li>
+            
         </ul>
-        <form action="LoginController" method="post">
-            <input type="text" name="username" placeholder="username">
-            <input type="password" name="password" placeholder="password">
-            <input type="submit" value="login">
-        </form>
+        
         <!--            an ehei kanei login-->
         <% } else { %>
 
@@ -145,13 +148,29 @@
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="#">1</a>
+                    <a class="page-link" href="getLastPosts">1</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="#">2</a>
+                    <a class="page-link" href="2">2</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="#">3</a>
+                    <a class="page-link" href="3">3</a>
+                <li class="page-item">
+                    <a class="page-link" href="4">4</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="5">5</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="6">6</a>
+                <li class="page-item">
+                    <a class="page-link" href="7">7</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="8">8</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="9">9</a>
                 </li>
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
