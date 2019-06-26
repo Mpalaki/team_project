@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>opus artis</title>
     </head>
-    <body>
+    <body style="background-image: url(resources/soccer.jpg); background-size: cover">
         <h1>sign up</h1>
         <form action="RegisterController" enctype="multipart/form-data" method="post">
              <input type="text" name="firstName" placeholder="first name"></br>
