@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -145,6 +146,16 @@ public class PostController {
         Post post = pr.getPostByIdpost(idpost);
         mm.addAttribute("post", post);
         return "postpage";
+    }
+    
+    @RequestMapping(value="deletepost",  method = RequestMethod.GET)
+    public String deletePost(HttpServletRequest req, ModelMap mm) {
+        int idpost = Integer.parseInt(req.getParameter("idpost"));
+        Post p = pr.getPostByIdpost(idpost);
+        pr.delete(p);
+        List<Post> posts = ps.getTenLastsPosts();
+        mm.addAttribute("posts", posts);
+        return "welcome";
     }
 
 }

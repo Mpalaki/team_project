@@ -90,119 +90,126 @@
                         <!-- posts -->
                         <table>
                             <c:forEach var = "l" items="${posts}">
-<!--                                theto tin id tou user pou einai sundedemenos-->
+                                <!--                                theto tin id tou user pou einai sundedemenos-->
                                 <%int iduser = (Integer) session.getAttribute("iduser");%>
                                 <tr>
                                 <div class="row">
                                     <div class="col-md-5">
                                         post no: ${l.idpost},
-                                        by ${l.iduser.username},
+                                        by ${l.iduser.username}</br>
                                         ${l.title},
                                         ${photos}
-<!--                                  an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
+                                        <!--                                  an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
                                         <c:if test = "${l.iduser.iduser==iduser || iduser==1 || iduser==2}" >                            
+                                            <!--                                            <form action="deletepost" method="post">  
+                                                                                            
+                                                                                            <input type="submit" value="delete post">
+                                                                                            <form action="editpost" method="post">            
+                                                                                                <input type="submit" value="edit post">-->
 
-                                            <form action="deletepost" method="post">            
-                                                <input type="submit" value="delete post">
-                                                <form action="editpost" method="post">            
-                                                    <input type="submit" value="edit post">
+                                            <a class="btn btn-primary" href=" <c:url value="deletepost">
+                                                   <c:param name="idpost" value="${l.idpost}"/>
+                                               </c:url>">delete post</a>
+                                            <a class="btn btn-primary" href="<c:url value="editpost">
+                                                   <c:param name="idpost" value="${l.idpost}"/>
+                                               </c:url>">edit post</a>
 
-                                                </c:if>
-                                                   
-                                                <td>
-                                                    <img src="data:image/jpg;base64,${photos}" alt="No image">
-                                                </td>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <a href="#">
-                                                        <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-5">                            
-                                                    <p>${l.description}</p>
+                                        </c:if>
 
-                                                    <a class="btn btn-primary" href="<c:url value="viewPost">
-                                                           <c:param name="idpost" value="${l.idpost}"/>
-                                                       </c:url>">View Project</a>
-                                                </div>
-                                                </div>
+                                        <td>
+                                            <img src="data:image/jpg;base64,${photos}" alt="No image">
+                                        </td>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <a href="#">
+                                            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5">                            
+                                        <p>${l.description}</p>
 
-                                                </tr>
-                                                <hr>
+                                        <a class="btn btn-primary" href="<c:url value="viewPost">
+                                               <c:param name="idpost" value="${l.idpost}"/>
+                                           </c:url>">View Project</a>
+                                    </div>
+                                </div>
 
-                                            </c:forEach>
-                                            </table>
-                                            <table>
+                                </tr>
+                                <hr>
 
-                                                <c:forEach var = "artists" items="${artists}">
-                                                    <tr>
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <h3>${artists.firstName}</h3>
-                                                            <h3>${artists.lastName}</h3>
+                            </c:forEach>
+                        </table>
+                        <table>
 
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            <a href="#">
-                                                                <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-5">                            
-                                                            <p>${l.username}</p>
-                                                            <a class="btn btn-primary" href="#">View Artist</a>
-                                                        </div>
-                                                    </div>
+                            <c:forEach var = "artists" items="${artists}">
+                                <tr>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <h3>${artists.firstName}</h3>
+                                        <h3>${artists.lastName}</h3>
 
-                                                    </tr>
-                                                    <hr>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <a href="#">
+                                            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5">                            
+                                        <p>${l.username}</p>
+                                        <a class="btn btn-primary" href="#">View Artist</a>
+                                    </div>
+                                </div>
 
-                                                </c:forEach>
-                                            </table>
+                                </tr>
+                                <hr>
 
-                                            <hr>
+                            </c:forEach>
+                        </table>
 
-                                            <!-- Pagination -->
-                                            <ul class="pagination justify-content-center">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                        <span class="sr-only">Previous</span>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="getLastPosts">1</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="2">2</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="3">3</a>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="4">4</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="5">5</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="6">6</a>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="7">7</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="8">8</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="9">9</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                        <span class="sr-only">Next</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
+                        <hr>
 
-                                            </div>
-                                            <!-- /.container -->
-                                            </body>
-                                            </html>
+                        <!-- Pagination -->
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="getLastPosts">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="2">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="3">3</a>
+                            <li class="page-item">
+                                <a class="page-link" href="4">4</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="5">5</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="6">6</a>
+                            <li class="page-item">
+                                <a class="page-link" href="7">7</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="8">8</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="9">9</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- /.container -->
+                    </body>
+                    </html>

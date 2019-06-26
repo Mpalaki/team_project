@@ -51,5 +51,7 @@ public interface PostRepo extends JpaRepository<Post, Integer> {
 
     @Query("Select p FROM Post p where p.idpost<= (:maxidp-80) and p.idpost>( :maxidp-90) ORDER BY p.idpost DESC ")
     public List<Post> select81to90Posts(int maxidp);
+    
+//    public void deletePost(int idpost);
 
 }
