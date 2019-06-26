@@ -44,8 +44,10 @@ public class LoginController {
         if (u == null) {
             return "registerform";
         } else {
+            int iduser = u.getIduser();
             HttpSession session = request.getSession();
             session.setAttribute("user", u);
+            session.setAttribute("iduser", iduser);
             session.setAttribute("username", username);
             mm.addAttribute("user", u);
             List<Post> posts = ps.getTenLastsPosts();

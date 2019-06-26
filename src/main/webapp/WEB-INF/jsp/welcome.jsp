@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,6 +47,7 @@
             response.setHeader("Expires", "0"); // proxies
             
             String username = (String) session.getAttribute("username");
+            
             if (username == null) {%>
 
         <ul>
@@ -83,18 +85,23 @@
         <h1> ${user.username}</h1></br>
         <% }%><div class="container">
             <!-- Page Heading -->
-            <h1 class="my-4">OpusArtis.gr</br>
+            <h1 class="my-4">Calendart</br>
                 <small>last posts</small>
             </h1>
             <!-- posts -->
             <table>
                 <c:forEach var = "l" items="${posts}">
+                    <%int iduser = (Integer) session.getAttribute("iduser");%>
                     <tr>
                     <div class="row">
                         <div class="col-md-5">
                             <h3>${l.idpost}</h3>
                             <h3>${l.title}</h3>
                             <h3>${photos}</h3>
+                            <c:if test = "${l.iduser.iduser==iduser}" >                            
+                            
+                                <a href="deletepost">delete post</a> 
+                            </c:if>
                             <td>
                                 <img src="data:image/jpg;base64,${photos}" alt="No image">
                             </td>
@@ -126,6 +133,7 @@
                         <div class="col-md-5">
                             <h3>${artists.firstName}</h3>
                             <h3>${artists.lastName}</h3>
+                        
                         </div>
                         <div class="col-md-7">
                             <a href="#">
