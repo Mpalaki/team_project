@@ -9,10 +9,12 @@ import com.team.project.model.Post;
 import com.team.project.model.User;
 import com.team.project.repos.PostRepo;
 import com.team.project.service.PostService;
+import com.team.project.utils.UrlUtils;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.jasypt.util.text.StrongTextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -150,7 +152,8 @@ public class PostController {
     
     @RequestMapping(value="deletepost",  method = RequestMethod.GET)
     public String deletePost(HttpServletRequest req, ModelMap mm) {
-        int idpost = Integer.parseInt(req.getParameter("idpost"));
+        String pw = UrlUtils.decrypt(req.getParameter("idpost"));
+        int idpost = Integer.parseInt(pw);
         Post p = pr.getPostByIdpost(idpost);
         pr.delete(p);
         List<Post> posts = ps.getTenLastsPosts();

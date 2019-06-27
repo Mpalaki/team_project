@@ -1,4 +1,5 @@
 
+<%@page import="com.team.project.utils.UrlUtils"%>
 <%-- 
     Document   : index
     Created on : 17-Jun-2019, 13:56:22
@@ -108,8 +109,9 @@
                                                                                                 <input type="submit" value="edit post">-->
 
                                             <a class="btn btn-primary" href=" <c:url value="deletepost">
-                                                   <c:param name="idpost" value="${l.idpost}"/>
+                                                   <c:param name="idpost" value="${UrlUtils.encrypt(l.idpost)}"/>
                                                </c:url>">delete post</a>
+
                                             <a class="btn btn-primary" href="<c:url value="editpost">
                                                    <c:param name="idpost" value="${l.idpost}"/>
                                                </c:url>">edit post</a>
