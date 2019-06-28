@@ -159,5 +159,37 @@ public class PostController {
         mm.addAttribute("posts", posts);
         return "welcome";
     }
+    
+    
+    @RequestMapping(value="editpost",  method = RequestMethod.GET)
+    public String editPost(HttpServletRequest req, ModelMap mm) {
+        String pw = EncryptUtils.decrypt(req.getParameter("idpost"));
+        int idpost = Integer.parseInt(pw);
+        Post p = pr.getPostByIdpost(idpost);        
+        mm.addAttribute("post", p);
+        return "editpostform";
+    }
+    @RequestMapping(value="updatepost",  method = RequestMethod.POST)
+    public String updatePost(HttpServletRequest request, Post post, @RequestParam("idpost") int idpost, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
+        String username = u.getUsername();
+        byte[] img = image.getBytes();
+        post.setPhoto(img);
+        post.setIduser(u);
+        java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+        post.setDate(date);
+        post.setIdpost(idpost);
+        mm.addAttribute(post);
+        mm.addAttribute("username", username);
+        session.setAttribute("user", u);
+        session.setAttribute("username", username);
+        pr.save(post);
+        List<Post> posts = ps.getTenLastsPosts();
+        mm.addAttribute("posts", posts);
+        return "welcome";
+    }
+    
+    
 
 }

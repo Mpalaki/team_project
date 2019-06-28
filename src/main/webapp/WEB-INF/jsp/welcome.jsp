@@ -20,7 +20,7 @@
                 margin: 0;
                 padding: 0;
                 overflow: hidden;
-                background-color: #322;
+                background-color: pink;
             }
 
             li {
@@ -29,7 +29,7 @@
 
             li a {
                 display: block;
-                color: pink;
+                color: black;
                 text-align: center;
                 padding: 14px 16px;
                 text-decoration: none;
@@ -51,8 +51,9 @@
             if (username == null) {%>
 
         <ul>
-
+            <li><a href="http://tinypic.com?ref=4vfzit" target="_blank"><img src="http://i66.tinypic.com/4vfzit.png" border="0" height="160" width="160" alt="Image and video hosting by TinyPic"></a></li>
             <li><form action="LoginController" method="post">
+                    
                     <input type="text" name="username" placeholder="username">
                     <input type="password" name="password" placeholder="password">
                     <input type="submit" value="login"></li>
@@ -86,8 +87,9 @@
                     <% }%><div class="container">
                         <!-- Page Heading -->
                         <h1 class="my-4">Calendart</br>
-                            <small>last posts</small>
+                            <small>art gallery</small>
                         </h1>
+                        <h2> social media for painters and sculptors. Post pictures of your paintings or your sculptures</h2>
                         <!-- posts -->
                         <table>
                             <c:forEach var = "l" items="${posts}">

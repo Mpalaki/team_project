@@ -295,7 +295,7 @@
                                 <i class="fa fa-google-plus"></i>
                             </a>
                             <a class="btn btn-primary btn-sm" rel="publisher"
-                               href="https://www.facebook.com/makis.karfakis.1">
+                               href="https://www.facebook.com/nikos.kermezis">
                                 <i class="fa fa-facebook"></i>
                             </a>
                             <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
