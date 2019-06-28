@@ -5,8 +5,10 @@
  */
 package com.team.project.controllers;
 
+import com.team.project.model.Comment;
 import com.team.project.model.Post;
 import com.team.project.model.User;
+import com.team.project.repos.CommentRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.service.PostService;
 import com.team.project.utils.EncryptUtils;
@@ -33,6 +35,8 @@ public class PostController {
     PostRepo pr;
     @Autowired
     PostService ps;
+    @Autowired
+    CommentRepo cr;
 
     @RequestMapping("addpost")
     public String redirectToInsertPostForm(HttpSession session, ModelMap mm) {
@@ -146,6 +150,8 @@ public class PostController {
         int idpost = Integer.parseInt(req.getParameter("idpost"));
         Post post = pr.getPostByIdpost(idpost);
         mm.addAttribute("post", post);
+        List<Comment > comments = cr.getCommentsByIdpost(post);
+        mm.addAttribute("comments",comments);
         return "postpage";
     }
     

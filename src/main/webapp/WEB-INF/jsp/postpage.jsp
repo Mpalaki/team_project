@@ -64,10 +64,8 @@
                     </div>
                     <div class="col-md-5">                            
                         <p>${post.description}</p></br>
-                        <form action="<c:url value="insertcomment">
-                                  <c:param name="idpost" value="${post.idpost}"/>
-                                  <c:param name="iduser" value="${post.iduser}"/>
-                              </c:url>" method="post">
+                        <form action="insertcomment" method="post">
+                            <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
                             <textarea rows = "5" cols = "50" name = "description">
             Enter your comment
                             </textarea></br>  
@@ -86,25 +84,16 @@
                             <table>
 
 
-                                <c:forEach var = "artists" items="${artists}">
+                                <c:forEach var = "comments" items="${comments}">
                                     <tr>
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <h3>${artists.firstName}</h3>
-                                            <h3>${artists.lastName}</h3>
+                                            <h3>#${comments.idcomment},
+                                            ${comments.date}, by
+                                            ${comments.iduser.username}</h3>
+                                            <h3>${comments.keimeno}</h3>
                                         </div>
-                                        <div class="col-md-7">
-                                            <a href="#">
-                                                <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-5">                            
-                                            <p>${l.username}</p>
-                                            <a class="btn btn-primary" href="#">View Artist</a>
-                                        </div>
-                                    </div>
-
-                                    </tr>
+                                        
                                     <hr>
 
                                 </c:forEach>
