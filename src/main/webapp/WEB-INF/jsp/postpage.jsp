@@ -11,6 +11,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Index</title>
         <style>
@@ -85,15 +96,15 @@
 
 
                                 <c:forEach var = "comments" items="${comments}">
-                                    <tr>
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <h3>#${comments.idcomment},
-                                            ${comments.date}, by
-                                            ${comments.iduser.username}</h3>
-                                            <h3>${comments.keimeno}</h3>
+
+                                    <div class="media border p-3">
+                                        <div class="media-body">
+                                            <h4>#${comments.idcomment} ${comments.iduser.username}<small><i> posted on ${comments.date}</i></small></h4>
+                                            <p>${comments.keimeno}</p>
+
                                         </div>
-                                        
+                                    </div>
+
                                     <hr>
 
                                 </c:forEach>
