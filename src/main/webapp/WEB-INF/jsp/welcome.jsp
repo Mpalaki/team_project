@@ -10,53 +10,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Bootstrap 4 Website Example</title>
+        <title>Calendart</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="welcome.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <style>
-            .fakeimg {
-                height: 350px;
-                background: #aaa;
-            }
-
-            #prologos{
-                background-image: url("artgallery.jpg"); /* The image used */
-                background-color: #cccccc; /* Used if the image is unavailable */
-                height: 355px; /* You must set a specified height */
-                background-position: center; /* Center the image */
-                background-repeat: no-repeat; /* Do not repeat the image */
-                background-size: cover; /* Resize the background image to cover the entire container */
-            }
-            .keimeno{
-                color: orange;
-            }
-            input[type=submit] {
-                background-color: orange;
-                border: none;
-                color: white;
-                padding: 4px 16px;
-                text-decoration: none;
-                margin: 4px 2px;
-                cursor: pointer;
-            }
-            input[type=text],input[type=password] {
-                background-color:#faf68a;
-                border: none;
-                color: black;
-                padding: 4px;
-                text-decoration: none;
-                margin: 4px 2px;
-                cursor: pointer;
-            }
-            li{
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-        </style>
+        
     </head>
     <body>       
 
@@ -161,7 +123,12 @@
 
                                                 <!-- latest posts-->
                                                 <!-- start here-->
-                                                <div class="container" style="margin-top:30px">
+                                                <div class="container" style="margin-top:10px">
+                                                    <h2>Latest posts</h2></br>
+                                                    <hr>
+                                                    
+                                                </div>
+                                                <div class="container" style="margin-top:0px">
                                                     <div class="row">
                                                         <!--                                                        <div class="col-sm-4">
                                                                                                                     <h2>About Me</h2>
@@ -188,14 +155,15 @@
                                                                                                                 </div>-->
 
 
-                                                        <div class="col-sm-8">
+                                                        
                                                             <c:forEach var = "l" items="${posts}">
+                                                                <div class="col-sm-8" id="even">
                                                                 <!--  theto tin id tou user pou einai sundedemenos-->
                                                                 <%int iduser = (Integer) session.getAttribute("iduser");%>
 
                                                                 <h2>${l.title}</h2>
                                                                 <h5>post #${l.idpost}, ${l.date}, by ${l.iduser.username}</h5>
-                                                                <div class="fakeimg">Fake Image</div>
+                                                                <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" width="600" height="350"/></div>
                                                                 <p>${l.description}</p>
                                                                 <br>
 
@@ -220,9 +188,9 @@
 
 
                                                                 <hr>
-
+                                                                </div>
                                                             </c:forEach>
-                                                        </div>
+                                                        
 
                                                         <!-- latest posts-->
                                                         <!-- end here-->

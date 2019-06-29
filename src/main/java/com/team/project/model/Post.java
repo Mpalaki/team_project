@@ -25,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -75,6 +76,7 @@ public class Post implements Serializable {
     @JoinColumn(name = "iduser", referencedColumnName = "iduser")
     @ManyToOne(optional = false)
     private User iduser;
+    private String base64Photo;
 
     public Post() {
     }
@@ -87,6 +89,16 @@ public class Post implements Serializable {
         this.idpost = idpost;
         this.title = title;
         this.date = date;
+    }
+
+    @Transient
+    public String getBase64Photo() {
+        base64Photo = Base64.getEncoder().encodeToString(this.photo);
+        return base64Photo;
+    }
+
+    public void setBase64Photo(String base64Image) {
+        this.base64Photo = base64Image;
     }
 
     public Integer getIdpost() {
@@ -170,7 +182,7 @@ public class Post implements Serializable {
     public void setCommentCollection(Collection<Comment> commentCollection) {
         this.commentCollection = commentCollection;
     }
-    
+
 //    public String getStringPhoto() {
 //        return convertBinImageToString(photo);
 //    }

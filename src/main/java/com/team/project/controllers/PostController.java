@@ -13,6 +13,7 @@ import com.team.project.repos.PostRepo;
 import com.team.project.service.PostService;
 import com.team.project.utils.EncryptUtils;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -66,6 +68,11 @@ public class PostController {
     @RequestMapping("getLastPosts")
     public String getLastPosts(ModelMap mm) {
         List<Post> posts = ps.getTenLastsPosts();
+        for (int i = 0; i < posts.size(); i++) {
+            byte imageBytes[] = posts.get(i).getPhoto();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            posts.get(i).setBase64Photo(base64Image);
+        }
         mm.addAttribute("posts", posts);
 
         return "welcome";
@@ -150,12 +157,12 @@ public class PostController {
         int idpost = Integer.parseInt(req.getParameter("idpost"));
         Post post = pr.getPostByIdpost(idpost);
         mm.addAttribute("post", post);
-        List<Comment > comments = cr.getCommentsByIdpost(post);
-        mm.addAttribute("comments",comments);
+        List<Comment> comments = cr.getCommentsByIdpost(post);
+        mm.addAttribute("comments", comments);
         return "postpage";
     }
-    
-    @RequestMapping(value="deletepost",  method = RequestMethod.GET)
+
+    @RequestMapping(value = "deletepost", method = RequestMethod.GET)
     public String deletePost(HttpServletRequest req, ModelMap mm) {
         String pw = EncryptUtils.decrypt(req.getParameter("idpost"));
         int idpost = Integer.parseInt(pw);
@@ -165,17 +172,17 @@ public class PostController {
         mm.addAttribute("posts", posts);
         return "welcome";
     }
-    
-    
-    @RequestMapping(value="editpost",  method = RequestMethod.GET)
+
+    @RequestMapping(value = "editpost", method = RequestMethod.GET)
     public String editPost(HttpServletRequest req, ModelMap mm) {
         String pw = EncryptUtils.decrypt(req.getParameter("idpost"));
         int idpost = Integer.parseInt(pw);
-        Post p = pr.getPostByIdpost(idpost);        
+        Post p = pr.getPostByIdpost(idpost);
         mm.addAttribute("post", p);
         return "editpostform";
     }
-    @RequestMapping(value="updatepost",  method = RequestMethod.POST)
+
+    @RequestMapping(value = "updatepost", method = RequestMethod.POST)
     public String updatePost(HttpServletRequest request, Post post, @RequestParam("idpost") int idpost, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
@@ -195,7 +202,5 @@ public class PostController {
         mm.addAttribute("posts", posts);
         return "welcome";
     }
-    
-    
 
 }
