@@ -28,12 +28,16 @@ public class ProfileController {
     public String redirectToProfile(HttpSession session, ModelMap mm) {
         User u = (User) session.getAttribute("user");
         mm.addAttribute("user", u);
+        session.setAttribute("user", u);
+        session.setAttribute("username", u.getUsername());
         return "profile";
     }
 
     @RequestMapping("viewArtists")
-    public String showArtists(ModelMap mm) {
+    public String showArtists(HttpSession session, ModelMap mm) {
         List<User> artists = ur.getUsersWherePostsNoGreaterThanZero();
+        User u = (User) session.getAttribute("user");
+        session.setAttribute("username", u.getUsername());
         mm.addAttribute("artists", artists);
         return "welcome";
     }

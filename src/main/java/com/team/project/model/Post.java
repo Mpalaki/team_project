@@ -6,7 +6,7 @@
 package com.team.project.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -25,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,7 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Post.findByIdpost", query = "SELECT p FROM Post p WHERE p.idpost = :idpost")
     , @NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post p WHERE p.title = :title")
     , @NamedQuery(name = "Post.findByDate", query = "SELECT p FROM Post p WHERE p.date = :date")
-    })
+})
 public class Post implements Serializable {
 
     @Basic(optional = false)
@@ -67,7 +68,7 @@ public class Post implements Serializable {
     @Basic(optional = false)
     @Column(name = "idpost")
     private Integer idpost;
-    
+
 //    @NotNull
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -75,6 +76,7 @@ public class Post implements Serializable {
     @JoinColumn(name = "iduser", referencedColumnName = "iduser")
     @ManyToOne(optional = false)
     private User iduser;
+    private String base64Photo;
 
     public Post() {
     }
@@ -87,6 +89,16 @@ public class Post implements Serializable {
         this.idpost = idpost;
         this.title = title;
         this.date = date;
+    }
+
+    @Transient
+    public String getBase64Photo() {
+        base64Photo = Base64.getEncoder().encodeToString(this.photo);
+        return base64Photo;
+    }
+
+    public void setBase64Photo(String base64Image) {
+        this.base64Photo = base64Image;
     }
 
     public Integer getIdpost() {
@@ -105,7 +117,6 @@ public class Post implements Serializable {
         this.date = date;
     }
 
-    
     public User getIduser() {
         return iduser;
     }
@@ -171,5 +182,16 @@ public class Post implements Serializable {
     public void setCommentCollection(Collection<Comment> commentCollection) {
         this.commentCollection = commentCollection;
     }
-    
+
+//    public String getStringPhoto() {
+//        return convertBinImageToString(photo);
+//    }
+//
+//    public static String convertBinImageToString(byte[] accPicture) {
+//        if (accPicture != null && accPicture.length > 0) {
+//            return Base64.getEncoder().encodeToString(accPicture);
+//        } else {
+//            return "";
+//        }
+//    }
 }

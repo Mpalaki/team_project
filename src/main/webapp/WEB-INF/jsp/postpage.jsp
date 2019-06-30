@@ -11,6 +11,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Index</title>
         <style>
@@ -64,10 +75,8 @@
                     </div>
                     <div class="col-md-5">                            
                         <p>${post.description}</p></br>
-                        <form action="<c:url value="insertcomment">
-                                  <c:param name="idpost" value="${post.idpost}"/>
-                                  <c:param name="iduser" value="${post.iduser}"/>
-                              </c:url>" method="post">
+                        <form action="insertcomment" method="post">
+                            <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
                             <textarea rows = "5" cols = "50" name = "description">
             Enter your comment
                             </textarea></br>  
@@ -86,25 +95,16 @@
                             <table>
 
 
-                                <c:forEach var = "artists" items="${artists}">
-                                    <tr>
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <h3>${artists.firstName}</h3>
-                                            <h3>${artists.lastName}</h3>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <a href="#">
-                                                <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="col-md-5">                            
-                                            <p>${l.username}</p>
-                                            <a class="btn btn-primary" href="#">View Artist</a>
+                                <c:forEach var = "comments" items="${comments}">
+
+                                    <div class="media border p-3">
+                                        <div class="media-body">
+                                            <h4>#${comments.idcomment} ${comments.iduser.username}<small><i> posted on ${comments.date}</i></small></h4>
+                                            <p>${comments.keimeno}</p>
+
                                         </div>
                                     </div>
 
-                                    </tr>
                                     <hr>
 
                                 </c:forEach>
