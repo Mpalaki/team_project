@@ -17,7 +17,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepo  extends JpaRepository<User,Integer>{
     
     public User findByUsername(String username);
-    
+        
     @Query("SELECT COUNT(u) FROM User u WHERE u.username=?1")
     public Long countUsers(String username);
     

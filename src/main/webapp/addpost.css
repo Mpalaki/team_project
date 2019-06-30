@@ -1,0 +1,57 @@
+.fakeimg {
+    height: 350px;
+}
+
+#prologos{
+    background-image: url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
+    background-color: #cccccc; /* Used if the image is unavailable */
+    height: 190px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}
+.keimeno{
+    color: orange;
+}
+
+input[type=submit] {
+    background-color: orange;
+    border: none;
+    color: white;
+    padding: 4px 16px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+textarea {
+    background-color: rgb(242, 255, 251);
+    color: black;
+     text-decoration: none;
+     cursor: pointer;
+}
+input[type=text] {
+    background-color:#faf68a;
+     color: black;
+     margin: 4px 2px;
+    cursor: pointer;
+}
+li{
+    padding-left: 10px;
+    padding-right: 10px;
+    
+}
+#even:nth-child(odd){
+    background:#fafbc5;
+}
+
+ul{
+    text-align: center;
+}
+
+.formapost{   
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 50%;
+
+}

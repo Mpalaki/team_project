@@ -7,6 +7,7 @@ package com.team.project.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -23,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -101,6 +103,8 @@ public class User implements Serializable {
     private Integer postsNo;
     @Column(name = "comments_no")
     private Integer commentsNo;
+    @Transient
+    private String base64Avatar;
 
     public User() {
     }
@@ -117,6 +121,15 @@ public class User implements Serializable {
         this.password = password;
         this.emailAddress = emailAddress;
         this.role = role;
+    }
+    
+    public String getBase64Avatar() {
+        base64Avatar = Base64.getEncoder().encodeToString(this.avatar);
+        return base64Avatar;
+    }
+
+    public void setBase64Avatar(String base64avatar) {
+        this.base64Avatar = base64avatar;
     }
 
     public Integer getIduser() {
@@ -202,10 +215,7 @@ public class User implements Serializable {
     public String toString() {
         return "com.team.project.model.User[ iduser=" + iduser + " ]";
     }
-
     
-
-
     public Integer getRole() {
         return role;
     }
@@ -222,11 +232,6 @@ public class User implements Serializable {
     public void setPostCollection(Collection<Post> postCollection) {
         this.postCollection = postCollection;
     }
-
-    
-
-    
-
 
     public Date getSignupDate() {
         return signupDate;

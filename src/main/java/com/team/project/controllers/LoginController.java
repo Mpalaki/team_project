@@ -9,6 +9,7 @@ import com.team.project.model.Post;
 import com.team.project.model.User;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
+import com.team.project.service.PostService;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -32,6 +33,8 @@ public class LoginController {
     UserRepo ur;
     @Autowired
     PostRepo pr;
+    @Autowired 
+    PostService ps;
 
     @RequestMapping("LoginController")
     public String login(HttpServletRequest request, ModelMap mm) {
@@ -41,22 +44,35 @@ public class LoginController {
         if (u == null) {
             return "registerform";
         } else {
+            int iduser = u.getIduser();
+            int role = u.getRole();
             HttpSession session = request.getSession();
             session.setAttribute("user", u);
+            session.setAttribute("iduser", iduser);
+            session.setAttribute("username", username);
+            session.setAttribute("role", role);
             mm.addAttribute("user", u);
-            List<Post> posts = pr.getLastPosts();
+            List<Post> posts = ps.getTenLastsPosts();
             mm.addAttribute("posts", posts);
             return "welcome";
         }
     }
 
+    @RequestMapping("logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("username");
+        session.invalidate();        
+        return "welcome";
+    }
     @RequestMapping("SignupController")
     public String redirectToSignupForm() {
         return "registerform";
     }
 
     @RequestMapping("home")
-    public String homePage() {
+    public String homePage(ModelMap mm) {
+        List<Post> posts = ps.getTenLastsPosts();
+        mm.addAttribute("posts", posts);
         return "welcome";
     }
 
