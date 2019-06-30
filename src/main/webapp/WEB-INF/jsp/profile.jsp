@@ -276,7 +276,7 @@
 
                         </div>
                         <div class="avatar">
-                            <img alt="" src="http://lorempixel.com/100/100/people/9/">
+                            <img alt="" src="data:image/jpg;base64,${user.base64Avatar}">
                         </div>
                         <div class="info">
                             <div class="title">

@@ -45,10 +45,12 @@ public class LoginController {
             return "registerform";
         } else {
             int iduser = u.getIduser();
+            int role = u.getRole();
             HttpSession session = request.getSession();
             session.setAttribute("user", u);
             session.setAttribute("iduser", iduser);
             session.setAttribute("username", username);
+            session.setAttribute("role", role);
             mm.addAttribute("user", u);
             List<Post> posts = ps.getTenLastsPosts();
             mm.addAttribute("posts", posts);

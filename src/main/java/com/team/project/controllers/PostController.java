@@ -62,6 +62,9 @@ public class PostController {
         session.setAttribute("user", u);
         session.setAttribute("username", username);
         pr.save(post);
+        List<Post> posts = ps.getTenLastsPosts();
+        mm.addAttribute("posts", posts);
+        
         return "welcome";
     }
 

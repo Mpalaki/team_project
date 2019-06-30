@@ -6,6 +6,7 @@
 package com.team.project.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
@@ -76,7 +77,11 @@ public class Post implements Serializable {
     @JoinColumn(name = "iduser", referencedColumnName = "iduser")
     @ManyToOne(optional = false)
     private User iduser;
+    @Transient
     private String base64Photo;
+    @Transient
+    private String dispDate;
+    
 
     public Post() {
     }
@@ -91,7 +96,6 @@ public class Post implements Serializable {
         this.date = date;
     }
 
-    @Transient
     public String getBase64Photo() {
         base64Photo = Base64.getEncoder().encodeToString(this.photo);
         return base64Photo;
@@ -100,7 +104,7 @@ public class Post implements Serializable {
     public void setBase64Photo(String base64Image) {
         this.base64Photo = base64Image;
     }
-
+    
     public Integer getIdpost() {
         return idpost;
     }
@@ -112,6 +116,12 @@ public class Post implements Serializable {
     public Date getDate() {
         return date;
     }
+    
+    public String getDispDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY HH:mm");
+        String dispdate = sdf.format(this.date);
+        return dispdate;}   
+    
 
     public void setDate(Date date) {
         this.date = date;
