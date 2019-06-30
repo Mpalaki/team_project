@@ -15,13 +15,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="welcome.css">
-      
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-      
+        
     </head>
-    <body id="top">       
+    <body>       
 
         <!--        proto kouti pano me prologo kai backround photo-->
         <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
@@ -42,7 +41,7 @@
         <!--        to navbar an den einai logged in-->
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <a class="navbar-brand" href="home"><h5>Calendart Gallery</h5></a>
+            <a class="navbar-brand" href="home"><h5>Calendart  <span style="color:red">G</span><span style="color:orange">a</span><span style="color:yellow">l</span><span style="color:green">l</span><span style="color:lightblue">e</span><span style="color:blue">r</span><span style="color:purple">y</span></h5></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -131,7 +130,7 @@
                                                 </div>
                                                 <div class="container" style="margin-top:0px">
                                                     <div class="row">
-                                                        <!--                                                        <div class="col-sm-4">
+<!--                                                                                                                <div class="col-sm-4">
                                                                                                                     <h2>About Me</h2>
                                                                                                                     <h5>Photo of me:</h5>
                                                                                                                     <div class="fakeimg">Fake Image</div>
@@ -160,26 +159,26 @@
                                                             <c:forEach var = "l" items="${posts}">
                                                                 <div class="col-sm-8" id="even">
                                                                 <!--  theto tin id tou user pou einai sundedemenos-->
-                                                                <%int iduser = (Integer) session.getAttribute("iduser");%>
+                                                                <%int role = (Integer) session.getAttribute("role");%>
 
                                                                 <h2>${l.title}</h2>
-                                                                <h5>post #${l.idpost}, ${l.date}, by ${l.iduser.username}</h5>
+                                                                <h5>post #${l.idpost}, ${l.dispDate}, by ${l.iduser.username}</h5>
                                                                 <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" width="600" height="350"/></div>
                                                                 <p>${l.description}</p>
                                                                 <br>
 
 
                                                                 <!-- an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
-                                                                <c:if test = "${l.iduser.iduser==iduser || iduser==1 || iduser==2}" >                            
+                                                                <c:if test = "${l.iduser.iduser==iduser || role==1 }" >                            
 
 
                                                                     <a  href=" <c:url value="deletepost">
                                                                             <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
-                                                                        </c:url>">Delete </a>
+                                                                        </c:url>">Delete |</a>
 
                                                                     <a  href="<c:url value="editpost">
                                                                             <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
-                                                                        </c:url>">Edit </a>
+                                                                        </c:url>">Edit |</a>
 
                                                                 </c:if>
 
@@ -207,7 +206,8 @@
                                                                     </div>
                                                                     <div class="col-md-7">
                                                                         <a href="#">
-                                                                            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+
+                                                                            <img class="img-fluid rounded mb-3 mb-md-0" src="data:image/jpg;base64,${artists.base64Avatar}" alt="">
                                                                         </a>
                                                                     </div>
                                                                     <div class="col-md-5">                            
@@ -226,7 +226,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="jumbotron text-center" style="margin-bottom:0">
+<!--                                                <div class="jumbotron text-center" style="margin-bottom:0">-->
                                                     <ul class="pagination justify-content-center">
                                                         <li class="page-item">
                                                             <a class="page-link" href="#" aria-label="Previous">
@@ -266,7 +266,7 @@
                                                             </a>
                                                         </li>
                                                     </ul>
-                                                </div>
-<a  href="#top" class="move-top text-center"></a>
+<!--                                                </div>-->
+
                                                 </body>
                                                 </html>
