@@ -33,7 +33,7 @@ public class LoginController {
     UserRepo ur;
     @Autowired
     PostRepo pr;
-    @Autowired 
+    @Autowired
     PostService ps;
 
     @RequestMapping("LoginController")
@@ -59,11 +59,14 @@ public class LoginController {
     }
 
     @RequestMapping("logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, ModelMap mm) {
         session.removeAttribute("username");
-        session.invalidate();        
+        session.invalidate();
+        List<Post> posts = ps.getTenLastsPosts();
+        mm.addAttribute("posts", posts);
         return "welcome";
     }
+
     @RequestMapping("SignupController")
     public String redirectToSignupForm() {
         return "registerform";

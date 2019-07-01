@@ -18,7 +18,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        
+
     </head>
     <body>       
 
@@ -126,44 +126,44 @@
                                                 <div class="container" style="margin-top:10px">
                                                     <h2>Latest posts</h2></br>
                                                     <hr>
-                                                    
+
                                                 </div>
                                                 <div class="container" style="margin-top:0px">
                                                     <div class="row">
-<!--                                                                                                                <div class="col-sm-4">
-                                                                                                                    <h2>About Me</h2>
-                                                                                                                    <h5>Photo of me:</h5>
-                                                                                                                    <div class="fakeimg">Fake Image</div>
-                                                                                                                    <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-                                                                                                                    <h3>Some Links</h3>
-                                                                                                                    <p>Lorem ipsum dolor sit ame.</p>
-                                                                                                                    <ul class="nav nav-pills flex-column">
-                                                                                                                        <li class="nav-item">
-                                                                                                                            <a class="nav-link active" href="#">Active</a>
-                                                                                                                        </li>
-                                                                                                                        <li class="nav-item">
-                                                                                                                            <a class="nav-link" href="#">Link</a>
-                                                                                                                        </li>
-                                                                                                                        <li class="nav-item">
-                                                                                                                            <a class="nav-link" href="#">Link</a>
-                                                                                                                        </li>
-                                                                                                                        <li class="nav-item">
-                                                                                                                            <a class="nav-link disabled" href="#">Disabled</a>
-                                                                                                                        </li>
-                                                                                                                    </ul>
-                                                                                                                    <hr class="d-sm-none">
-                                                                                                                </div>-->
+                                                        <!--                                                                                                                <div class="col-sm-4">
+                                                                                                                                                                            <h2>About Me</h2>
+                                                                                                                                                                            <h5>Photo of me:</h5>
+                                                                                                                                                                            <div class="fakeimg">Fake Image</div>
+                                                                                                                                                                            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+                                                                                                                                                                            <h3>Some Links</h3>
+                                                                                                                                                                            <p>Lorem ipsum dolor sit ame.</p>
+                                                                                                                                                                            <ul class="nav nav-pills flex-column">
+                                                                                                                                                                                <li class="nav-item">
+                                                                                                                                                                                    <a class="nav-link active" href="#">Active</a>
+                                                                                                                                                                                </li>
+                                                                                                                                                                                <li class="nav-item">
+                                                                                                                                                                                    <a class="nav-link" href="#">Link</a>
+                                                                                                                                                                                </li>
+                                                                                                                                                                                <li class="nav-item">
+                                                                                                                                                                                    <a class="nav-link" href="#">Link</a>
+                                                                                                                                                                                </li>
+                                                                                                                                                                                <li class="nav-item">
+                                                                                                                                                                                    <a class="nav-link disabled" href="#">Disabled</a>
+                                                                                                                                                                                </li>
+                                                                                                                                                                            </ul>
+                                                                                                                                                                            <hr class="d-sm-none">
+                                                                                                                                                                        </div>-->
 
 
-                                                        
-                                                            <c:forEach var = "l" items="${posts}">
-                                                                <div class="col-sm-8" id="even">
+
+                                                        <c:forEach var = "l" items="${posts}">
+                                                            <div class="col-sm-8" id="even">
                                                                 <!--  theto tin id tou user pou einai sundedemenos-->
                                                                 <%int role = (Integer) session.getAttribute("role");%>
 
                                                                 <h2>${l.title}</h2>
                                                                 <h5>post #${l.idpost}, ${l.dispDate}, by ${l.iduser.username}</h5>
-                                                                <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" width="600" height="350"/></div>
+                                                                <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" style="max-width: 100%; height: auto;"/></div>
                                                                 <p>${l.description}</p>
                                                                 <br>
 
@@ -188,9 +188,9 @@
 
 
                                                                 <hr>
-                                                                </div>
-                                                            </c:forEach>
-                                                        
+                                                            </div>
+                                                        </c:forEach>
+
 
                                                         <!-- latest posts-->
                                                         <!-- end here-->
@@ -226,47 +226,47 @@
                                                     </div>
                                                 </div>
 
-<!--                                                <div class="jumbotron text-center" style="margin-bottom:0">-->
-                                                    <ul class="pagination justify-content-center">
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="#" aria-label="Previous">
-                                                                <span aria-hidden="true">&laquo;</span>
-                                                                <span class="sr-only">Previous</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="getLastPosts">1</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="2">2</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="3">3</a>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="4">4</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="5">5</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="6">6</a>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="7">7</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="8">8</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="9">9</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="#" aria-label="Next">
-                                                                <span aria-hidden="true">&raquo;</span>
-                                                                <span class="sr-only">Next</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-<!--                                                </div>-->
+                                                <!--                                                <div class="jumbotron text-center" style="margin-bottom:0">-->
+                                                <ul class="pagination justify-content-center">
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="getLastPosts">1</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="2">2</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="3">3</a>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="4">4</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="5">5</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="6">6</a>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="7">7</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="8">8</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="9">9</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <!--                                                </div>-->
 
                                                 </body>
                                                 </html>

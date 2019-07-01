@@ -38,7 +38,6 @@ public class CommentController {
     
     
     
-    // den douleuei...
     @RequestMapping("insertcomment")
     public String insertComment(ModelMap mm, HttpServletRequest req, Comment comment, @RequestParam("description") 
             String description, @RequestParam("idpost") int idpost) {

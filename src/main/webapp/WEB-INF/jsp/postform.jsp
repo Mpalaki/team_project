@@ -67,7 +67,7 @@
         </nav>
 
         <div class="container">
-            <h2>Post artwork</h2>
+            <h2>Post your artwork</h2>
             <p>We are happy to host photos of your paintings and sculptures.</p>
             <form action="insertpost" enctype="multipart/form-data"  class="was-validated" method="post">
                 <div class="form-group">

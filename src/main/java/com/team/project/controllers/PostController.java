@@ -84,6 +84,11 @@ public class PostController {
     @RequestMapping("2")
     public String get11to20Posts(ModelMap mm) {
         List<Post> posts = ps.get11to20Posts();
+        for (int i = 0; i < posts.size(); i++) {
+            byte imageBytes[] = posts.get(i).getPhoto();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            posts.get(i).setBase64Photo(base64Image);
+        }
         mm.addAttribute("posts", posts);
 
         return "welcome";
@@ -92,6 +97,11 @@ public class PostController {
     @RequestMapping("3")
     public String get21to30Posts(ModelMap mm) {
         List<Post> posts = ps.get21to30Posts();
+        for (int i = 0; i < posts.size(); i++) {
+            byte imageBytes[] = posts.get(i).getPhoto();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            posts.get(i).setBase64Photo(base64Image);
+        }
         mm.addAttribute("posts", posts);
 
         return "welcome";
@@ -100,6 +110,11 @@ public class PostController {
     @RequestMapping("4")
     public String get31to40Posts(ModelMap mm) {
         List<Post> posts = ps.get31to40Posts();
+        for (int i = 0; i < posts.size(); i++) {
+            byte imageBytes[] = posts.get(i).getPhoto();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            posts.get(i).setBase64Photo(base64Image);
+        }
         mm.addAttribute("posts", posts);
 
         return "welcome";
@@ -108,6 +123,11 @@ public class PostController {
     @RequestMapping("5")
     public String get41to50Posts(ModelMap mm) {
         List<Post> posts = ps.get41to50Posts();
+        for (int i = 0; i < posts.size(); i++) {
+            byte imageBytes[] = posts.get(i).getPhoto();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            posts.get(i).setBase64Photo(base64Image);
+        }
         mm.addAttribute("posts", posts);
 
         return "welcome";
@@ -116,6 +136,11 @@ public class PostController {
     @RequestMapping("6")
     public String get51to60Posts(ModelMap mm) {
         List<Post> posts = ps.get51to60Posts();
+        for (int i = 0; i < posts.size(); i++) {
+            byte imageBytes[] = posts.get(i).getPhoto();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            posts.get(i).setBase64Photo(base64Image);
+        }
         mm.addAttribute("posts", posts);
 
         return "welcome";
@@ -124,6 +149,11 @@ public class PostController {
     @RequestMapping("7")
     public String get61to70Posts(ModelMap mm) {
         List<Post> posts = ps.get61to70Posts();
+        for (int i = 0; i < posts.size(); i++) {
+            byte imageBytes[] = posts.get(i).getPhoto();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            posts.get(i).setBase64Photo(base64Image);
+        }
         mm.addAttribute("posts", posts);
 
         return "welcome";
@@ -132,6 +162,11 @@ public class PostController {
     @RequestMapping("8")
     public String get71to80Posts(ModelMap mm) {
         List<Post> posts = ps.get71to80Posts();
+        for (int i = 0; i < posts.size(); i++) {
+            byte imageBytes[] = posts.get(i).getPhoto();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            posts.get(i).setBase64Photo(base64Image);
+        }
         mm.addAttribute("posts", posts);
 
         return "welcome";
@@ -140,6 +175,11 @@ public class PostController {
     @RequestMapping("9")
     public String get81to90Posts(ModelMap mm) {
         List<Post> posts = ps.get81to90Posts();
+        for (int i = 0; i < posts.size(); i++) {
+            byte imageBytes[] = posts.get(i).getPhoto();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            posts.get(i).setBase64Photo(base64Image);
+        }
         mm.addAttribute("posts", posts);
 
         return "welcome";

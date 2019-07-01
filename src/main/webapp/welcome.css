@@ -1,6 +1,3 @@
-.fakeimg {
-    height: 350px;
-}
 
 #prologos{
     background-image: url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
@@ -57,3 +54,11 @@ a.move-top {
 }
 
 /* //bottom-to-top */
+
+textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    width: 100%;
+}

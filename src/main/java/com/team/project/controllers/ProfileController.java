@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -31,6 +32,15 @@ public class ProfileController {
         mm.addAttribute("user", u);
         session.setAttribute("user", u);
         session.setAttribute("username", u.getUsername());
+        return "profile";
+    }
+    @RequestMapping("profile")
+    public String viewOtherProfile(HttpSession session, ModelMap mm, @RequestParam ("unartist") String unartist) { 
+        User artist = ur.findByUsername(unartist);
+        byte[] avatar = artist.getAvatar();
+        String avat = Base64.getEncoder().encodeToString(avatar);
+        artist.setBase64Avatar(avat);
+        mm.addAttribute("user", artist);        
         return "profile";
     }
 
