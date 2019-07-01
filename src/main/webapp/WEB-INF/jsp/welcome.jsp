@@ -21,7 +21,7 @@
 
     </head>
     <body>       
-
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
         <!--        proto kouti pano me prologo kai backround photo-->
         <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
             <h1>A website dedicated to artists and art lovers.</h1>
@@ -163,12 +163,12 @@
 
                                                                 <h2>${l.title}</h2>
                                                                 <h5>post #${l.idpost}, ${l.dispDate}, by 
-                                                                    
+
                                                                     <!--                                                                    avatar - should not be null-->
-<!--                                                                    <img src="data:image/jpg;base64,'$'{l.iduser.base64Avatar}" style="vertical-align: middle;
-                                                                         width: 50px;
-                                                                         height: 50px;
-                                                                         border-radius: 50%;"/>-->
+                                                                    <!--                                                                    <img src="data:image/jpg;base64,'$'{l.iduser.base64Avatar}" style="vertical-align: middle;
+                                                                                                                                             width: 50px;
+                                                                                                                                             height: 50px;
+                                                                                                                                             border-radius: 50%;"/>-->
                                                                     ${l.iduser.username}</h5>
                                                                 <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" style="max-width: 100%; height: auto;"/></div>
                                                                 <p>${l.description}</p>
@@ -274,6 +274,25 @@
                                                     </li>
                                                 </ul>
                                                 <!--                                                </div>-->
+                                                <script>
+                                                    // When the user scrolls down 20px from the top of the document, show the button
+                                                    window.onscroll = function () {
+                                                        scrollFunction()
+                                                    };
 
+                                                    function scrollFunction() {
+                                                        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                                                            document.getElementById("myBtn").style.display = "block";
+                                                        } else {
+                                                            document.getElementById("myBtn").style.display = "none";
+                                                        }
+                                                    }
+
+                                                    // When the user clicks on the button, scroll to the top of the document
+                                                    function topFunction() {
+                                                        document.body.scrollTop = 0;
+                                                        document.documentElement.scrollTop = 0;
+                                                    }
+                                                </script>
                                                 </body>
                                                 </html>
