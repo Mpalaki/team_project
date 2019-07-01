@@ -72,6 +72,7 @@
                 <div class="form-group">
                     <!--                    <label for="uname">Username:</label>-->
                     <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
+                    <input type=hidden id="date" name="date" value="${post.date}">
                     <input type="text" class="form-control" id="uname" placeholder="${post.title}" name="title" required>
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div>

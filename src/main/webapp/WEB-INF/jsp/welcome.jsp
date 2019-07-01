@@ -165,7 +165,7 @@
                                                                 <h5>post #${l.idpost}, ${l.dispDate}, by 
                                                                     
                                                                     <!--                                                                    avatar - should not be null-->
-<!--                                                                    <img src="data:image/jpg;base64,'$'{l.iduser.base64Avatar}" style="vertical-align: middle;
+<!--                                                                    <img src="data:image/jpg;base64,{l.iduser.base64Avatar}" style="vertical-align: middle;
                                                                          width: 50px;
                                                                          height: 50px;
                                                                          border-radius: 50%;"/>-->

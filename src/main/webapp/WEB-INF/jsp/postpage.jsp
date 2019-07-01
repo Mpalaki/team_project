@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="com.team.project.model.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -78,12 +79,19 @@
                 <h2>${post.title}</h2>
                 <h5>post #${post.idpost}, ${post.dispDate}, by 
                     <img src="data:image/jpg;base64,${post.iduser.base64Avatar}" style="vertical-align: middle;
-                                              width: 50px;
-                                              height: 50px;
-                                              border-radius: 50%;"/>
+                         width: 50px;
+                         height: 50px;
+                         border-radius: 50%;"/>
                     <a  href=" <c:url value="profile">
                             <c:param name="unartist" value="${post.iduser.username}"/>
                         </c:url>">${post.iduser.username}</a>
+                    <!--                    vazo ena try catch gia na mporeso na emfaniso tin editdate an uparhei.trelo?-->
+                    <% Post post = (Post) pageContext.findAttribute("post");
+                        try {
+                            String editdate = post.getDispeditDate();
+                            if (editdate != null) {%><i>(edited: ${post.dispeditDate})</i><%}
+                            } catch (NullPointerException e) {
+                            } finally { %>
                 </h5>
                 <div class="fakeimg"><img src="data:image/jpg;base64,${post.base64Photo}" style="max-width: 100%; height: auto;"/></div>
                 <p>${post.description}</p>
@@ -217,7 +225,7 @@
                                     <span class="sr-only">Next</span>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> <%}%>
 
                         <!-- /.container -->
                         </body>

@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Post.findByIdpost", query = "SELECT p FROM Post p WHERE p.idpost = :idpost")
     , @NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post p WHERE p.title = :title")
     , @NamedQuery(name = "Post.findByDate", query = "SELECT p FROM Post p WHERE p.date = :date")
+    , @NamedQuery(name = "Post.findByEditdate", query = "SELECT p FROM Post p WHERE p.editdate = :editdate")
 })
 public class Post implements Serializable {
 
@@ -74,6 +75,9 @@ public class Post implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+    @Column(name = "editdate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date editdate;
     @JoinColumn(name = "iduser", referencedColumnName = "iduser")
     @ManyToOne(optional = false)
     private User iduser;
@@ -81,6 +85,8 @@ public class Post implements Serializable {
     private String base64Photo;
     @Transient
     private String dispDate;
+    @Transient
+    private String dispeditDate;
     
 
     public Post() {
@@ -116,11 +122,25 @@ public class Post implements Serializable {
     public Date getDate() {
         return date;
     }
+
+    public Date getEditdate() {
+        return editdate;
+    }
+
+    public String getDispeditDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY HH:mm");
+        String dispdate1 = sdf.format(this.editdate);
+        return dispdate1;
+    }
     
     public String getDispDate(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY HH:mm");
         String dispdate = sdf.format(this.date);
         return dispdate;}   
+
+    public void setEditdate(Date editdate) {
+        this.editdate = editdate;
+    }
     
 
     public void setDate(Date date) {

@@ -14,6 +14,7 @@ import com.team.project.service.PostService;
 import com.team.project.utils.EncryptUtils;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -225,16 +226,19 @@ public class PostController {
         return "editpostform";
     }
 
-    @RequestMapping(value = "updatepost", method = RequestMethod.POST)
-    public String updatePost(HttpServletRequest request, Post post, @RequestParam("idpost") int idpost, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {
+    @RequestMapping(value = "updatepost")
+    public String updatePost(HttpServletRequest request, @RequestParam("idpost") int idpost, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {
         HttpSession session = request.getSession();
+        Post post = pr.getPostByIdpost(idpost);
         User u = (User) session.getAttribute("user");
+        Date initialdate = post.getDate();
         String username = u.getUsername();
         byte[] img = image.getBytes();
         post.setPhoto(img);
         post.setIduser(u);
-        java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
-        post.setDate(date);
+        java.sql.Timestamp editdate = new java.sql.Timestamp(new java.util.Date().getTime());
+        post.setDate(initialdate);
+        post.setEditdate(editdate);
         post.setIdpost(idpost);
         mm.addAttribute(post);
         mm.addAttribute("username", username);
