@@ -120,9 +120,12 @@
 
                             <c:forEach var = "comments" items="${comments}">
 
-                                <div class="media border p-3">
+                                <div class="media border p-3" style="background-color: #e0f9f9">
                                     <div class="media-body">
-                                        <h5>${comments.iduser.username}<small><i> posted on ${comments.date}</i></small></h5>
+                                        <h5><a  href=" <c:url value="profile">
+                                                    <c:param name="unartist" value="${comments.iduser.username}"/>
+                                                </c:url>">${comments.iduser.username}</a>
+                                            <small><i> commented on ${comments.dispDate}</i></small></h5>
                                         <p>${comments.keimeno}</p>
 
                                     </div>
