@@ -24,7 +24,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <title>JSP Page</title>
+        <title>add post</title>
     </head>
     <body>
         <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
@@ -66,7 +66,7 @@
             </div>  
         </nav>
 
-        <div class="container">
+        <div class="container"  style="width: 50%">
             <h2>Post your artwork</h2>
             <p>We are happy to host photos of your paintings and sculptures.</p>
             <form action="insertpost" enctype="multipart/form-data"  class="was-validated" method="post">

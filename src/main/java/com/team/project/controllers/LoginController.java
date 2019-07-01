@@ -10,7 +10,9 @@ import com.team.project.model.User;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
 import com.team.project.service.PostService;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,8 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 public class LoginController {
+
+    File imgfile = new File("defav.png");
 
     @Autowired
     UserRepo ur;
@@ -86,8 +90,14 @@ public class LoginController {
             return "registerform";
         } else {
             if (password.equals(wordpass)) {
-                byte[] img = image.getBytes();
-                user.setAvatar(img);
+                if (image != null) {
+                    byte[] img = image.getBytes();
+                    user.setAvatar(img);
+//                    an den valei avatar na mpainei ena default
+                } else {
+                    byte[] fileContent = Files.readAllBytes(imgfile.toPath());
+                    user.setAvatar(fileContent);
+                }
                 user.setRole(2); // eisagontai oloi os aploi users, oi admins tha prostithentai kateutheian stin vasi
                 java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
                 user.setSignupDate(date);
@@ -98,5 +108,5 @@ public class LoginController {
             }
         }
     }
-
+    
 }

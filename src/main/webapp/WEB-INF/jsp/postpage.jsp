@@ -77,6 +77,10 @@
 
                 <h2>${post.title}</h2>
                 <h5>post #${post.idpost}, ${post.dispDate}, by 
+                    <img src="data:image/jpg;base64,${post.iduser.base64Avatar}" style="vertical-align: middle;
+                                              width: 50px;
+                                              height: 50px;
+                                              border-radius: 50%;"/>
                     <a  href=" <c:url value="profile">
                             <c:param name="unartist" value="${post.iduser.username}"/>
                         </c:url>">${post.iduser.username}</a>
