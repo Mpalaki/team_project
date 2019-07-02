@@ -6,6 +6,7 @@
 package com.team.project.repos;
 
 import com.team.project.model.Post;
+import com.team.project.model.User;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,8 @@ public interface PostRepo extends JpaRepository<Post, Integer> {
 //    SELECT firstName, lastName, seatNumber FROM passengers ORDER BY seatNumber LIMIT 1;
     @Query("SELECT p FROM Post p ORDER BY p.idpost DESC")
     public List<Post> getLastPosts();
+    
+    public List<Post> findByIduser(User user);
 
     public Post getPostByIdpost(int idpost);
 

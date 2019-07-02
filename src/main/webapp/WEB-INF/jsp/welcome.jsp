@@ -163,13 +163,16 @@
 
                                                                 <h2>${l.title}</h2>
                                                                 <h5>post #${l.idpost}, ${l.dispDate}, by 
-                                                                    
+
                                                                     <!--                                                                    avatar - should not be null-->
-<!--                                                                    <img src="data:image/jpg;base64,{l.iduser.base64Avatar}" style="vertical-align: middle;
-                                                                         width: 50px;
-                                                                         height: 50px;
-                                                                         border-radius: 50%;"/>-->
-                                                                    ${l.iduser.username}</h5>
+                                                                    <!--                                                                    <img src="data:image/jpg;base64,{l.iduser.base64Avatar}" style="vertical-align: middle;
+                                                                                                                                             width: 50px;
+                                                                                                                                             height: 50px;
+                                                                                                                                             border-radius: 50%;"/>-->
+                                                                    <a  href=" <c:url value="profile">
+                                                                            <c:param name="unartist" value="${l.iduser.username}"/>
+                                                                        </c:url>">${l.iduser.username}</a>
+                                                                    </h5>
                                                                 <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" style="max-width: 100%; height: auto;"/></div>
                                                                 <p>${l.description}</p>
                                                                 <br>

@@ -81,3 +81,11 @@ textarea {
   #myBtn:hover {
     background-color: #555;
   }
+
+  .profilepic {
+    vertical-align: middle;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%; 
+    float: left;
+  }

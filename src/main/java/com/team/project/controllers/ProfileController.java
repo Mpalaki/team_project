@@ -6,6 +6,7 @@
 package com.team.project.controllers;
 
 import com.team.project.model.User;
+import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
 import java.util.Base64;
 import java.util.List;
@@ -25,6 +26,8 @@ public class ProfileController {
 
     @Autowired
     UserRepo ur;
+    @Autowired
+    PostRepo pr;
 
     @RequestMapping("redirectToProfile")
     public String redirectToProfile(HttpSession session, ModelMap mm) {
@@ -40,7 +43,9 @@ public class ProfileController {
         byte[] avatar = artist.getAvatar();
         String avat = Base64.getEncoder().encodeToString(avatar);
         artist.setBase64Avatar(avat);
-        mm.addAttribute("user", artist);        
+        mm.addAttribute("user", artist); 
+        List posts = pr.findByIduser(artist);
+        mm.addAttribute("posts",posts);
         return "profile";
     }
 
