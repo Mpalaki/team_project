@@ -1,3 +1,4 @@
+<%@page import="com.team.project.utils.EncryptUtils"%>
 <%-- 
     Document   : index
     Created on : 17-Jun-2019, 13:56:22
@@ -113,7 +114,7 @@
                                                 </div>
                                                 <div class="container" style="margin-top:0px">
                                                     <div class="row">
-                                                        <!--                                                                                                                <div class="col-sm-4">
+<!--                                                                                                                                                                        <div class="col-sm-4">
                                                                                                                                                                             <h2>About Me</h2>
                                                                                                                                                                             <h5>Photo of me:</h5>
                                                                                                                                                                             <div class="fakeimg">Fake Image</div>

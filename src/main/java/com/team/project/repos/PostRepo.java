@@ -21,6 +21,7 @@ public interface PostRepo extends JpaRepository<Post, Integer> {
     @Query("SELECT p FROM Post p ORDER BY p.idpost DESC")
     public List<Post> getLastPosts();
     
+    @Query("select p from Post p where p.iduser=?1 ORDER BY p.idpost DESC")
     public List<Post> findByIduser(User user);
 
     public Post getPostByIdpost(int idpost);

@@ -227,7 +227,10 @@ public class PostController {
     }
 
     @RequestMapping(value = "updatepost")
-    public String updatePost(HttpServletRequest request, @RequestParam("idpost") int idpost, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {
+    public String updatePost(HttpServletRequest request, @RequestParam("idpost") int idpost, 
+            @RequestParam("description") String description, 
+            @RequestParam("title") String title, ModelMap mm, 
+            @RequestParam("photo1") MultipartFile image) throws IOException {
         HttpSession session = request.getSession();
         Post post = pr.getPostByIdpost(idpost);
         User u = (User) session.getAttribute("user");
@@ -240,6 +243,8 @@ public class PostController {
         post.setDate(initialdate);
         post.setEditdate(editdate);
         post.setIdpost(idpost);
+        post.setDescription(description);
+        post.setTitle(title);
         mm.addAttribute(post);
         mm.addAttribute("username", username);
         session.setAttribute("user", u);
