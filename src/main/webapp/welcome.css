@@ -1,22 +1,25 @@
 
 #prologos{
-    background-image: url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
+    background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
     background-color: #cccccc; /* Used if the image is unavailable */
-    height: 350px; /* You must set a specified height */
+    height: 280px; /* You must set a specified height */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
 }
-.keimeno{
-    color: orange;
-}
+/* .keimeno{
+    color: rgb(79, 60, 25);
+    font-family: 'Lobster', cursive;
+    font-family: 'Oswald', sans-serif;
+
+} */
 input[type=submit] {
     background-color: orange;
     border: none;
-    color: white;
+    color: black;
     padding: 4px 16px;
     text-decoration: none;
-    margin: 4px 2px;
+    margin: 6px ;
     cursor: pointer;
 }
 input[type=text],input[type=password] {
@@ -41,20 +44,6 @@ ul{
     text-align: center;
 }
 
-/* bottom-to-top */
-a.move-top {
-    width: 34px;
-    height: 34px;
-    background: url("move-top.png") no-repeat;
-    display: inline-block;
-    position: fixed;
-    bottom: 4%;
-    right: 2%;
-    z-index: 0;
-}
-
-/* //bottom-to-top */
-
 textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -72,12 +61,33 @@ textarea {
     border: none;
     outline: none;
     background-color: black;
-    color: white;
+    color: #fafbc5; 
     cursor: pointer;
     padding: 15px;
     border-radius: 4px;
   }
-  
   #myBtn:hover {
     background-color: #555;
   }
+
+  #message{
+    font-family: 'Lobster', cursive;
+/* 
+    
+
+    font-family: 'Montez', cursive;
+
+    font-family: 'Oleo Script Swash Caps', cursive; */
+
+    /* font-family: 'Oswald', sans-serif; */
+    /* font-family: 'Barriecito', cursive; */
+
+    color: black;
+
+  }
+#calendart{   
+
+    font-family: 'Barriecito', cursive;
+
+}
+

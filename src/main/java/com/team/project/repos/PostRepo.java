@@ -17,10 +17,9 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface PostRepo extends JpaRepository<Post, Integer> {
 
-//    SELECT firstName, lastName, seatNumber FROM passengers ORDER BY seatNumber LIMIT 1;
     @Query("SELECT p FROM Post p ORDER BY p.idpost DESC")
     public List<Post> getLastPosts();
-    
+
     @Query("select p from Post p where p.iduser=?1 ORDER BY p.idpost DESC")
     public List<Post> findByIduser(User user);
 
@@ -31,6 +30,9 @@ public interface PostRepo extends JpaRepository<Post, Integer> {
 
     @Query("Select p FROM Post p where p.idpost<= :maxidp and p.idpost>( :maxidp-10) ORDER BY p.idpost DESC ")
     public List<Post> selectTenLastPosts(int maxidp);
+
+    @Query("Select p FROM Post p where p.idpost<= (:maxidp-:lastpost) and p.idpost> (:maxidp-:firstpost) ORDER BY p.idpost DESC ")
+    public List<Post> selectTenNextPosts(int firstpost, int lastpost, int maxidp);
 
     @Query("Select p FROM Post p where p.idpost<= (:maxidp-10) and p.idpost>( :maxidp-20) ORDER BY p.idpost DESC ")
     public List<Post> select11to20Posts(int maxidp);
@@ -55,7 +57,6 @@ public interface PostRepo extends JpaRepository<Post, Integer> {
 
     @Query("Select p FROM Post p where p.idpost<= (:maxidp-80) and p.idpost>( :maxidp-90) ORDER BY p.idpost DESC ")
     public List<Post> select81to90Posts(int maxidp);
-    
-//    public void deletePost(int idpost);
 
+//    public void deletePost(int idpost);
 }

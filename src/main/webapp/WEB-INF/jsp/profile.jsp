@@ -20,7 +20,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     </head>
-    <body>       
+    <body>    
 
         <!--        proto kouti pano me prologo kai backround photo-->
         <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
@@ -92,7 +92,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" >${user.username} profile</a>
                                         </li>
-                                                                               
+
                                         <li class="nav-item">
                                             <form class="nav-item" action="logout" method="post">            
                                                 <input type="submit" value="logout">
@@ -114,29 +114,29 @@
                                                 </div>
                                                 <div class="container" style="margin-top:0px">
                                                     <div class="row">
-<!--                                                                                                                                                                        <div class="col-sm-4">
-                                                                                                                                                                            <h2>About Me</h2>
-                                                                                                                                                                            <h5>Photo of me:</h5>
-                                                                                                                                                                            <div class="fakeimg">Fake Image</div>
-                                                                                                                                                                            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-                                                                                                                                                                            <h3>Some Links</h3>
-                                                                                                                                                                            <p>Lorem ipsum dolor sit ame.</p>
-                                                                                                                                                                            <ul class="nav nav-pills flex-column">
-                                                                                                                                                                                <li class="nav-item">
-                                                                                                                                                                                    <a class="nav-link active" href="#">Active</a>
-                                                                                                                                                                                </li>
-                                                                                                                                                                                <li class="nav-item">
-                                                                                                                                                                                    <a class="nav-link" href="#">Link</a>
-                                                                                                                                                                                </li>
-                                                                                                                                                                                <li class="nav-item">
-                                                                                                                                                                                    <a class="nav-link" href="#">Link</a>
-                                                                                                                                                                                </li>
-                                                                                                                                                                                <li class="nav-item">
-                                                                                                                                                                                    <a class="nav-link disabled" href="#">Disabled</a>
-                                                                                                                                                                                </li>
-                                                                                                                                                                            </ul>
-                                                                                                                                                                            <hr class="d-sm-none">
-                                                                                                                                                                        </div>-->
+                                                        <!--                                                                                                                                                                        <div class="col-sm-4">
+                                                                                                                                                                                                        <h2>About Me</h2>
+                                                                                                                                                                                                        <h5>Photo of me:</h5>
+                                                                                                                                                                                                        <div class="fakeimg">Fake Image</div>
+                                                                                                                                                                                                        <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+                                                                                                                                                                                                        <h3>Some Links</h3>
+                                                                                                                                                                                                        <p>Lorem ipsum dolor sit ame.</p>
+                                                                                                                                                                                                        <ul class="nav nav-pills flex-column">
+                                                                                                                                                                                                        <li class="nav-item">
+                                                                                                                                                                                                        <a class="nav-link active" href="#">Active</a>
+                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                        <li class="nav-item">
+                                                                                                                                                                                                        <a class="nav-link" href="#">Link</a>
+                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                        <li class="nav-item">
+                                                                                                                                                                                                        <a class="nav-link" href="#">Link</a>
+                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                        <li class="nav-item">
+                                                                                                                                                                                                        <a class="nav-link disabled" href="#">Disabled</a>
+                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                        <hr class="d-sm-none">
+                                                                                                                                                                                                        </div>-->
 
 
 
@@ -147,12 +147,12 @@
 
                                                                 <h2>${l.title}</h2>
                                                                 <h5>post #${l.idpost}, ${l.dispDate}, by 
-                                                                    
+
                                                                     <!--                                                                    avatar - should not be null-->
-<!--                                                                    <img src="data:image/jpg;base64,{l.iduser.base64Avatar}" style="vertical-align: middle;
-                                                                         width: 50px;
-                                                                         height: 50px;
-                                                                         border-radius: 50%;"/>-->
+                                                                    <!--                                                                    <img src="data:image/jpg;base64,{l.iduser.base64Avatar}" style="vertical-align: middle;
+                                                                                                                                             width: 50px;
+                                                                                                                                             height: 50px;
+                                                                                                                                             border-radius: 50%;"/>-->
                                                                     ${l.iduser.username}</h5>
                                                                 <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" style="max-width: 100%; height: auto;"/></div>
                                                                 <p>${l.description}</p>
@@ -235,6 +235,8 @@
                                                     </li>
                                                 </ul>
                                                 <!--                                                </div>-->
-
+                                                
                                                 </body>
+
+
                                                 </html>

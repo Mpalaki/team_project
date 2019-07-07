@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -65,7 +64,7 @@ public class PostController {
         pr.save(post);
         List<Post> posts = ps.getTenLastsPosts();
         mm.addAttribute("posts", posts);
-        
+
         return "welcome";
     }
 
@@ -82,108 +81,22 @@ public class PostController {
         return "welcome";
     }
 
-    @RequestMapping("2")
-    public String get11to20Posts(ModelMap mm) {
-        List<Post> posts = ps.get11to20Posts();
-        for (int i = 0; i < posts.size(); i++) {
-            byte imageBytes[] = posts.get(i).getPhoto();
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            posts.get(i).setBase64Photo(base64Image);
+    @RequestMapping("nextpage")
+    public String getNext10Posts(ModelMap mm, HttpServletRequest request, @RequestParam("pagenumber") int pagenumber) {
+        try {
+            List<Post> posts = ps.getTenNextPosts(pagenumber);
+            for (int i = 0; i < posts.size(); i++) {
+                byte imageBytes[] = posts.get(i).getPhoto();
+                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                posts.get(i).setBase64Photo(base64Image);
+            }
+            mm.addAttribute("posts", posts);
+        } catch (NullPointerException e) {
+            getLastPosts(mm);
+        } finally {
+            return "welcome";
         }
-        mm.addAttribute("posts", posts);
 
-        return "welcome";
-    }
-
-    @RequestMapping("3")
-    public String get21to30Posts(ModelMap mm) {
-        List<Post> posts = ps.get21to30Posts();
-        for (int i = 0; i < posts.size(); i++) {
-            byte imageBytes[] = posts.get(i).getPhoto();
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            posts.get(i).setBase64Photo(base64Image);
-        }
-        mm.addAttribute("posts", posts);
-
-        return "welcome";
-    }
-
-    @RequestMapping("4")
-    public String get31to40Posts(ModelMap mm) {
-        List<Post> posts = ps.get31to40Posts();
-        for (int i = 0; i < posts.size(); i++) {
-            byte imageBytes[] = posts.get(i).getPhoto();
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            posts.get(i).setBase64Photo(base64Image);
-        }
-        mm.addAttribute("posts", posts);
-
-        return "welcome";
-    }
-
-    @RequestMapping("5")
-    public String get41to50Posts(ModelMap mm) {
-        List<Post> posts = ps.get41to50Posts();
-        for (int i = 0; i < posts.size(); i++) {
-            byte imageBytes[] = posts.get(i).getPhoto();
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            posts.get(i).setBase64Photo(base64Image);
-        }
-        mm.addAttribute("posts", posts);
-
-        return "welcome";
-    }
-
-    @RequestMapping("6")
-    public String get51to60Posts(ModelMap mm) {
-        List<Post> posts = ps.get51to60Posts();
-        for (int i = 0; i < posts.size(); i++) {
-            byte imageBytes[] = posts.get(i).getPhoto();
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            posts.get(i).setBase64Photo(base64Image);
-        }
-        mm.addAttribute("posts", posts);
-
-        return "welcome";
-    }
-
-    @RequestMapping("7")
-    public String get61to70Posts(ModelMap mm) {
-        List<Post> posts = ps.get61to70Posts();
-        for (int i = 0; i < posts.size(); i++) {
-            byte imageBytes[] = posts.get(i).getPhoto();
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            posts.get(i).setBase64Photo(base64Image);
-        }
-        mm.addAttribute("posts", posts);
-
-        return "welcome";
-    }
-
-    @RequestMapping("8")
-    public String get71to80Posts(ModelMap mm) {
-        List<Post> posts = ps.get71to80Posts();
-        for (int i = 0; i < posts.size(); i++) {
-            byte imageBytes[] = posts.get(i).getPhoto();
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            posts.get(i).setBase64Photo(base64Image);
-        }
-        mm.addAttribute("posts", posts);
-
-        return "welcome";
-    }
-
-    @RequestMapping("9")
-    public String get81to90Posts(ModelMap mm) {
-        List<Post> posts = ps.get81to90Posts();
-        for (int i = 0; i < posts.size(); i++) {
-            byte imageBytes[] = posts.get(i).getPhoto();
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            posts.get(i).setBase64Photo(base64Image);
-        }
-        mm.addAttribute("posts", posts);
-
-        return "welcome";
     }
 
     @RequestMapping("/")
@@ -227,9 +140,9 @@ public class PostController {
     }
 
     @RequestMapping(value = "updatepost")
-    public String updatePost(HttpServletRequest request, @RequestParam("idpost") int idpost, 
-            @RequestParam("description") String description, 
-            @RequestParam("title") String title, ModelMap mm, 
+    public String updatePost(HttpServletRequest request, @RequestParam("idpost") int idpost,
+            @RequestParam("description") String description,
+            @RequestParam("title") String title, ModelMap mm,
             @RequestParam("photo1") MultipartFile image) throws IOException {
         HttpSession session = request.getSession();
         Post post = pr.getPostByIdpost(idpost);

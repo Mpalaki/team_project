@@ -17,54 +17,27 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PostService {
-    
+
     @Autowired
     PostRepo pr;
-    
-    public List<Post> getTenLastsPosts(){
-        int max_postid = pr.getMaxPostId();
-        List<Post> lastten = pr.selectTenLastPosts(max_postid);
+
+    public List<Post> getTenLastsPosts() {
+        List<Post> allposts = pr.getLastPosts();
+        List<Post> lastten = allposts.subList(0, 10);
         return lastten;
     }
-    public List<Post> get11to20Posts(){
-        int max_postid = pr.getMaxPostId();
-        List<Post> elevento20 = pr.select11to20Posts(max_postid);
-        return elevento20;
+
+    public List<Post> getTenNextPosts(int pagenumber) {
+        int fromIndex = (pagenumber - 1) * 10;
+        int toIndex = pagenumber * 10;
+        List<Post> nextten = null;
+        List<Post> allposts = pr.getLastPosts();
+        if (toIndex < allposts.size()) {
+            nextten = allposts.subList(fromIndex, toIndex);
+        } else {
+            nextten = allposts.subList(fromIndex, allposts.size());
+        }
+        return nextten;
     }
-    public List<Post> get21to30Posts(){
-        int max_postid = pr.getMaxPostId();
-        List<Post> elevento20 = pr.select21to30Posts(max_postid);
-        return elevento20;
-    }
-    public List<Post> get31to40Posts(){
-        int max_postid = pr.getMaxPostId();
-        List<Post> elevento20 = pr.select31to40Posts(max_postid);
-        return elevento20;
-    }
-    public List<Post> get41to50Posts(){
-        int max_postid = pr.getMaxPostId();
-        List<Post> elevento20 = pr.select41to50Posts(max_postid);
-        return elevento20;
-    }
-    public List<Post> get51to60Posts(){
-        int max_postid = pr.getMaxPostId();
-        List<Post> elevento20 = pr.select51to60Posts(max_postid);
-        return elevento20;
-    }
-    public List<Post> get61to70Posts(){
-        int max_postid = pr.getMaxPostId();
-        List<Post> elevento20 = pr.select61to70Posts(max_postid);
-        return elevento20;
-    }
-    public List<Post> get71to80Posts(){
-        int max_postid = pr.getMaxPostId();
-        List<Post> elevento20 = pr.select71to80Posts(max_postid);
-        return elevento20;
-    }
-    public List<Post> get81to90Posts(){
-        int max_postid = pr.getMaxPostId();
-        List<Post> elevento20 = pr.select81to90Posts(max_postid);
-        return elevento20;
-    }
-    
+
 }
