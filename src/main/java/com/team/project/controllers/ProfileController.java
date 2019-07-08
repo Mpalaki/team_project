@@ -39,6 +39,7 @@ public class ProfileController {
     }
     @RequestMapping("profile")
     public String viewOtherProfile(HttpSession session, ModelMap mm, @RequestParam ("unartist") String unartist) { 
+//        User onlineUser = (User) session.getAttribute("user");
         User artist = ur.findByUsername(unartist);
         byte[] avatar = artist.getAvatar();
         String avat = Base64.getEncoder().encodeToString(avatar);

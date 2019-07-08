@@ -7,6 +7,7 @@ package com.team.project.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
@@ -105,6 +106,8 @@ public class User implements Serializable {
     private Integer commentsNo;
     @Transient
     private String base64Avatar;
+    @Transient
+    private String dispDate;
 
     public User() {
     }
@@ -189,7 +192,11 @@ public class User implements Serializable {
     public void setCommentsNo(Integer commentsNo) {
         this.commentsNo = commentsNo;
     }
-
+    
+    public String getDispDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+        String dispdate = sdf.format(this.signupDate);
+        return dispdate;}
 
     @Override
     public int hashCode() {

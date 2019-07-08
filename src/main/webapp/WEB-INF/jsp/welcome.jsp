@@ -30,7 +30,7 @@
         <!--        proto kouti pano me prologo kai backround photo-->
         <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
             <!--            view port width-->
-            <h1 id="message" style="opacity: 0.9">A website dedicated to artists and art lovers<br>
+            <h1 id="message">A website dedicated to artists and art lovers<br>
                 Post in Calendart and exhibit your artwork  </h1>
         </div>
 
@@ -189,7 +189,7 @@
                                                                                 <c:param name="unartist" value="${l.iduser.username}"/>
                                                                             </c:url>">${l.iduser.username}</a>
                                                                     </h5>
-                                                                    <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" style="max-width: 100%; height: auto;"/></div>
+                                                                    <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" style="max-width: 80%; height: auto;"/></div>
                                                                     <p>${l.description}</p>
                                                                     <br>
 
