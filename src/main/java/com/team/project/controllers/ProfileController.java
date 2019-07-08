@@ -36,7 +36,9 @@ public class ProfileController {
     // TODO: pairnei ton user ap to session opote an kanei update photo den fainetai sto profile an den kanei logout kai login pali
     @RequestMapping("redirectToProfile")
     public String redirectToProfile(HttpSession session, ModelMap mm) {
-        User u = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
+        // Mpaloma
+        User u = ur.findByIduser(user.getIduser());
         mm.addAttribute("user", u);
         byte[] avatar = u.getAvatar();
         String avat = Base64.getEncoder().encodeToString(avatar);
