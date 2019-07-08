@@ -8,6 +8,7 @@ package com.team.project.controllers;
 import com.team.project.model.User;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
+import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -15,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -29,24 +32,31 @@ public class ProfileController {
     @Autowired
     PostRepo pr;
 
+    
+    // TODO: pairnei ton user ap to session opote an kanei update photo den fainetai sto profile an den kanei logout kai login pali
     @RequestMapping("redirectToProfile")
     public String redirectToProfile(HttpSession session, ModelMap mm) {
         User u = (User) session.getAttribute("user");
         mm.addAttribute("user", u);
-        session.setAttribute("user", u);
-        session.setAttribute("username", u.getUsername());
+        byte[] avatar = u.getAvatar();
+        String avat = Base64.getEncoder().encodeToString(avatar);
+        u.setBase64Avatar(avat);
+        mm.addAttribute("user", u);
+        List posts = pr.findByIduser(u);
+        mm.addAttribute("posts", posts);
         return "profile";
     }
+
     @RequestMapping("profile")
-    public String viewOtherProfile(HttpSession session, ModelMap mm, @RequestParam ("unartist") String unartist) { 
+    public String viewOtherProfile(HttpSession session, ModelMap mm, @RequestParam("unartist") String unartist) {
 //        User onlineUser = (User) session.getAttribute("user");
         User artist = ur.findByUsername(unartist);
         byte[] avatar = artist.getAvatar();
         String avat = Base64.getEncoder().encodeToString(avatar);
         artist.setBase64Avatar(avat);
-        mm.addAttribute("user", artist); 
+        mm.addAttribute("user", artist);
         List posts = pr.findByIduser(artist);
-        mm.addAttribute("posts",posts);
+        mm.addAttribute("posts", posts);
         return "profile";
     }
 
@@ -62,6 +72,18 @@ public class ProfileController {
 //        session.setAttribute("username", u.getUsername());
         mm.addAttribute("artists", artists);
         return "welcome";
+    }
+
+    @RequestMapping(value = "updatephoto", method = RequestMethod.POST)
+    public String updateAvatar(ModelMap mm, @RequestParam("iduser") int iduser, @RequestParam("avatar") MultipartFile avatar ) throws IOException {
+        User user = ur.findByIduser(iduser);
+        byte [] image = avatar.getBytes();
+        user.setAvatar(image);
+        ur.save(user);
+        mm.addAttribute("user", user);
+        List posts = pr.findByIduser(user);
+        mm.addAttribute("posts", posts);
+        return "profile";
     }
 
 }

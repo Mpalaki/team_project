@@ -295,7 +295,7 @@
                                                                         </form>
                                                                     </div>
                                                                     <div class="tab-pane" id="pms">
-                                                                        
+
                                                                     </div>
                                                                 </c:if>
                                                             </div>
@@ -306,8 +306,11 @@
                                                             <c:if test = "${user.iduser==iduser}" >
                                                                 <h6 class="mt-2">Upload a different photo</h6>
                                                                 <label class="custom-file">
-                                                                    <input type="file" id="file" class="custom-file-input" >
-                                                                    <span class="custom-file-control">Choose file</span>
+                                                                    <form action="updatephoto" enctype="multipart/form-data" method="post">
+                                                                        <input type="file" id="file" name="avatar" class="custom-file-input" >
+                                                                        <input type=hidden id="iduser" name="iduser" value="${iduser}">                                                                        <span class="custom-file-control">Choose file</span>
+                                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                                    </form>
                                                                 </label>
                                                             </c:if>
                                                         </div>
