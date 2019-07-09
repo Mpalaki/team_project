@@ -1,91 +1,48 @@
-
-#prologos{
-    background-image: url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
-    background-color: #cccccc; /* Used if the image is unavailable */
-    height: 350px; /* You must set a specified height */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-}
-.keimeno{
-    color: orange;
-}
-input[type=submit] {
-    background-color: orange;
-    border: none;
-    color: white;
-    padding: 4px 16px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-input[type=text],input[type=password] {
-    background-color:#faf68a;
-    border: none;
-    color: black;
-    padding: 4px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-li{
-    padding-left: 10px;
-    padding-right: 10px;
+/* input[type=text]{
+    background-color:#fafbc5;
     
-}
-#even:nth-child(odd){
-    background:#fafbc5;
-}
+} */
 
-ul{
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
     text-align: center;
-}
-
-/* bottom-to-top */
-a.move-top {
-    width: 34px;
-    height: 34px;
-    background: url("move-top.png") no-repeat;
-    display: inline-block;
-    position: fixed;
-    bottom: 4%;
-    right: 2%;
-    z-index: 0;
-}
-
-/* //bottom-to-top */
-
-textarea {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-
-    width: 100%;
-}
-#myBtn {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    z-index: 99;
-    font-size: 18px;
-    border: none;
-    outline: none;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 4px;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
   }
   
-  #myBtn:hover {
-    background-color: #555;
+  .fa:hover {
+      opacity: 0.7;
   }
 
-  .profilepic {
-    vertical-align: middle;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%; 
-    float: left;
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  .fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+  /* .fa-google {
+    background: #dd4b39;
+    color: white;
+  }
+  
+  .fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+  .fa-youtube {
+    background: #bb0000;
+    color: white;
+  } */
+  
+  .fa-instagram {
+    background: #125688;
+    color: white;
   }

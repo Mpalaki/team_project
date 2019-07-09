@@ -77,27 +77,26 @@
                     <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
                 <div class="form-group">
-                    <textarea rows = "6" cols = "50" name = "description">
-            Enter your description
-                    </textarea></br>
+                    <textarea rows = "6" cols = "50" name = "description">Enter your description</textarea></br>
                 </div>
-                <div class="form-group">
-                        <input class="form-control-file" type="file" name="photo1" required> 
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Upload an image to continue.</div>
-                    </label>
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file" name="photo1" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Upload an image to continue.</div>
+                    <label class="custom-file-label" for="customFile">Choose file</label><br>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Submit</button>
             </form>
         </div>
-
-<!--        <form  class="formapost" action="insertpost" enctype="multipart/form-data" method="post">
-            <input type="text" name="title" placeholder="insert post title"></br>
-            <textarea rows = "10" cols = "50" name = "description">
-            Enter your description
-            </textarea></br>  
-            <input type="file" name="photo1">
-
-            <input type="submit">  -->
-            </body>
-            </html>
+        <script>
+        // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    </body>
+</html>

@@ -58,7 +58,7 @@ public class Post implements Serializable {
     private byte[] photo;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 845)
+    @Size(min = 1, max = 1845)
     @Column(name = "description")
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpost")

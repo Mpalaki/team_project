@@ -15,7 +15,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!--        <link rel="stylesheet" href="welcome.css">-->
+        <!--                <link rel="stylesheet" href="profile.css">-->
+        <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet"> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -65,7 +66,7 @@
 
 
                             <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-                                <a class="navbar-brand" href="home"><h5>Calendart Gallery</h5></a>
+                                <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart Gallery</h5></a>
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
@@ -133,11 +134,11 @@
                                                         <a class="btn btn-primary btn-sm" rel="publisher" href="${user.instagram}">
                                                             <i class="fa fa-instagram"></i>
                                                         </a><hr>
-                                                        <span class="badge badge-primary"><i class="fa fa-user"></i> ${user.postsNo} posts</span>
-                                                        <span class="badge badge-success"><i class="fa fa-cog"></i> ${user.commentsNo} comments</span>
+                                                        <span class="badge badge-primary"><i class="fa fa-photo"></i> ${user.postsNo} posts</span>
+                                                        <span class="badge badge-success"><i class="fa fa-comment"></i> ${user.commentsNo} comments</span>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <h3 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Artwork</h3>
+                                                        <h3 class="mt-2">Artwork</h3>
                                                         <hr>
                                                         <table class="table table-sm table-hover table-striped">
                                                             <tbody>                                    
@@ -287,22 +288,31 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 order-lg-1 text-center">
-                                        <h2 class="mt-2" style="background-color: #fafbc5">${user.username}</h2>
+                                        <h2 class="mt-2" style="background-color: #fafbc5; color:black; font-family: 'Barriecito', cursive;">${user.username}</h2>
                                         <img src="data:image/jpg;base64,${user.base64Avatar}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
                                         <c:if test = "${user.iduser==iduser}" >
                                             <h6 class="mt-2">Upload a different photo</h6>
-                                            <label class="custom-file">
-                                                <form action="updatephoto" enctype="multipart/form-data" method="post">
-                                                    <input type="file" id="file" name="avatar" class="custom-file-input" >
-                                                    <input type=hidden id="iduser" name="iduser" value="${iduser}">                                                                        <span class="custom-file-control">Choose file</span>
+                                            <form action="updatephoto" enctype="multipart/form-data" method="post">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="file" name="avatar" >
+                                                    <input type=hidden id="iduser" name="iduser" value="${iduser}">
+                                                    <label class="custom-file-label" for="customFile">Choose file</label>
                                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                                </form>
-                                            </label>
+                                                </div>
+                                            </form>
+
                                         </c:if>
 
                                     </div>
                                 </div>
                             </div>
+                            <script>
+// Add the following code if you want the name of the file appear on select
+                                $(".custom-file-input").on("change", function () {
+                                    var fileName = $(this).val().split("\\").pop();
+                                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                                });
+                            </script>
                             </body>
 
                             </html>
