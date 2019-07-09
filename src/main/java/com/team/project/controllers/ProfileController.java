@@ -88,17 +88,26 @@ public class ProfileController {
         return "profile";
     }
     
-//    @RequestMapping(value = "updateprofile", method = RequestMethod.POST)
-//    public String updateProfile(ModelMap mm, @RequestParam("iduser") int iduser, @RequestParam("firstname") String firstname,
-//            @RequestParam("lastname") String lastname,) {
-//        User user = ur.findByIduser(iduser);
-//        byte [] image = avatar.getBytes();
-//        user.setAvatar(image);
-//        ur.save(user);
-//        mm.addAttribute("user", user);
-//        List posts = pr.findByIduser(user);
-//        mm.addAttribute("posts", posts);
-//        return "profile";
-//    }
+    @RequestMapping(value = "updateprofile", method = RequestMethod.POST)
+    public String updateProfile(ModelMap mm, HttpSession session, @RequestParam("firstName") String firstname,
+            @RequestParam("lastName") String lastname, @RequestParam("email") String email, 
+            @RequestParam("facebook") String facebook, @RequestParam("instagram") String instagram, @RequestParam("twitter") String twitter, 
+            @RequestParam("aboutme") String aboutme ) {
+        User u = (User) session.getAttribute("user");
+        // Mpaloma
+        User user = ur.findByIduser(u.getIduser());
+        user.setAboutme(aboutme);
+        user.setEmail(email);
+        user.setFacebook(facebook);
+        user.setInstagram(instagram);
+        user.setTwitter(twitter);
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
+        ur.save(user);
+        mm.addAttribute("user", user);
+        List posts = pr.findByIduser(user);
+        mm.addAttribute("posts", posts);
+        return "profile";
+    }
 
 }

@@ -53,13 +53,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public class User implements Serializable {
 
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "first_name")
     private String firstName;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)
@@ -104,6 +100,16 @@ public class User implements Serializable {
     private Integer postsNo;
     @Column(name = "comments_no")
     private Integer commentsNo;
+    @Column(name = "facebook")
+    private String facebook;
+    @Column(name = "instagram")
+    private String instagram;
+    @Column(name = "twitter")
+    private String twitter;
+    @Column(name = "aboutme")
+    private String aboutme;
+    @Column(name = "email")
+    private String email;
     @Transient
     private String base64Avatar;
     @Transient
@@ -125,7 +131,7 @@ public class User implements Serializable {
         this.emailAddress = emailAddress;
         this.role = role;
     }
-    
+
     public String getBase64Avatar() {
         base64Avatar = Base64.getEncoder().encodeToString(this.avatar);
         return base64Avatar;
@@ -135,8 +141,48 @@ public class User implements Serializable {
         this.base64Avatar = base64avatar;
     }
 
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public String getAboutme() {
+        return aboutme;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public Integer getIduser() {
         return iduser;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
+    public void setAboutme(String aboutme) {
+        this.aboutme = aboutme;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setIduser(Integer iduser) {
@@ -159,7 +205,6 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -176,7 +221,6 @@ public class User implements Serializable {
         this.telephone = telephone;
     }
 
-
     public Integer getPostsNo() {
         return postsNo;
     }
@@ -192,11 +236,12 @@ public class User implements Serializable {
     public void setCommentsNo(Integer commentsNo) {
         this.commentsNo = commentsNo;
     }
-    
-    public String getDispDate(){
+
+    public String getDispDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
         String dispdate = sdf.format(this.signupDate);
-        return dispdate;}
+        return dispdate;
+    }
 
     @Override
     public int hashCode() {
@@ -222,7 +267,7 @@ public class User implements Serializable {
     public String toString() {
         return "com.team.project.model.User[ iduser=" + iduser + " ]";
     }
-    
+
     public Integer getRole() {
         return role;
     }
@@ -248,7 +293,6 @@ public class User implements Serializable {
         this.signupDate = signupDate;
     }
 
-    
     public String getUsername() {
         return username;
     }
@@ -265,7 +309,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    
     public byte[] getAvatar() {
         return avatar;
     }
@@ -274,7 +317,6 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
-   
     @XmlTransient
     public Collection<Comment> getCommentCollection() {
         return commentCollection;
@@ -283,5 +325,5 @@ public class User implements Serializable {
     public void setCommentCollection(Collection<Comment> commentCollection) {
         this.commentCollection = commentCollection;
     }
-    
+
 }
