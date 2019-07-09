@@ -87,5 +87,18 @@ public class ProfileController {
         mm.addAttribute("posts", posts);
         return "profile";
     }
+    
+//    @RequestMapping(value = "updateprofile", method = RequestMethod.POST)
+//    public String updateProfile(ModelMap mm, @RequestParam("iduser") int iduser, @RequestParam("firstname") String firstname,
+//            @RequestParam("lastname") String lastname,) {
+//        User user = ur.findByIduser(iduser);
+//        byte [] image = avatar.getBytes();
+//        user.setAvatar(image);
+//        ur.save(user);
+//        mm.addAttribute("user", user);
+//        List posts = pr.findByIduser(user);
+//        mm.addAttribute("posts", posts);
+//        return "profile";
+//    }
 
 }
