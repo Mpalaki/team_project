@@ -30,7 +30,7 @@
     <body>
         <!--        proto kouti pano me prologo kai backround photo-->
         <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
-            
+
         </div>
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -79,7 +79,28 @@
         <div class="container"  style="width: 50%">
             <h2>Post your artwork</h2>
             <p>We are happy to host photos of your paintings and sculptures.</p>
-            
+            <form action="insertpost" enctype="multipart/form-data"  class="was-validated" method="post">
+                <div class="form-group">
+                    <!--                    <label for="uname">Username:</label>-->
+                    <input type="text" class="form-control" id="uname" placeholder="Enter post title" name="title" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                    <textarea rows = "6" cols = "50" name = "description">Enter your description</textarea></br>
+                </div>
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file" name="photo1" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Upload an image to continue.</div>
+                    <label class="custom-file-label" for="customFile">Choose file</label><br>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Submit</button>
+            </form>
+
         </div>
         <script>
             // Add the following code if you want the name of the file appear on select
