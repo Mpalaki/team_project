@@ -7,20 +7,25 @@ package com.team.project.service;
 
 import com.team.project.model.User;
 import com.team.project.repos.UserRepo;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Makis
  */
+
+@Service
 public class UserService {
 
     @Autowired
     UserRepo ur;
 
+
     public boolean isPasswordValid(User user, String password) {
         String upass = user.getPassword();
-        if (upass.equals(password)) {
+        if (BCrypt.checkpw(password, upass)) {
             return true;
         } else {
             return false;

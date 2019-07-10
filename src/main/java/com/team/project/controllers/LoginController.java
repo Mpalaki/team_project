@@ -17,9 +17,14 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.team.project.service.UserService;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,26 +44,32 @@ public class LoginController {
     PostRepo pr;
     @Autowired
     PostService ps;
+    @Autowired
+    UserService us;
 
-    @RequestMapping("LoginController")
+    @RequestMapping ("LoginController")
     public String login(HttpServletRequest request, ModelMap mm) {
         String username = request.getParameter("username");
         String givenpass = request.getParameter("password");
-        User u = ur.findByUsernameAndPassword(username, givenpass);
+        User u = ur.findByUsername(username);
         if (u == null) {
             return "registerform";
         } else {
-            int iduser = u.getIduser();
-            int role = u.getRole();
-            HttpSession session = request.getSession();
-            session.setAttribute("user", u);
-            session.setAttribute("iduser", iduser);
-            session.setAttribute("username", username);
-            session.setAttribute("role", role);
-            mm.addAttribute("user", u);
-            List<Post> posts = ps.getTenLastsPosts();
-            mm.addAttribute("posts", posts);
-            return "welcome";
+            if(us.isPasswordValid(u,givenpass)) {
+                int iduser = u.getIduser();
+                int role = u.getRole();
+                HttpSession session = request.getSession();
+                session.setAttribute("user", u);
+                session.setAttribute("iduser", iduser);
+                session.setAttribute("username", username);
+                session.setAttribute("role", role);
+                mm.addAttribute("user", u);
+                List<Post> posts = ps.getTenLastsPosts();
+                mm.addAttribute("posts", posts);
+                return "welcome";
+            }else {
+                return "registerform";
+            }
         }
     }
 
@@ -71,19 +82,19 @@ public class LoginController {
         return "welcome";
     }
 
-    @RequestMapping("SignupController")
+    @GetMapping("SignupController")
     public String redirectToSignupForm() {
         return "registerform";
     }
 
-    @RequestMapping("home")
+    @GetMapping("home")
     public String homePage(ModelMap mm) {
         List<Post> posts = ps.getTenLastsPosts();
         mm.addAttribute("posts", posts);
         return "welcome";
     }
 
-    @RequestMapping("RegisterController")
+    @GetMapping("RegisterController")
     public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
             @RequestParam("wordpass") String wordpass, @RequestParam("photo") MultipartFile image) throws IOException, ServletException {
         if (ur.countUsers(givenun) > 0) {
@@ -91,6 +102,7 @@ public class LoginController {
         } else {
             if (password.equals(wordpass)) {
                 if (image != null) {
+
                     byte[] img = image.getBytes();
                     user.setAvatar(img);
 //                    an den valei avatar na mpainei ena default
@@ -98,8 +110,12 @@ public class LoginController {
                     byte[] fileContent = Files.readAllBytes(imgfile.toPath());
                     user.setAvatar(fileContent);
                 }
+
                 user.setRole(2); // eisagontai oloi os aploi users, oi admins tha prostithentai kateutheian stin vasi
                 java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+
+                System.out.println(BCrypt.hashpw(password,BCrypt.gensalt()));
+                user.setPassword(BCrypt.hashpw(password,BCrypt.gensalt()));
                 user.setSignupDate(date);
                 ur.save(user);
                 return "welcome";
