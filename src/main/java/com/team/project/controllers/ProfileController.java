@@ -6,6 +6,7 @@
 package com.team.project.controllers;
 
 import com.team.project.model.User;
+import com.team.project.repos.PmRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
 import java.io.IOException;
@@ -31,6 +32,8 @@ public class ProfileController {
     UserRepo ur;
     @Autowired
     PostRepo pr;
+    @Autowired
+    PmRepo pmr;
 
     
     // TODO: pairnei ton user ap to session opote an kanei update photo den fainetai sto profile an den kanei logout kai login pali
@@ -45,7 +48,9 @@ public class ProfileController {
         u.setBase64Avatar(avat);
         mm.addAttribute("user", u);
         List posts = pr.findByIduser(u);
+        List pms = pmr.getCommentsByIdreceiver(user);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("pms", pms);
         return "profile";
     }
 
@@ -58,7 +63,9 @@ public class ProfileController {
         artist.setBase64Avatar(avat);
         mm.addAttribute("user", artist);
         List posts = pr.findByIduser(artist);
+        List pms = pmr.getCommentsByIdreceiver(artist);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("pms", pms);
         return "profile";
     }
 

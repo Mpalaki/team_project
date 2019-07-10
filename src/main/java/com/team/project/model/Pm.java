@@ -6,6 +6,7 @@
 package com.team.project.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -64,7 +66,9 @@ public class Pm implements Serializable {
     @JoinColumn(name = "idsender", referencedColumnName = "iduser")
     @ManyToOne(optional = false)
     private User idsender;
-
+    @Transient
+    private String dispDate;
+    
     public Pm() {
     }
 
@@ -97,6 +101,11 @@ public class Pm implements Serializable {
     public Date getDate() {
         return date;
     }
+    
+    public String getDispDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY HH:mm");
+        String dispdate = sdf.format(this.date);
+        return dispdate;}
 
     public void setDate(Date date) {
         this.date = date;

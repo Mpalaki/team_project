@@ -102,7 +102,7 @@
                                                     <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Personal messages</a>
+                                                    <a href="" data-target="#pms" data-toggle="tab" class="nav-link">Personal messages</a>
                                                 </li>
                                             </c:if>
                                         </ul>
@@ -233,6 +233,25 @@
                                                                 <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
                                                             </td>
                                                         </tr>
+                                                    </tbody> 
+                                                </table>
+                                            </div>
+                                            <!-- personal messages-->
+                                            <div class="tab-pane" id="pms">
+
+                                                <table class="table table-hover table-striped">
+                                                    <tbody>
+                                                        <c:forEach var = "pms" items="${pms}">
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="float-right font-weight-bold">${pms.dispDate}</span> 
+                                                                    <a  href=" <c:url value="profile">
+                                                                            <c:param name="unartist" value="${pms.idsender.username}"/>
+                                                                        </c:url>">${pms.idsender.username}</a>
+                                                                    <br>${pms.text}
+                                                                </td>
+                                                            </tr>                                                        
+                                                        </c:forEach>
                                                     </tbody> 
                                                 </table>
                                             </div>
