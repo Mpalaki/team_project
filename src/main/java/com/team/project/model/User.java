@@ -53,24 +53,18 @@ import javax.xml.bind.annotation.XmlTransient;
 public class User implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "first_name")
-    private String firstName;
-    @Basic(optional = false)
-    @Column(name = "last_name")
-    private String lastName;
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 120)
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 145)
     @Column(name = "email_address")
     private String emailAddress;
     @Lob
@@ -81,6 +75,17 @@ public class User implements Serializable {
     @Column(name = "signup_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date signupDate;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idreceiver")
+    private Collection<Pm> pmCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idsender")
+    private Collection<Pm> pmCollection1;
+
+    @Basic(optional = false)
+    @Column(name = "first_name")
+    private String firstName;
+    @Basic(optional = false)
+    @Column(name = "last_name")
+    private String lastName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduser")
     private Collection<Comment> commentCollection;
     @Column(name = "role")
@@ -293,6 +298,16 @@ public class User implements Serializable {
         this.signupDate = signupDate;
     }
 
+
+    @XmlTransient
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
+    }
+
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -308,7 +323,7 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
     public byte[] getAvatar() {
         return avatar;
     }
@@ -318,12 +333,21 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Comment> getCommentCollection() {
-        return commentCollection;
+    public Collection<Pm> getPmCollection() {
+        return pmCollection;
     }
 
-    public void setCommentCollection(Collection<Comment> commentCollection) {
-        this.commentCollection = commentCollection;
+    public void setPmCollection(Collection<Pm> pmCollection) {
+        this.pmCollection = pmCollection;
+    }
+
+    @XmlTransient
+    public Collection<Pm> getPmCollection1() {
+        return pmCollection1;
+    }
+
+    public void setPmCollection1(Collection<Pm> pmCollection1) {
+        this.pmCollection1 = pmCollection1;
     }
 
 }

@@ -20,6 +20,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="jquery-3.2.1.js"></script>
 
     </head>
     <body>      
@@ -119,7 +120,23 @@
                                                             ${user.dispDate}
                                                         </p>
                                                     </div>
-                                                    <div class="col-md-6"> 
+                                                    <div class="col-md-6">
+                                                        <c:if test = "${iduser!=null}" >
+                                                            <button type="button" id="pmbtn" class="btn btn-success">Send PM</button>
+
+                                                            <form action="pm" id="pmform" class="was-validated" method="post"  style="display:none;">
+                                                                <div class="form-group">
+                                                                    <input type=hidden id="idsender" name="idsender" value="${iduser}">
+                                                                    <input type=hidden id="idreceiver" name="idreceiver" value="${user.iduser}">
+                                                                    <input type="text" id="uname" class="form-control"  name="title" placeholder="title">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <textarea rows = "6" cols = "50" class="form-control"  name = "text" required></textarea></br>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Send</button>
+                                                            </form>
+
+                                                        </c:if><hr>
                                                         <a class="btn btn-primary btn-twitter btn-sm" href="${user.twitter}">
                                                             <i class="fa fa-twitter"></i>
                                                         </a>
@@ -311,6 +328,10 @@
                                 $(".custom-file-input").on("change", function () {
                                     var fileName = $(this).val().split("\\").pop();
                                     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                                });
+
+                                $("#pmbtn").click(function () {
+                                    $("#pmform").toggle();
                                 });
                             </script>
                             </body>
