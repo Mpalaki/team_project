@@ -5,7 +5,7 @@
 #prologos{
     background-image: url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
     background-color: #cccccc; /* Used if the image is unavailable */
-    height: 190px; /* You must set a specified height */
+    height: 200px; /* You must set a specified height */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */

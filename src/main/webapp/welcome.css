@@ -1,6 +1,6 @@
 
 #prologos{
-    background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
+    background-image: url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
     background-color: #cccccc; /* Used if the image is unavailable */
     height: 280px; /* You must set a specified height */
     background-position: center; /* Center the image */
@@ -72,16 +72,6 @@ textarea {
 
   #message{
     font-family: 'Lobster', cursive;
-/* 
-    
-
-    font-family: 'Montez', cursive;
-
-    font-family: 'Oleo Script Swash Caps', cursive; */
-
-    /* font-family: 'Oswald', sans-serif; */
-    /* font-family: 'Barriecito', cursive; */
-
     color: black;
 
   }

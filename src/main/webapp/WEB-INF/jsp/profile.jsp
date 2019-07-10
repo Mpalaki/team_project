@@ -47,9 +47,6 @@
                         <a class="nav-link" href="SignupController">Sign up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="forgotpassword">Forgot your password?</a>
-                    </li>
-                    <li class="nav-item">
                         <form  class="nav-item" action="LoginController" method="post">
 
                             <input type="text" name="username" placeholder="username" required>
@@ -74,6 +71,9 @@
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
                                             <a class="nav-link" href="home">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="addpost">Post your artwork</a>
                                         </li>
 
                                         <!--                                        <li class="nav-item">
@@ -291,7 +291,7 @@
                                         <h2 class="mt-2" style="background-color: #fafbc5; color:black; font-family: 'Barriecito', cursive;">${user.username}</h2>
                                         <img src="data:image/jpg;base64,${user.base64Avatar}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
                                         <c:if test = "${user.iduser==iduser}" >
-                                            <h6 class="mt-2">Upload a different photo</h6>
+                                            <h6 class="mt-2">Upload a different photo ( max size: 1 KB)</h6>
                                             <form action="updatephoto" enctype="multipart/form-data" method="post">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="file" name="avatar" >

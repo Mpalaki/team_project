@@ -69,9 +69,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="SignupController">Sign up</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="forgotpassword">Forgot your password?</a>
-                    </li>
+
                     <li class="nav-item">
                         <form  class="nav-item" action="LoginController" method="post">
 
@@ -87,8 +85,8 @@
                             <!--            an ehei kanei login-->
                             <% } else {%>
                             <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-                                <a class="navbar-brand" id="calendart" href="home"><h5>Calendart 
-                                        <span style="color:red">G</span><span style="color:orange">a</span><span style="color:yellow">l</span><span style="color:green">l</span><span style="color:lightblue">e</span><span style="color:blue">r</span><span style="color:purple">y</span></h5></a>
+                                <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart  Gallery</h5></a>
+
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                                     <span class="navbar-toggler-icon"></span></h5></a>
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
