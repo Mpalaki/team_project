@@ -17,8 +17,9 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface PmRepo extends JpaRepository<Pm, Integer> {
 
-//    @Query("SELECT p FROM Pm p WHERE p.idreceiver=?1 ORDER BY d.idpm DESC")
+    @Query("SELECT p FROM Pm p WHERE p.idreceiver=?1 ORDER BY p.idpm DESC")
     public List<Pm> getCommentsByIdreceiver(User receiver);
-    
-    
+
+    public Pm findByIdpm(int idpm);
+
 }

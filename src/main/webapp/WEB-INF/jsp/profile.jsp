@@ -239,16 +239,29 @@
                                             <!-- personal messages-->
                                             <div class="tab-pane" id="pms">
 
-                                                <table class="table table-hover table-striped">
+                                                <table class="table table-hover table-striped" id="pms2">
                                                     <tbody>
                                                         <c:forEach var = "pms" items="${pms}">
                                                             <tr>
                                                                 <td>
-                                                                    <span class="float-right font-weight-bold">${pms.dispDate}</span> 
+                                                                    <span class="float-right font-weight-bold">${pms.dispDate} | <a  href=" <c:url value="deletepm">
+                                                                                                                                         <c:param name="idpm" value="${EncryptUtils.encrypt(pms.idpm)}"/>
+                                                                                                                                         <c:param name="idreceiver" value="${pms.idreceiver.iduser}"/>
+                                                                                                                                     </c:url>">Delete</a></span> from: 
                                                                     <a  href=" <c:url value="profile">
                                                                             <c:param name="unartist" value="${pms.idsender.username}"/>
                                                                         </c:url>">${pms.idsender.username}</a>
-                                                                    <br>${pms.text}
+                                                                    <br>subject: <b>${pms.title}</b><br><hr>${pms.text}<br><hr>
+
+                                                                    <form action="reply" method="post">
+
+                                                                        <input type=hidden id="idsender" name="idsender" value="${pms.idreceiver.iduser}">
+                                                                        <input type=hidden id="idreceiver" name="idreceiver" value="${pms.idsender.iduser}">
+                                                                        <input type=hidden id="title" name="title" value="${pms.title}">
+                                                                        <textarea rows = "2" cols = "50" class="custom-file-textarea"  name = "text"></textarea></br>  
+
+                                                                        <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Reply</button>
+
                                                                 </td>
                                                             </tr>                                                        
                                                         </c:forEach>
@@ -343,7 +356,7 @@
                                 </div>
                             </div>
                             <script>
-// Add the following code if you want the name of the file appear on select
+                                // Add the following code if you want the name of the file appear on select
                                 $(".custom-file-input").on("change", function () {
                                     var fileName = $(this).val().split("\\").pop();
                                     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -352,6 +365,12 @@
                                 $("#pmbtn").click(function () {
                                     $("#pmform").toggle();
                                 });
+                                $("#pmbtn2").click(function () {
+                                    $("#pmform2").toggle();
+                                });
+
+
+
                             </script>
                             </body>
 
