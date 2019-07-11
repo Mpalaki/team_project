@@ -46,6 +46,9 @@
                 background-color: #42AEEC;
                 color: #fff;
             }
+             #error_msg{
+                 color:darkred; font-weight:bold;
+             }
         </style>
         <!--nikos-->
     </head>
@@ -60,38 +63,38 @@
                 <article class="card-body mx-auto" style="max-width: 400px;">
                     <h4 class="card-title mt-3 text-center">Create Account</h4>
                     <p class="text-center">Get started with your free account</p>
-                    <p>
+<!--                    <p>
                         <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
                         <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
-                    </p>
+                    </p>-->
                     <p class="divider-text">
-                        <span class="bg-light">OR</span>
+                        <span class="bg-light">Sign up now!</span>
                     </p>
-                    <form action="RegisterController" enctype="multipart/form-data" method="post">
+                    <form id="foid" action="RegisterController" enctype="multipart/form-data" method="post">
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                             </div>
-                            <input name="firstName" class="form-control" placeholder="First name" type="text">
+                            <input name="firstName" class="form-control" placeholder="First name" type="text" >
                         </div> <!-- form-group// -->
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                             </div>
-                            <input name="lastName" class="form-control" placeholder="Last name" type="text">
+                            <input name="lastName" class="form-control" placeholder="Last name" type="text" >
                         </div> <!-- form-group// -->
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                             </div>
-                            <input name="username" class="form-control" placeholder="Username" type="text" required>
+                            <input name="username" class="form-control" placeholder="Username( * )" type="text" required>
                         </div> 
                         <!-- form-group// -->
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                             </div>
-                            <input name="emailAddress" class="form-control" placeholder="Email address" type="email">
+                            <input name="emailAddress" class="form-control" placeholder="Email address( * )" type="email" required>
                         </div> 
                         <!-- form-group// -->
                         <div class="form-group input-group">
@@ -101,34 +104,24 @@
 
                             <input name="telephone" class="form-control" placeholder="Phone number" type="text">
                         </div> <!-- form-group// -->
-                        <div class="form-group input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"> <i class="fa fa-building"></i> </span>
-                            </div>
-                            <select class="form-control">
-                                <option selected=""> Select job type</option>
-                                <option>Designer</option>
-                                <option>Manager</option>
-                                <option>Accaunting</option>
-                            </select>
-                        </div> <!-- form-group end.// -->
+                        
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                             </div>
-                            <input name="password" class="form-control" placeholder="Create password" type="password">
+                            <input id="pass1" name="password" class="form-control" placeholder="Create password( * )" type="password" required>
                         </div> <!-- form-group// -->
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                             </div>
-                            <input name="wordpass" class="form-control" placeholder="Repeat password" type="password">
+                            <input id="pass2" name="wordpass" class="form-control" placeholder="Repeat password( * )" type="password" required>
                         </div> <!-- form-group// -->       
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fas fa-file-image"></i> </span>
                             </div>
-                            <input name="photo" class="form-control" placeholder="Repeat password" type="file">
+                            <input name="photo" class="form-control" placeholder="" type="file" >
                         </div> <!-- form-group// -->  
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
@@ -142,17 +135,55 @@
         <!--container end.//-->
 
         <br><br>
-        <article class="bg-secondary mb-3">  
-            <div class="card-body text-center">
-                <h3 class="text-white mt-3">Bootstrap 4 UI KIT</h3>
-                <p class="h5 text-white">Components and templates  <br> for Ecommerce, marketplace, booking websites 
-                    and product landing pages</p>   <br>
-                <p><a class="btn btn-warning" target="_blank" href="http://bootstrap-ecommerce.com/"> Bootstrap-ecommerce.com  
-                        <i class="fa fa-window-restore "></i></a></p>
-            </div>
-            <br><br>
-        </article>
+        
         <!--nikos-->
-
+        <script>
+            
+             $(document).ready(function(){
+            var $submitBtn = $("#foid button[type='submit']");
+            var $passwordBox = $("#pass1");
+            var $confirmBox = $("#pass2");
+            var $errorMsg =  $('<span id="error_msg">Passwords do not match.Try again.</span>');
+    
+            // This is incase the user hits refresh - some browsers will maintain the disabled state of the button.
+            $submitBtn.removeAttr("disabled");
+    
+            function checkMatchingPasswords(){
+                if($confirmBox.val() != "" && $passwordBox.val != ""){
+                    if( $confirmBox.val() != $passwordBox.val() ){
+                        $submitBtn.attr("disabled", "disabled");
+                        $errorMsg.insertAfter($confirmBox);
+                    }
+                }
+            }
+    
+            function resetPasswordError(){
+                $submitBtn.removeAttr("disabled");
+                var $errorCont = $("#error_msg");
+                if($errorCont.length > 0){
+                    $errorCont.remove();
+                }  
+            }
+    
+    
+            $("#pass2, #pass1")
+                 .on("keydown", function(e){
+                    /* only check when the tab or enter keys are pressed
+                     * to prevent the method from being called needlessly  */
+                    if(e.keyCode == 13 || e.keyCode == 9) {
+                        checkMatchingPasswords();
+                    }
+                 })
+                 .on("blur", function(){                    
+                    // also check when the element looses focus (clicks somewhere else)
+                    checkMatchingPasswords();
+                })
+                .on("focus", function(){
+                    // reset the error message when they go to make a change
+                    resetPasswordError();
+                })
+    
+        });
+        </script>
     </body>
 </html>
