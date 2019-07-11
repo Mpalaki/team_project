@@ -19,12 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.team.project.service.UserService;
+import com.team.project.utils.BCryptPasswdMngr;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class LoginController {
 
-    File imgfile = new File("defav.png");
+    private File imgfile = new File("defav.png");
 
     @Autowired
     UserRepo ur;
@@ -46,6 +46,7 @@ public class LoginController {
     PostService ps;
     @Autowired
     UserService us;
+
 
     @RequestMapping ("LoginController")
     public String login(HttpServletRequest request, ModelMap mm) {
@@ -97,6 +98,7 @@ public class LoginController {
     @GetMapping("RegisterController")
     public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
             @RequestParam("wordpass") String wordpass, @RequestParam("photo") MultipartFile image) throws IOException, ServletException {
+        BCryptPasswdMngr bCryptPasswdMngr = new BCryptPasswdMngr();
         if (ur.countUsers(givenun) > 0) {
             return "registerform";
         } else {
@@ -114,8 +116,8 @@ public class LoginController {
                 user.setRole(2); // eisagontai oloi os aploi users, oi admins tha prostithentai kateutheian stin vasi
                 java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 
-                System.out.println(BCrypt.hashpw(password,BCrypt.gensalt()));
-                user.setPassword(BCrypt.hashpw(password,BCrypt.gensalt()));
+                System.out.println(BCryptPasswdMngr.hashPassword(password));
+                user.setPassword(BCryptPasswdMngr.hashPassword(password));
                 user.setSignupDate(date);
                 ur.save(user);
                 return "welcome";

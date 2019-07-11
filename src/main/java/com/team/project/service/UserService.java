@@ -25,11 +25,7 @@ public class UserService {
 
     public boolean isPasswordValid(User user, String password) {
         String upass = user.getPassword();
-        if (BCrypt.checkpw(password, upass)) {
-            return true;
-        } else {
-            return false;
-        }
+        return BCrypt.checkpw(password, upass);
     }
 
     public boolean doesUsernameExist(String username) {
@@ -40,5 +36,7 @@ public class UserService {
             return false;
         }
     }
+
+
 
 }
