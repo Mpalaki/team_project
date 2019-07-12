@@ -217,7 +217,7 @@
                                                             <a  href=" <c:url value="acceptfriendrequest">
                                                                     <c:param name="idfr1" value="${EncryptUtils.encrypt(f.user.iduser)}"/>
                                                                     <c:param name="idfr2" value="${EncryptUtils.encrypt(f.user1.iduser)}"/>
-                                                                </c:url>">Accept </a>|<a  href=" <c:url value="deletefriendrequest">
+                                                                </c:url>">Accept </a>|<a  href=" <c:url value="declinefriendrequest">
                                                                     <c:param name="idfr1" value="${EncryptUtils.encrypt(f.user.iduser)}"/>
                                                                     <c:param name="idfr2" value="${EncryptUtils.encrypt(f.user1.iduser)}"/>
                                                                 </c:url>"> Decline</a></span>
