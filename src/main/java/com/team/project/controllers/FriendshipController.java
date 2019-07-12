@@ -37,7 +37,7 @@ public class FriendshipController {
     PostRepo pr;
     @Autowired
     PmRepo pmr;
-
+// TODO: load mm with friends after the below methods...
     @RequestMapping(value = "friendrequest", method = RequestMethod.POST)
     public String sendFriendRequest(@RequestParam("idfriend1") int idfriend1, @RequestParam("idfriend2") int idfriend2, ModelMap mm) {
         FriendshipPK fpk = new FriendshipPK(idfriend1, idfriend2);
@@ -47,7 +47,9 @@ public class FriendshipController {
         fr.save(friensdhip);
         mm.addAttribute("user", friend2);
         List posts = pr.findByIduser(friend2);
+        List friends = fr.getFriends(friend2);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
         return "profile";
     }
 
@@ -66,7 +68,9 @@ public class FriendshipController {
         List posts = pr.findByIduser(friend2);
         List pms = pmr.getCommentsByIdreceiver(friend2);
         List frs = fr.getAllFriendRequests(friend2);
+        List friends = fr.getFriends(friend2);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
         mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);
         return "profile";
@@ -86,7 +90,9 @@ public class FriendshipController {
         List posts = pr.findByIduser(friend2);
         List pms = pmr.getCommentsByIdreceiver(friend2);
         List frs = fr.getAllFriendRequests(friend2);
+        List friends = fr.getFriends(friend2);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
         mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);
         return "profile";

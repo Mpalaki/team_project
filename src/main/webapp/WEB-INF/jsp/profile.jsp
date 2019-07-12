@@ -210,7 +210,7 @@
                                                 </div>
                                                 <!--/row-->
                                             </div> 
-                                                <!-- FRIENDS TAB-->
+                                            <!-- FRIENDS TAB-->
                                             <div class="tab-pane" id="friends">
                                                 <c:if test = "${user.iduser==iduser}" >
                                                     <c:forEach var = "f" items="${friendrequests}">
@@ -231,7 +231,7 @@
                                                         </div>
                                                     </c:forEach>
                                                 </c:if>
-                                                
+
                                                 <!-- Controller sends list with friendship objects (named 'friends') and I loop it.
                                                 In each of this list's items, there are included 2 users - one is the user who owns the profile I am looking
                                                 and the other user is a friend of his. I use 'c:if' to display only the usernames of the friends and not
@@ -243,9 +243,17 @@
                                                                 <td>
                                                                     <span class="float-right font-weight-bold">
                                                                         <c:if test = "${user.iduser!=friends.user1.iduser}" >
+                                                                            <img src="data:image/jpg;base64,${friends.user1.base64Avatar}" style="vertical-align: middle;
+                                                                                 width: 50px;
+                                                                                 height: 50px;
+                                                                                 border-radius: 50%;"/>
                                                                             ${friends.user1.username}</c:if>
 
                                                                         <c:if test = "${user.iduser!=friends.user.iduser}" >
+                                                                            <img src="data:image/jpg;base64,${friends.user.base64Avatar}" style="vertical-align: middle;
+                                                                                 width: 50px;
+                                                                                 height: 50px;
+                                                                                 border-radius: 50%;"/>
                                                                             ${friends.user.username}</c:if>
                                                                         </span>
                                                                     </td>
