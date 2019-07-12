@@ -121,8 +121,15 @@
                                                         </p>
                                                     </div>
                                                     <div class="col-md-6">
+<!--                                                        tests if there is a user logged in, so that a visitor does not see the below buttons-->
                                                         <c:if test = "${iduser!=null}" >
-                                                            <button type="button" id="pmbtn" class="btn btn-success">Send PM</button>
+                                                            <button type="button" id="pmbtn" class="btn btn-success">personal message</button>
+
+                                                            <form action="friendrequest" method="post">                                                                
+                                                                <input type=hidden id="idfriend1" name="idfriend1" value="${iduser}">
+                                                                <input type=hidden id="idfriend2" name="idfriend2" value="${user.iduser}">                                                                                                                               
+                                                                <button type="submit" class="btn btn-info" style="margin-top: 20px;">friend request</button>
+                                                            </form>
 
                                                             <form action="pm" id="pmform" class="was-validated" method="post"  style="display:none;">
                                                                 <div class="form-group">
@@ -252,15 +259,6 @@
                                                                             <c:param name="unartist" value="${pms.idsender.username}"/>
                                                                         </c:url>">${pms.idsender.username}</a>
                                                                     <br>subject: <b>${pms.title}</b><br><hr>${pms.text}<br><hr>
-
-                                                                    <form action="reply" method="post">
-
-                                                                        <input type=hidden id="idsender" name="idsender" value="${pms.idreceiver.iduser}">
-                                                                        <input type=hidden id="idreceiver" name="idreceiver" value="${pms.idsender.iduser}">
-                                                                        <input type=hidden id="title" name="title" value="${pms.title}">
-                                                                        <textarea rows = "2" cols = "50" class="custom-file-textarea"  name = "text"></textarea></br>  
-
-                                                                        <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Reply</button>
 
                                                                 </td>
                                                             </tr>                                                        

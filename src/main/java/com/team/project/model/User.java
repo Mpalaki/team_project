@@ -75,6 +75,10 @@ public class User implements Serializable {
     @Column(name = "signup_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date signupDate;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Collection<Friendship> friendshipCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user1")
+    private Collection<Friendship> friendshipCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idreceiver")
     private Collection<Pm> pmCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idsender")
@@ -298,7 +302,6 @@ public class User implements Serializable {
         this.signupDate = signupDate;
     }
 
-
     @XmlTransient
     public Collection<Comment> getCommentCollection() {
         return commentCollection;
@@ -306,30 +309,6 @@ public class User implements Serializable {
 
     public void setCommentCollection(Collection<Comment> commentCollection) {
         this.commentCollection = commentCollection;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
     }
 
     @XmlTransient
@@ -348,6 +327,48 @@ public class User implements Serializable {
 
     public void setPmCollection1(Collection<Pm> pmCollection1) {
         this.pmCollection1 = pmCollection1;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    @XmlTransient
+    public Collection<Friendship> getFriendshipCollection() {
+        return friendshipCollection;
+    }
+
+    public void setFriendshipCollection(Collection<Friendship> friendshipCollection) {
+        this.friendshipCollection = friendshipCollection;
+    }
+
+    @XmlTransient
+    public Collection<Friendship> getFriendshipCollection1() {
+        return friendshipCollection1;
+    }
+
+    public void setFriendshipCollection1(Collection<Friendship> friendshipCollection1) {
+        this.friendshipCollection1 = friendshipCollection1;
     }
 
 }
