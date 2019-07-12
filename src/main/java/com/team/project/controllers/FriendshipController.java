@@ -11,7 +11,9 @@ import com.team.project.model.User;
 import com.team.project.repos.FriendshipRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
+import com.team.project.utils.EncryptUtils;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -44,6 +46,23 @@ public class FriendshipController {
         List posts = pr.findByIduser(friend2);
         mm.addAttribute("posts", posts);
         return "profile";
+    }
+    
+    @RequestMapping(value = "acceptfriendrequest", method = RequestMethod.GET)
+    public String acceptFriendRequest(HttpServletRequest req, ModelMap mm) {
+        String pw1 = EncryptUtils.decrypt(req.getParameter("idfr1"));
+        String pw2 = EncryptUtils.decrypt(req.getParameter("idfr2"));
+        int idfriend1 = Integer.parseInt(pw1);
+        int idfriend2 = Integer.parseInt(pw2);
+        User friend1 = ur.findByIduser(idfriend1);
+        User friend2 = ur.findByIduser(idfriend2);
+        Friendship friendship = fr.getFriendship(friend1, friend2);
+        friendship.setFriend2accepts(1);
+        fr.save(friendship);
+        mm.addAttribute("user", friend2);
+        List posts = pr.findByIduser(friend2);
+        mm.addAttribute("posts", posts);
+        return "welcome";
     }
 
 }

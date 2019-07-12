@@ -6,12 +6,21 @@
 package com.team.project.repos;
 
 import com.team.project.model.Friendship;
+import com.team.project.model.User;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
  * @author Makis
  */
 public interface FriendshipRepo extends JpaRepository<Friendship, Integer>{
+    
+    @Query("Select f FROM Friendship f where f.user1=?1 and f.friend1accepts=1 and f.friend2accepts=0")
+    public List<Friendship> getAllFriendRequests(User friend2);
+    
+    @Query("Select f FROM Friendship f where f.user=?1 and f.user1=?2")
+    public Friendship getFriendship(User friend1, User friend2);
     
 }

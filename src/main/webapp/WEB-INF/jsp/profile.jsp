@@ -94,7 +94,7 @@
                                                 <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+                                                <a href="" data-target="#friends" data-toggle="tab" class="nav-link">Friends</a>
                                             </li>
                                             <!--    eleghos gia na vlepei tin epilogi edit efoson einai diko tou to profile-->
                                             <c:if test = "${user.iduser==iduser}" >
@@ -121,7 +121,7 @@
                                                         </p>
                                                     </div>
                                                     <div class="col-md-6">
-<!--                                                        tests if there is a user logged in, so that a visitor does not see the below buttons-->
+                                                        <!--                                                        tests if there is a user logged in, so that a visitor does not see the below buttons-->
                                                         <c:if test = "${iduser!=null}" >
                                                             <button type="button" id="pmbtn" class="btn btn-success">personal message</button>
 
@@ -209,10 +209,25 @@
                                                 </div>
                                                 <!--/row-->
                                             </div>
-                                            <div class="tab-pane" id="messages">
-                                                <div class="alert alert-info alert-dismissable">
-                                                    <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                                                </div>
+                                            <div class="tab-pane" id="friends">
+                                                <c:forEach var = "f" items="${friendrequests}">
+                                                    <div class="alert alert-info alert-dismissable">
+                                                        <!--------- <a class="panel-close close" data-dismiss="alert">×</a>-->
+                                                        <span class="float-right font-weight-bold">
+                                                            <a  href=" <c:url value="acceptfriendrequest">
+                                                                    <c:param name="idfr1" value="${EncryptUtils.encrypt(f.user.iduser)}"/>
+                                                                    <c:param name="idfr2" value="${EncryptUtils.encrypt(f.user1.iduser)}"/>
+                                                                </c:url>">Accept </a>|<a  href=" <c:url value="deletefriendrequest">
+                                                                    <c:param name="idfr1" value="${EncryptUtils.encrypt(f.user.iduser)}"/>
+                                                                    <c:param name="idfr2" value="${EncryptUtils.encrypt(f.user1.iduser)}"/>
+                                                                </c:url>"> Decline</a></span>
+                                                        You have a friend request from: 
+                                                        <a  href=" <c:url value="profile">
+                                                                <c:param name="unartist" value="${f.user.username}"/>
+                                                            </c:url>">${f.user.username}</a>
+                                                    </div>
+                                                </c:forEach>
+
                                                 <table class="table table-hover table-striped">
                                                     <tbody>                                    
                                                         <tr>
@@ -220,26 +235,7 @@
                                                                 <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus. 
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus. 
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
-                                                            </td>
-                                                        </tr>
+
                                                     </tbody> 
                                                 </table>
                                             </div>

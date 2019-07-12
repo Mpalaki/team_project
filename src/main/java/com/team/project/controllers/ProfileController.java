@@ -6,6 +6,7 @@
 package com.team.project.controllers;
 
 import com.team.project.model.User;
+import com.team.project.repos.FriendshipRepo;
 import com.team.project.repos.PmRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
@@ -34,6 +35,8 @@ public class ProfileController {
     PostRepo pr;
     @Autowired
     PmRepo pmr;
+    @Autowired
+    FriendshipRepo fr;
 
     
     // TODO: pairnei ton user ap to session opote an kanei update photo den fainetai sto profile an den kanei logout kai login pali
@@ -49,7 +52,9 @@ public class ProfileController {
         mm.addAttribute("user", u);
         List posts = pr.findByIduser(u);
         List pms = pmr.getCommentsByIdreceiver(user);
+        List frs = fr.getAllFriendRequests(user);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);
         return "profile";
     }
