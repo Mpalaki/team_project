@@ -53,7 +53,9 @@ public class ProfileController {
         List posts = pr.findByIduser(u);
         List pms = pmr.getCommentsByIdreceiver(user);
         List frs = fr.getAllFriendRequests(user);
+        List friends = fr.getFriends(user);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
         mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);
         return "profile";
@@ -69,7 +71,11 @@ public class ProfileController {
         mm.addAttribute("user", artist);
         List posts = pr.findByIduser(artist);
         List pms = pmr.getCommentsByIdreceiver(artist);
+        List frs = fr.getAllFriendRequests(artist);
+        List friends = fr.getFriends(artist);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
+        mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);
         return "profile";
     }

@@ -121,15 +121,10 @@
                                                         </p>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <!--                                                        tests if there is a user logged in, so that a visitor does not see the below buttons-->
+                                                        <!--   tests if there is a user logged in, so that a visitor does not see the below buttons-->
                                                         <c:if test = "${iduser!=null}" >
+                                                            <!--when he presses the button the form shows up -->
                                                             <button type="button" id="pmbtn" class="btn btn-success">personal message</button>
-
-                                                            <form action="friendrequest" method="post">                                                                
-                                                                <input type=hidden id="idfriend1" name="idfriend1" value="${iduser}">
-                                                                <input type=hidden id="idfriend2" name="idfriend2" value="${user.iduser}">                                                                                                                               
-                                                                <button type="submit" class="btn btn-info" style="margin-top: 20px;">friend request</button>
-                                                            </form>
 
                                                             <form action="pm" id="pmform" class="was-validated" method="post"  style="display:none;">
                                                                 <div class="form-group">
@@ -141,6 +136,12 @@
                                                                     <textarea rows = "6" cols = "50" class="form-control"  name = "text" required></textarea></br>
                                                                 </div>
                                                                 <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Send</button>
+                                                            </form>
+                                                            <!--button that sends a friend request -->
+                                                            <form action="friendrequest" method="post">                                                                
+                                                                <input type=hidden id="idfriend1" name="idfriend1" value="${iduser}">
+                                                                <input type=hidden id="idfriend2" name="idfriend2" value="${user.iduser}">                                                                                                                               
+                                                                <button type="submit" class="btn btn-info" style="margin-top: 20px;">friend request</button>
                                                             </form>
 
                                                         </c:if><hr>
@@ -208,35 +209,50 @@
                                                     </div>
                                                 </div>
                                                 <!--/row-->
-                                            </div>
+                                            </div> 
+                                                <!-- FRIENDS TAB-->
                                             <div class="tab-pane" id="friends">
-                                                <c:forEach var = "f" items="${friendrequests}">
-                                                    <div class="alert alert-info alert-dismissable">
-                                                        <!--------- <a class="panel-close close" data-dismiss="alert">×</a>-->
-                                                        <span class="float-right font-weight-bold">
-                                                            <a  href=" <c:url value="acceptfriendrequest">
-                                                                    <c:param name="idfr1" value="${EncryptUtils.encrypt(f.user.iduser)}"/>
-                                                                    <c:param name="idfr2" value="${EncryptUtils.encrypt(f.user1.iduser)}"/>
-                                                                </c:url>">Accept </a>|<a  href=" <c:url value="declinefriendrequest">
-                                                                    <c:param name="idfr1" value="${EncryptUtils.encrypt(f.user.iduser)}"/>
-                                                                    <c:param name="idfr2" value="${EncryptUtils.encrypt(f.user1.iduser)}"/>
-                                                                </c:url>"> Decline</a></span>
-                                                        You have a friend request from: 
-                                                        <a  href=" <c:url value="profile">
-                                                                <c:param name="unartist" value="${f.user.username}"/>
-                                                            </c:url>">${f.user.username}</a>
-                                                    </div>
-                                                </c:forEach>
-
+                                                <c:if test = "${user.iduser==iduser}" >
+                                                    <c:forEach var = "f" items="${friendrequests}">
+                                                        <div class="alert alert-info alert-dismissable">
+                                                            <!--------- <a class="panel-close close" data-dismiss="alert">×</a>-->
+                                                            <span class="float-right font-weight-bold">
+                                                                <a  href=" <c:url value="acceptfriendrequest">
+                                                                        <c:param name="idfr1" value="${EncryptUtils.encrypt(f.user.iduser)}"/>
+                                                                        <c:param name="idfr2" value="${EncryptUtils.encrypt(f.user1.iduser)}"/>
+                                                                    </c:url>">Accept </a>|<a  href=" <c:url value="declinefriendrequest">
+                                                                        <c:param name="idfr1" value="${EncryptUtils.encrypt(f.user.iduser)}"/>
+                                                                        <c:param name="idfr2" value="${EncryptUtils.encrypt(f.user1.iduser)}"/>
+                                                                    </c:url>"> Decline</a></span>
+                                                            You have a friend request from: 
+                                                            <a  href=" <c:url value="profile">
+                                                                    <c:param name="unartist" value="${f.user.username}"/>
+                                                                </c:url>">${f.user.username}</a>
+                                                        </div>
+                                                    </c:forEach>
+                                                </c:if>
+                                                
+                                                <!-- Controller sends list with friendship objects (named 'friends') and I loop it.
+                                                In each of this list's items, there are included 2 users - one is the user who owns the profile I am looking
+                                                and the other user is a friend of his. I use 'c:if' to display only the usernames of the friends and not
+                                                the username of the user that is the profile owner-->
                                                 <table class="table table-hover table-striped">
-                                                    <tbody>                                    
-                                                        <tr>
-                                                            <td>
-                                                                <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
-                                                            </td>
-                                                        </tr>
+                                                    <c:forEach var = "friends" items="${friends}">
+                                                        <tbody>                                    
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="float-right font-weight-bold">
+                                                                        <c:if test = "${user.iduser!=friends.user1.iduser}" >
+                                                                            ${friends.user1.username}</c:if>
 
-                                                    </tbody> 
+                                                                        <c:if test = "${user.iduser!=friends.user.iduser}" >
+                                                                            ${friends.user.username}</c:if>
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody> 
+                                                    </c:forEach>
                                                 </table>
                                             </div>
                                             <!-- personal messages-->

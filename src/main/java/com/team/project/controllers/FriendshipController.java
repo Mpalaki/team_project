@@ -91,5 +91,6 @@ public class FriendshipController {
         mm.addAttribute("pms", pms);
         return "profile";
     }
+    
 
 }

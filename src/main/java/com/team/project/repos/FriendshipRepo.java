@@ -23,4 +23,10 @@ public interface FriendshipRepo extends JpaRepository<Friendship, Integer>{
     @Query("Select f FROM Friendship f where f.user=?1 and f.user1=?2")
     public Friendship getFriendship(User friend1, User friend2);
     
+    @Query("Select f FROM Friendship f where f.user=?1 or f.user1=?1")
+    public List<Friendship> getFriendsOrHalfFriends(User user);
+    
+    @Query("Select f FROM Friendship f where f.user=?1 or f.user1=?1 and f.friend1accepts=1 and friend2accepts=1")
+    public List<Friendship> getFriends(User user);
+    
 }
