@@ -66,7 +66,7 @@ public class FriendshipController {
         friendship.setFriend2accepts(1);
         fr.save(friendship);
         mm.addAttribute("user", friend2);
-        List posts = pr.findByIduser(friend2);
+        List posts = pr.findByIduser(friend2); 
         List pms = pmr.getCommentsByIdreceiver(friend2);
         List frs = fr.getAllFriendRequests(friend2);
         List friends = fr.getFriends(friend2);

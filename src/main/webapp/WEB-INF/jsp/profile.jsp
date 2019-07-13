@@ -94,7 +94,7 @@
                                                 <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="" data-target="#friends" data-toggle="tab" class="nav-link">Friends</a>
+                                                <a href="" data-target="#friends" data-toggle="tab" class="nav-link">Friends (${friends.size()})</a>
                                             </li>
                                             <!--    eleghos gia na vlepei tin epilogi edit efoson einai diko tou to profile-->
                                             <c:if test = "${user.iduser==iduser}" >
@@ -102,7 +102,7 @@
                                                     <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="" data-target="#pms" data-toggle="tab" class="nav-link">Inbox</a>
+                                                    <a href="" data-target="#pms" data-toggle="tab" class="nav-link">Inbox (${pms.size()})</a>
                                                 </li>
                                             </c:if>
                                         </ul>

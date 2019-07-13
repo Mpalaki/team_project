@@ -102,7 +102,13 @@ public class ProfileController {
         ur.save(user);
         mm.addAttribute("user", user);
         List posts = pr.findByIduser(user);
+        List pms = pmr.getCommentsByIdreceiver(user);
+        List frs = fr.getAllFriendRequests(user);
+        List friends = fr.getFriends(user);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
+        mm.addAttribute("friendrequests", frs);
+        mm.addAttribute("pms", pms);
         return "profile";
     }
     
@@ -124,7 +130,13 @@ public class ProfileController {
         ur.save(user);
         mm.addAttribute("user", user);
         List posts = pr.findByIduser(user);
+        List pms = pmr.getCommentsByIdreceiver(user);
+        List frs = fr.getAllFriendRequests(user);
+        List friends = fr.getFriends(user);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
+        mm.addAttribute("friendrequests", frs);
+        mm.addAttribute("pms", pms);
         return "profile";
     }
 
