@@ -38,6 +38,7 @@ public class FriendshipController {
     @Autowired
     PmRepo pmr;
 // TODO: load mm with friends after the below methods...
+
     @RequestMapping(value = "friendrequest", method = RequestMethod.POST)
     public String sendFriendRequest(@RequestParam("idfriend1") int idfriend1, @RequestParam("idfriend2") int idfriend2, ModelMap mm) {
         FriendshipPK fpk = new FriendshipPK(idfriend1, idfriend2);
@@ -97,6 +98,27 @@ public class FriendshipController {
         mm.addAttribute("pms", pms);
         return "profile";
     }
-    
+
+    @RequestMapping(value = "deletefriend", method = RequestMethod.GET)
+    public String deleteFriend(HttpServletRequest req, ModelMap mm) {
+        String deleterpw = EncryptUtils.decrypt(req.getParameter("deleter"));
+        String deletedpw = EncryptUtils.decrypt(req.getParameter("deleted"));
+        int iddeleter = Integer.parseInt(deleterpw);
+        int iddeleted = Integer.parseInt(deletedpw);
+        User deleter = ur.findByIduser(iddeleter);
+        User deleted = ur.findByIduser(iddeleted);
+        Friendship friendship = fr.getFriendship2(deleter, deleted);
+        fr.delete(friendship);
+        List posts = pr.findByIduser(deleter);
+        List pms = pmr.getCommentsByIdreceiver(deleter);
+        List frs = fr.getAllFriendRequests(deleter);
+        List friends = fr.getFriends(deleter);
+        mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
+        mm.addAttribute("friendrequests", frs);
+        mm.addAttribute("pms", pms);
+
+        return "profile";
+    }
 
 }
