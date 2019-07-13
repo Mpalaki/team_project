@@ -46,7 +46,9 @@ public class PmController {
         mm.addAttribute("user", idreceiver);
         List posts = pr.findByIduser(idreceiver);
         List pms = pmr.getCommentsByIdreceiver(idreceiver);
+        List friends = fr.getFriends(idreceiver);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
         mm.addAttribute("pms", pms);
         return "profile";
     }
