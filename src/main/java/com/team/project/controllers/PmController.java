@@ -7,6 +7,7 @@ package com.team.project.controllers;
 
 import com.team.project.model.Pm;
 import com.team.project.model.User;
+import com.team.project.repos.FriendshipRepo;
 import com.team.project.repos.PmRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
@@ -33,6 +34,8 @@ public class PmController {
     PostRepo pr;
     @Autowired
     PmRepo pmr;
+    @Autowired
+    FriendshipRepo fr;
 
     @RequestMapping(value = "pm", method = RequestMethod.POST)
     public String sendPm(@RequestParam("idsender") User idsender, @RequestParam("idreceiver") User idreceiver,
@@ -71,7 +74,11 @@ public class PmController {
         mm.addAttribute("user", receiver);
         List posts = pr.findByIduser(receiver);
         List pms = pmr.getCommentsByIdreceiver(receiver);
+        List frs = fr.getAllFriendRequests(receiver);
+        List friends = fr.getFriends(receiver);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
+        mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);
         return "profile";
     }

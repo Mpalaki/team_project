@@ -102,7 +102,7 @@
                                                     <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="" data-target="#pms" data-toggle="tab" class="nav-link">Personal messages</a>
+                                                    <a href="" data-target="#pms" data-toggle="tab" class="nav-link">Inbox</a>
                                                 </li>
                                             </c:if>
                                         </ul>
@@ -220,10 +220,10 @@
                                                                 <a  href=" <c:url value="acceptfriendrequest">
                                                                         <c:param name="idfr1" value="${EncryptUtils.encrypt(f.user.iduser)}"/>
                                                                         <c:param name="idfr2" value="${EncryptUtils.encrypt(f.user1.iduser)}"/>
-                                                                    </c:url>">Accept </a>|<a  href=" <c:url value="declinefriendrequest">
+                                                                    </c:url>">accept </a>|<a  href=" <c:url value="declinefriendrequest">
                                                                         <c:param name="idfr1" value="${EncryptUtils.encrypt(f.user.iduser)}"/>
                                                                         <c:param name="idfr2" value="${EncryptUtils.encrypt(f.user1.iduser)}"/>
-                                                                    </c:url>"> Decline</a></span>
+                                                                    </c:url>"> decline</a></span>
                                                             You have a friend request from: 
                                                             <a  href=" <c:url value="profile">
                                                                     <c:param name="unartist" value="${f.user.username}"/>
