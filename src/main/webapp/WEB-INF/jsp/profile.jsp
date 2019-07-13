@@ -234,32 +234,61 @@
 
                                                 <!-- Controller sends list with friendship objects (named 'friends') and I loop it.
                                                 In each of this list's items, there are included 2 users - one is the user who owns the profile I am looking
-                                                and the other user is a friend of his. I use 'c:if' to display only the usernames of the friends and not
+                                                and the other user is a friend of his. I use 'c:if' to display only the username of the friend and not
                                                 the username of the user that is the profile owner-->
                                                 <table class="table table-hover table-striped">
                                                     <c:forEach var = "friends" items="${friends}">
                                                         <tbody>                                    
                                                             <tr>
                                                                 <td>
-                                                                    <span class="float-right font-weight-bold">
-                                                                        <c:if test = "${user.iduser!=friends.user1.iduser}" >
+                                                                    <!-- user.iduser is the profile owner's id-->
+                                                                    <c:if test = "${user.iduser!=friends.user1.iduser}" >
+                                                                        <span class="float-left font-weight-bold">
                                                                             <img src="data:image/jpg;base64,${friends.user1.base64Avatar}" style="vertical-align: middle;
                                                                                  width: 50px;
                                                                                  height: 50px;
                                                                                  border-radius: 50%;"/>
-                                                                            ${friends.user1.username}</c:if>
+                                                                            <a  href=" <c:url value="profile">
+                                                                                    <c:param name="unartist" value="${friends.user1.username}"/>
+                                                                                </c:url>">${friends.user1.username}</a>
 
-                                                                        <c:if test = "${user.iduser!=friends.user.iduser}" >
+                                                                        </span>
+                                                                        <!-- iduser is the session user's id. Below I test if the session user is the profile owner
+                                                                         and if(true) he will have the option of deleting his friends. -->
+                                                                        <c:if test = "${user.iduser==iduser}" >
+                                                                            <span class="float-right font-weight-bold">
+                                                                                <a  href=" <c:url value="deletefriend">
+                                                                                        <c:param name="deleter" value="${EncryptUtils.encrypt(user.iduser)}"/>
+                                                                                        <c:param name="deleted" value="${EncryptUtils.encrypt(friends.user1.iduser)}"/>
+                                                                                    </c:url>"> delete 
+                                                                                </a>
+                                                                            </span>
+                                                                        </c:if>
+                                                                    </c:if>
+
+                                                                    <c:if test = "${user.iduser!=friends.user.iduser}" >
+                                                                        <span class="float-left font-weight-bold">
                                                                             <img src="data:image/jpg;base64,${friends.user.base64Avatar}" style="vertical-align: middle;
                                                                                  width: 50px;
                                                                                  height: 50px;
                                                                                  border-radius: 50%;"/>
-                                                                            ${friends.user.username}</c:if>
+                                                                            <a  href=" <c:url value="profile">
+                                                                                    <c:param name="unartist" value="${friends.user.username}"/>
+                                                                                </c:url>">${friends.user.username}</a>
                                                                         </span>
-                                                                    </td>
-                                                                </tr>
-
-                                                            </tbody> 
+                                                                        <c:if test = "${user.iduser==iduser}" >
+                                                                            <span class="float-right font-weight-bold">
+                                                                                <a  href=" <c:url value="deletefriend">
+                                                                                        <c:param name="deleter" value="${EncryptUtils.encrypt(user.iduser)}"/>
+                                                                                        <c:param name="deleted" value="${EncryptUtils.encrypt(friends.user.iduser)}"/>
+                                                                                    </c:url>"> delete 
+                                                                                </a>
+                                                                            </span>
+                                                                        </c:if> 
+                                                                    </c:if>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody> 
                                                     </c:forEach>
                                                 </table>
                                             </div>
