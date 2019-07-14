@@ -305,21 +305,36 @@
 
                                                 <table class="table table-hover table-striped" id="pms2">
                                                     <tbody>
-                                                        <c:forEach var = "pms" items="${pms}">
+                                                        <c:forEach var = "pms" items="${pms}" varStatus="pmStatus">
                                                             <tr>
                                                                 <td>
                                                                     <span class="float-right font-weight-bold">${pms.dispDate} | <a  href=" <c:url value="deletepm">
                                                                                                                                          <c:param name="idpm" value="${EncryptUtils.encrypt(pms.idpm)}"/>
                                                                                                                                          <c:param name="idreceiver" value="${pms.idreceiver.iduser}"/>
-                                                                                                                                     </c:url>">Delete</a></span> from: 
+                                                                                                                                     </c:url>">Delete</a></span> from:
+                                                                    <img src="data:image/jpg;base64,${pms.idsender.base64Avatar}" style="vertical-align: middle;
+                                                                         width: 40px;
+                                                                         height: 40px;
+                                                                         border-radius: 50%;"/> 
                                                                     <a  href=" <c:url value="profile">
                                                                             <c:param name="unartist" value="${pms.idsender.username}"/>
                                                                         </c:url>">${pms.idsender.username}</a>
                                                                     <br>subject: <b>${pms.title}</b><br><hr>${pms.text}<br><hr>
 
-                                                                </td>
-                                                            </tr>                                                        
-                                                        </c:forEach>
+                                                                    <!--  form for reply -->
+
+                                                                    <form action = "reply" method = "POST">
+                                                                        <input type=hidden id="idsender" name="idsender" value="${pms.idreceiver.iduser}">
+                                                                        <input type=hidden id="idreceiver" name="idreceiver" value="${pms.idsender.iduser}">
+                                                                        <input type=hidden id="title" name="title" value="${pms.title}">
+                                                                        <textarea rows = "2" cols = "50" class="custom-file-textarea" style="border-radius: 4px;"  name = "text"></textarea><br>
+                                                                        <input type = "submit" class="btn btn-warning" value = "reply" />
+                                                                    </form>
+                                                                   
+
+                                                        </td>
+                                                        </tr>                                                        
+                                                    </c:forEach>
                                                     </tbody> 
                                                 </table>
                                             </div>
@@ -366,12 +381,12 @@
                                                                 <input class="form-control" name="twitter" type="text" value="${user.twitter}">
                                                             </div>
                                                         </div>
-<!--                                                        <div class="form-group row">
-                                                            <label class="col-lg-3 col-form-label form-control-label">Website<br>( public information)</label>
-                                                            <div class="col-lg-9">
-                                                                <input class="form-control" type="url" value="">
-                                                            </div>
-                                                        </div>-->
+                                                        <!--                                                        <div class="form-group row">
+                                                                                                                    <label class="col-lg-3 col-form-label form-control-label">Website<br>( public information)</label>
+                                                                                                                    <div class="col-lg-9">
+                                                                                                                        <input class="form-control" type="url" value="">
+                                                                                                                    </div>
+                                                                                                                </div>-->
                                                         <div class="form-group row">
                                                             <label class="col-lg-3 col-form-label form-control-label">About me</label>
                                                             <textarea class="col-lg-9" rows = "6" cols = "50" name = "aboutme">${user.aboutme} </textarea></br>

@@ -50,15 +50,17 @@ public class PmController {
         List posts = pr.findByIduser(idreceiver);
         List pms = pmr.getCommentsByIdreceiver(idreceiver);
         List friends = fr.getFriends(idreceiver);
+        List frs = fr.getAllFriendRequests(idreceiver);
         List friendRequestedList = fs.usersNotEligibleToSendFriendRequest(idreceiver); // returns all the ids of the users that are either friends or a friend request is pending with the profile ownwer
         mm.addAttribute("posts", posts);
         mm.addAttribute("friendRequestedList", friendRequestedList);
         mm.addAttribute("friends", friends);
+        mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);
         return "profile";
     }
     @RequestMapping(value = "reply", method = RequestMethod.POST)
-    public String replyToPm(@RequestParam("idsender") User idsender, @RequestParam("idreceiver") User idreceiver,
+    public String reply(@RequestParam("idsender") User idsender, @RequestParam("idreceiver") User idreceiver,
             @RequestParam("title") String title, @RequestParam("text") String text, ModelMap mm) {
         java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
         Pm pm = new Pm(date, title, text, idreceiver, idsender);
@@ -66,10 +68,27 @@ public class PmController {
         mm.addAttribute("user", idsender);
         List posts = pr.findByIduser(idsender);
         List pms = pmr.getCommentsByIdreceiver(idsender);
+        List friends = fr.getFriends(idsender);
+        List frs = fr.getAllFriendRequests(idsender);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friends", friends);
+        mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);
         return "profile";
     }
+//    @RequestMapping(value = "reply", method = RequestMethod.POST)
+//    public String replyToPm(@RequestParam("idsender") User idsender, @RequestParam("idreceiver") User idreceiver,
+//            @RequestParam("title") String title, @RequestParam("text") String text, ModelMap mm) {
+//        java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+//        Pm pm = new Pm(date, title, text, idreceiver, idsender);
+//        pmr.save(pm);
+//        mm.addAttribute("user", idsender);
+//        List posts = pr.findByIduser(idsender);
+//        List pms = pmr.getCommentsByIdreceiver(idsender);
+//        mm.addAttribute("posts", posts);
+//        mm.addAttribute("pms", pms);
+//        return "profile";
+//    }
 
     @RequestMapping(value = "deletepm", method = RequestMethod.GET)
     public String deletePost(HttpServletRequest req, @RequestParam("idreceiver") int idreceiver, ModelMap mm) {
