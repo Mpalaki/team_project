@@ -480,11 +480,11 @@
 
                                                             <c:forEach var = "l" items="${posts}">
                                                                 <div class="col-sm-8" id="even">
-<%--                                                                    <!--  theto tin id tou user pou einai sundedemenos-->--%>
+                                                                   <!--  theto tin id tou user pou einai sundedemenos-->--%>
 <%--                                                                    <%int role = (Integer) session.getAttribute("role");%>--%>
                                                                     <h2>${l.title}</h2>
                                                                     <h5>post #${l.idpost}, ${l.dispDate}, by </h5>
-<%--                                                                                                                                            avatar - should not be null-->--%>
+<%--                                                                avatar - should not be null-->--%>
                                                                         <img src="data:image/jpg;base64,${l.iduser.base64Avatar}" style="vertical-align: middle;
                                                                              width: 50px;
                                                                              height: 50px;
@@ -496,36 +496,25 @@
                                                                     <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" style="max-width: 80%; height: auto;"/></div>
                                                                     <p>${l.description}</p>
                                                                     <br>
-
-
                                                                     <!-- an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
                                                                     <c:if test = "${l.iduser.iduser==iduser || role==1 }" >
-
-
                                                                         <a  href=" <c:url value="deletepost">
                                                                                 <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
                                                                             </c:url>">Delete |</a>
-
                                                                         <a  href="<c:url value="editpost">
                                                                                 <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
                                                                             </c:url>">Edit |</a>
-
                                                                     </c:if>
-
                                                                     <a  href="<c:url value="viewPost">
                                                                             <c:param name="idpost" value="${l.idpost}"/>
                                                                         </c:url>">View artwork</a>
-
-
                                                                     <hr>
                                                                 </div>
                                                             </c:forEach>
-<%--                                                                <h1>${postsPage.content.get(1)}</h1>--%>
+
                                                                 <c:forEach var="post" items="${postsPage.content}">
-<%--                                                                    <h2>${post.dispDate}</h2>--%>
-<%--                                                                    <h1>dsafdjslfkjsakl</h1>--%>
                                                                     <div class="col-sm-8" id="even">
-                                                                            <%--                                                                    <!--  theto tin id tou user pou einai sundedemenos-->--%>
+<%--                                                                    <!--  theto tin id tou user pou einai sundedemenos-->--%>
                                                                         <%int role = (Integer) session.getAttribute("role");%>
                                                                         <h2>${post.title}</h2>
                                                                         <h5>post #${post.idpost}, ${post.dispDate}, by </h5>
@@ -541,8 +530,6 @@
                                                                         <div class="fakeimg"><img src="data:image/jpg;base64,${post.base64Photo}" style="max-width: 80%; height: auto;"/></div>
                                                                         <p>${post.description}</p>
                                                                         <br>
-
-
                                                                         <!-- an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
                                                                         <c:if test = "${post.iduser.iduser==iduser || role==1 }" >
 
@@ -567,14 +554,34 @@
 
                                                                 </c:forEach>
 
+                                                        <ul class="pagination justify-content-center">
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Previous">
+                                                                    <span aria-hidden="true">&laquo;</span>
+                                                                    <span class="sr-only">Previous</span>
+                                                                </a>
+                                                            </li>
                                                         <c:if test="${postsPage.totalPages> 0}">
-                                                            <div class="pagination">
+<%--                                                            <div class="pagination">--%>
                                                                 <c:forEach var="pageNumber" items="${pageNumbers}">
-                                                                    <a href="/home?size=${postsPage.size}&page=${pageNumber}">${pageNumber}</a>
+                                                                    <li class="page-item">
+                                                                    <a class="page-link" href="/home?size=${postsPage.size}&page=${pageNumber}">${pageNumber}</a>
 
+                                                                    </li>
                                                                 </c:forEach>
-                                                            </div>
+
+<%--                                                            </div>--%>
+
                                                         </c:if>
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Next">
+                                                                    <span aria-hidden="true">&raquo;</span>
+                                                                    <span class="sr-only">Next</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+
+
 <%--                                                        <div th:if="${bookPage.totalPages > 0}" class="pagination"--%>
 <%--                                                             th:each="pageNumber : ${pageNumbers}">--%>
 <%--                                                            <a th:href="@{/listBooks(size=${bookPage.size}, page=${pageNumber})}"--%>
@@ -614,68 +621,64 @@
 
 
                                                             </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <!--                                                <div class="jumbotron text-center" style="margin-bottom:0">-->
-                                                    <ul class="pagination justify-content-center">
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="#" aria-label="Previous">
-                                                                <span aria-hidden="true">&laquo;</span>
-                                                                <span class="sr-only">Previous</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="getLastPosts">1</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="2"/>
-                                                               </c:url>">2</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="3"/>
-                                                               </c:url>">3</a>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="4"/>
-                                                               </c:url>">4</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="5"/>
-                                                               </c:url>">5</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="6"/>
-                                                               </c:url>">6</a>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="7"/>
-                                                               </c:url>">7</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="8"/>
-                                                               </c:url>">8</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="9"/>
-                                                               </c:url>">9</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="#" aria-label="Next">
-                                                                <span aria-hidden="true">&raquo;</span>
-                                                                <span class="sr-only">Next</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-
-
-                                                    <!--                                                </div>-->
+<%--                                             <div class="jumbotron text-center" style="margin-bottom:0">-->&ndash;%&gt;--%>
+<%--                                                    <ul class="pagination justify-content-center">--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href="#" aria-label="Previous">--%>
+<%--                                                                <span aria-hidden="true">&laquo;</span>--%>
+<%--                                                                <span class="sr-only">Previous</span>--%>
+<%--                                                            </a>--%>
+<%--                                                        </li>--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href="getLastPosts">1</a>--%>
+<%--                                                        </li>--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href=" <c:url value="nextpage">--%>
+<%--                                                                   <c:param name="pagenumber" value="2"/>--%>
+<%--                                                               </c:url>">2</a>--%>
+<%--                                                        </li>--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href=" <c:url value="nextpage">--%>
+<%--                                                                   <c:param name="pagenumber" value="3"/>--%>
+<%--                                                               </c:url>">3</a>--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href=" <c:url value="nextpage">--%>
+<%--                                                                   <c:param name="pagenumber" value="4"/>--%>
+<%--                                                               </c:url>">4</a>--%>
+<%--                                                        </li>--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href=" <c:url value="nextpage">--%>
+<%--                                                                   <c:param name="pagenumber" value="5"/>--%>
+<%--                                                               </c:url>">5</a>--%>
+<%--                                                        </li>--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href=" <c:url value="nextpage">--%>
+<%--                                                                   <c:param name="pagenumber" value="6"/>--%>
+<%--                                                               </c:url>">6</a>--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href=" <c:url value="nextpage">--%>
+<%--                                                                   <c:param name="pagenumber" value="7"/>--%>
+<%--                                                               </c:url>">7</a>--%>
+<%--                                                        </li>--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href=" <c:url value="nextpage">--%>
+<%--                                                                   <c:param name="pagenumber" value="8"/>--%>
+<%--                                                               </c:url>">8</a>--%>
+<%--                                                        </li>--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href=" <c:url value="nextpage">--%>
+<%--                                                                   <c:param name="pagenumber" value="9"/>--%>
+<%--                                                               </c:url>">9</a>--%>
+<%--                                                        </li>--%>
+<%--                                                        <li class="page-item">--%>
+<%--                                                            <a class="page-link" href="#" aria-label="Next">--%>
+<%--                                                                <span aria-hidden="true">&raquo;</span>--%>
+<%--                                                                <span class="sr-only">Next</span>--%>
+<%--                                                            </a>--%>
+<%--                                                        </li>--%>
+<%--                                                    </ul>--%>
+<%--                                             </div>--%>
                                                     <script>
                                                         $(document).ready(function() {
                                                             $(".menu-icon").on("click", function() {

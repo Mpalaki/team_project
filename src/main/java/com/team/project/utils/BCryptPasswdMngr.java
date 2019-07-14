@@ -8,17 +8,17 @@ public class BCryptPasswdMngr {
         this.encryptor = encryptor;
     }
 
-    private BCrypt encryptor = new BCrypt();
+    private static BCrypt encryptor = new BCrypt();
 
 
     public static String hashPassword(String plainTextPassword){
-        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+        return encryptor.hashpw(plainTextPassword, BCrypt.gensalt());
 
     }
 
     public static boolean checkPass(String plainPassword, String hashedPassword) {
 
-        return BCrypt.checkpw(plainPassword, hashedPassword);
+        return encryptor.checkpw(plainPassword, hashedPassword);
     }
 
 

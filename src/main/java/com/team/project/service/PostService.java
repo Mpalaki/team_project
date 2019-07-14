@@ -45,16 +45,14 @@ public class PostService {
         }
         return nextten;
     }
-
     public Page<Post> findPaginated(Pageable pageable) {
         final List<Post> postsAllDesc =pr.getLastPosts();
+
+
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-
         List<Post> list;
-
-
         if (postsAllDesc.size() < startItem) {
             list = Collections.emptyList();
         } else {

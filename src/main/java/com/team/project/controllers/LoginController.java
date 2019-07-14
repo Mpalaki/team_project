@@ -96,7 +96,7 @@ public class    LoginController {
     }
 
     @RequestMapping(value = "home", method = RequestMethod.GET)
-    public String listBooks(
+    public String listPostPages(
             Model model,
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size) {
@@ -130,8 +130,7 @@ public class    LoginController {
     @GetMapping("RegisterController")
     public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
             @RequestParam("wordpass") String wordpass, @RequestParam("photo") MultipartFile image) throws IOException, ServletException {
-        BCryptPasswdMngr bCryptPasswdMngr = new BCryptPasswdMngr();
-        if (ur.countUsers(givenun) > 0) {
+            if (ur.countUsers(givenun) > 0) {
             return "registerform";
         } else {
             if (password.equals(wordpass)) {
