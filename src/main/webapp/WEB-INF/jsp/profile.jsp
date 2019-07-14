@@ -120,11 +120,11 @@
                                                             ${user.dispDate}
                                                         </p>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" style="background-color: #fafbc5">
                                                         <!--   tests if there is a user logged in, so that a visitor does not see the below buttons-->
                                                         <c:if test = "${iduser!=null}" >
                                                             <!--when he presses the button the form shows up -->
-                                                            <button type="button" id="pmbtn" class="btn btn-success">personal message</button>
+                                                            <button type="button" id="pmbtn" class="btn btn-success" style="margin-top: 20px"><i style="font-size:24px" class="fa">&#xf0e0;</i> message</button>
 
                                                             <form action="pm" id="pmform" class="was-validated" method="post"  style="display:none;">
                                                                 <div class="form-group">
@@ -137,31 +137,38 @@
                                                                 </div>
                                                                 <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Send</button>
                                                             </form>
-                                                            <!--button that sends a friend request -->
-                                                            <c:if test="${!tests.contains(iduser)}">
+                                                            <!-- if the session user has already sent a friend request to the profile owner or he is the profile owner, he will not see the below button -->
+                                                            <c:if test="${!(friendRequestedList.contains(iduser) or user.iduser==iduser)}">
+                                                                <!--button that sends a friend request -->
                                                                 <form action="friendrequest" method="post">                                                                
                                                                     <input type=hidden id="idfriend1" name="idfriend1" value="${iduser}">
                                                                     <input type=hidden id="idfriend2" name="idfriend2" value="${user.iduser}">                                                                                                                               
-                                                                    <button type="submit" class="btn btn-info" style="margin-top: 20px;">friend request</button>
+                                                                    <button type="submit" class="btn btn-info" style="margin-top: 20px;"><i style="font-size:24px" class="fa">&#xf234;</i> add</button>
                                                                 </form>
                                                             </c:if>
                                                         </c:if><hr>
-                                                        <a class="btn btn-primary btn-twitter btn-sm" href="${user.twitter}">
-                                                            <i class="fa fa-twitter"></i>
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" rel="publisher"
-                                                           href="https://plus.google.com/+ahmshahnuralam">
-                                                            <i class="fa fa-google-plus"></i>
-                                                        </a>
-                                                        <a class="btn btn-primary btn-sm" rel="publisher"
-                                                           href="${user.facebook}">
-                                                            <i class="fa fa-facebook"></i>
-                                                        </a>
-                                                        <a class="btn btn-primary btn-sm" rel="publisher" href="${user.instagram}">
-                                                            <i class="fa fa-instagram"></i>
-                                                        </a><hr>
-                                                        <span class="badge badge-primary"><i class="fa fa-photo"></i> ${user.postsNo} posts</span>
-                                                        <span class="badge badge-success"><i class="fa fa-comment"></i> ${user.commentsNo} comments</span>
+                                                        <c:if test="${user.email!=null and (user.email!='')}">
+                                                            email address: ${user.email}<hr>
+                                                        </c:if>                                                        
+                                                        <c:if test="${user.twitter!=null and (user.twitter!='')}">
+                                                            <a class="btn btn-primary btn-twitter btn-sm" href="${user.twitter}">
+                                                                <i class="fa fa-twitter"></i>
+                                                            </a>
+                                                        </c:if>                                                        
+                                                        <c:if test="${user.facebook!=null and (user.facebook!='')}">
+                                                            <a class="btn btn-primary btn-sm" rel="publisher"
+                                                               href="${user.facebook}">
+                                                                <i class="fa fa-facebook"></i>
+                                                            </a>
+                                                        </c:if>
+                                                        <c:if test="${user.instagram!=null and (user.instagram!='')}">
+                                                            <a class="btn btn-primary btn-sm" rel="publisher" href="${user.instagram}">
+                                                                <i class="fa fa-instagram"></i>
+                                                            </a>
+                                                        </c:if>
+                                                        <hr>
+                                                        <span class="badge badge-primary" style="margin-bottom: 20px"><i class="fa fa-photo"></i> ${user.postsNo} posts</span>
+                                                        <span class="badge badge-success" style="margin-bottom: 20px"><i class="fa fa-comment"></i> ${user.commentsNo} comments</span>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <h3 class="mt-2">Artwork</h3>
@@ -359,12 +366,12 @@
                                                                 <input class="form-control" name="twitter" type="text" value="${user.twitter}">
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
+<!--                                                        <div class="form-group row">
                                                             <label class="col-lg-3 col-form-label form-control-label">Website<br>( public information)</label>
                                                             <div class="col-lg-9">
                                                                 <input class="form-control" type="url" value="">
                                                             </div>
-                                                        </div>
+                                                        </div>-->
                                                         <div class="form-group row">
                                                             <label class="col-lg-3 col-form-label form-control-label">About me</label>
                                                             <textarea class="col-lg-9" rows = "6" cols = "50" name = "aboutme">${user.aboutme} </textarea></br>

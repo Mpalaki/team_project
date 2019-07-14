@@ -11,6 +11,7 @@ import com.team.project.repos.FriendshipRepo;
 import com.team.project.repos.PmRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
+import com.team.project.service.FriendshipService;
 import com.team.project.utils.EncryptUtils;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,8 @@ public class PmController {
     PmRepo pmr;
     @Autowired
     FriendshipRepo fr;
+    @Autowired
+    FriendshipService fs;
 
     @RequestMapping(value = "pm", method = RequestMethod.POST)
     public String sendPm(@RequestParam("idsender") User idsender, @RequestParam("idreceiver") User idreceiver,
@@ -47,7 +50,9 @@ public class PmController {
         List posts = pr.findByIduser(idreceiver);
         List pms = pmr.getCommentsByIdreceiver(idreceiver);
         List friends = fr.getFriends(idreceiver);
+        List friendRequestedList = fs.usersNotEligibleToSendFriendRequest(idreceiver); // returns all the ids of the users that are either friends or a friend request is pending with the profile ownwer
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friendRequestedList", friendRequestedList);
         mm.addAttribute("friends", friends);
         mm.addAttribute("pms", pms);
         return "profile";

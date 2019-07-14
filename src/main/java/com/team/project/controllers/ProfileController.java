@@ -76,9 +76,9 @@ public class ProfileController {
         List pms = pmr.getCommentsByIdreceiver(artist);
         List frs = fr.getAllFriendRequests(artist);
         List friends = fr.getFriends(artist);
-        List tests = fs.usersNotEligibleToSendFriendRequest(artist);
+        List friendRequestedList = fs.usersNotEligibleToSendFriendRequest(artist); // returns all the ids of the users that are either friends or a friend request is pending with the profile ownwer
         mm.addAttribute("posts", posts);
-        mm.addAttribute("tests", tests);
+        mm.addAttribute("friendRequestedList", friendRequestedList);
         mm.addAttribute("friends", friends);
         mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);

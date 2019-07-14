@@ -12,6 +12,7 @@ import com.team.project.repos.FriendshipRepo;
 import com.team.project.repos.PmRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
+import com.team.project.service.FriendshipService;
 import com.team.project.utils.EncryptUtils;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -32,12 +33,13 @@ public class FriendshipController {
     @Autowired
     FriendshipRepo fr;
     @Autowired
+    FriendshipService fs;
+    @Autowired
     UserRepo ur;
     @Autowired
     PostRepo pr;
     @Autowired
     PmRepo pmr;
-// TODO: load mm with friends after the below methods...
 
     @RequestMapping(value = "friendrequest", method = RequestMethod.POST)
     public String sendFriendRequest(@RequestParam("idfriend1") int idfriend1, @RequestParam("idfriend2") int idfriend2, ModelMap mm) {
@@ -49,7 +51,9 @@ public class FriendshipController {
         mm.addAttribute("user", friend2);
         List posts = pr.findByIduser(friend2);
         List friends = fr.getFriends(friend2);
+        List friendRequestedList = fs.usersNotEligibleToSendFriendRequest(friend2); // returns all the ids of the users that are either friends or a friend request is pending with the profile ownwer
         mm.addAttribute("posts", posts);
+        mm.addAttribute("friendRequestedList", friendRequestedList);
         mm.addAttribute("friends", friends);
         return "profile";
     }
