@@ -14,6 +14,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,10 +25,14 @@ import com.team.project.service.UserService;
 import com.team.project.utils.BCryptPasswdMngr;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,7 +41,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Makis
  */
 @Controller
-public class LoginController {
+public class    LoginController {
 
     private File imgfile = new File("defav.png");
 
@@ -88,12 +95,37 @@ public class LoginController {
         return "registerform";
     }
 
-    @GetMapping("home")
-    public String homePage(ModelMap mm) {
-        List<Post> posts = ps.getTenLastsPosts();
-        mm.addAttribute("posts", posts);
+    @RequestMapping(value = "home", method = RequestMethod.GET)
+    public String listBooks(
+            Model model,
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        Page<Post> postsPage = ps.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+        System.out.println(postsPage.hasContent());
+        System.out.println(postsPage.getContent().stream());
+        model.addAttribute("postsPage", postsPage);
+
+        int totalPages = postsPage.getTotalPages();
+        System.out.println(totalPages);
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
         return "welcome";
     }
+
+//    @GetMapping("home")
+//    public String homePage(ModelMap mm) {
+//        List<Post> posts = ps.getTenLastsPosts();
+//        mm.addAttribute("posts", posts);
+//        return "welcome";
+//    }
 
     @GetMapping("RegisterController")
     public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,

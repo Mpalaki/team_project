@@ -475,31 +475,16 @@
 
                                                     </div>
                                                     <div class="container" style="margin-top:0px">
-                                                        <div class="row">
-                                                            <!--
-
-
-
-
-
-
-
-
-
-
-
-
+                                                        <div class="row"
 
 
                                                             <c:forEach var = "l" items="${posts}">
                                                                 <div class="col-sm-8" id="even">
 <%--                                                                    <!--  theto tin id tou user pou einai sundedemenos-->--%>
-                                                                    <%int role = (Integer) session.getAttribute("role");%>
-
+<%--                                                                    <%int role = (Integer) session.getAttribute("role");%>--%>
                                                                     <h2>${l.title}</h2>
-                                                                    <h5>post #${l.idpost}, ${l.dispDate}, by 
-
-                                                                        <!--                                                                    avatar - should not be null-->
+                                                                    <h5>post #${l.idpost}, ${l.dispDate}, by </h5>
+<%--                                                                                                                                            avatar - should not be null-->--%>
                                                                         <img src="data:image/jpg;base64,${l.iduser.base64Avatar}" style="vertical-align: middle;
                                                                              width: 50px;
                                                                              height: 50px;
@@ -514,7 +499,7 @@
 
 
                                                                     <!-- an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
-                                                                    <c:if test = "${l.iduser.iduser==iduser || role==1 }" >                            
+                                                                    <c:if test = "${l.iduser.iduser==iduser || role==1 }" >
 
 
                                                                         <a  href=" <c:url value="deletepost">
@@ -535,6 +520,67 @@
                                                                     <hr>
                                                                 </div>
                                                             </c:forEach>
+<%--                                                                <h1>${postsPage.content.get(1)}</h1>--%>
+                                                                <c:forEach var="post" items="${postsPage.content}">
+<%--                                                                    <h2>${post.dispDate}</h2>--%>
+<%--                                                                    <h1>dsafdjslfkjsakl</h1>--%>
+                                                                    <div class="col-sm-8" id="even">
+                                                                            <%--                                                                    <!--  theto tin id tou user pou einai sundedemenos-->--%>
+                                                                        <%int role = (Integer) session.getAttribute("role");%>
+                                                                        <h2>${post.title}</h2>
+                                                                        <h5>post #${post.idpost}, ${post.dispDate}, by </h5>
+                                                                            <%--                                                                                                                                            avatar - should not be null-->--%>
+                                                                        <img src="data:image/jpg;base64,${post.iduser.base64Avatar}" style="vertical-align: middle;
+                                                                             width: 50px;
+                                                                             height: 50px;
+                                                                             border-radius: 50%;"/>
+                                                                        <a  href=" <c:url value="profile">
+                                                                                <c:param name="unartist" value="${post.iduser.username}"/>
+                                                                            </c:url>">${post.iduser.username}</a>
+                                                                        </h5>
+                                                                        <div class="fakeimg"><img src="data:image/jpg;base64,${post.base64Photo}" style="max-width: 80%; height: auto;"/></div>
+                                                                        <p>${post.description}</p>
+                                                                        <br>
+
+
+                                                                        <!-- an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
+                                                                        <c:if test = "${post.iduser.iduser==iduser || role==1 }" >
+
+
+                                                                            <a  href=" <c:url value="deletepost">
+                                                                                <c:param name="idpost" value="${EncryptUtils.encrypt(post.idpost)}"/>
+                                                                            </c:url>">Delete |</a>
+
+                                                                            <a  href="<c:url value="editpost">
+                                                                                <c:param name="idpost" value="${EncryptUtils.encrypt(post.idpost)}"/>
+                                                                            </c:url>">Edit |</a>
+
+                                                                        </c:if>
+
+                                                                        <a  href="<c:url value="viewPost">
+                                                                            <c:param name="idpost" value="${post.idpost}"/>
+                                                                        </c:url>">View artwork</a>
+
+
+                                                                        <hr>
+                                                                    </div>
+
+                                                                </c:forEach>
+
+                                                        <c:if test="${postsPage.totalPages> 0}">
+                                                            <div class="pagination">
+                                                                <c:forEach var="pageNumber" items="${pageNumbers}">
+                                                                    <a href="/home?size=${postsPage.size}&page=${pageNumber}">${pageNumber}</a>
+
+                                                                </c:forEach>
+                                                            </div>
+                                                        </c:if>
+<%--                                                        <div th:if="${bookPage.totalPages > 0}" class="pagination"--%>
+<%--                                                             th:each="pageNumber : ${pageNumbers}">--%>
+<%--                                                            <a th:href="@{/listBooks(size=${bookPage.size}, page=${pageNumber})}"--%>
+<%--                                                               th:text=${pageNumber}--%>
+<%--                                                                       th:class="${pageNumber==bookPage.number + 1} ? active"></a>--%>
+<%--                                                        </div>--%>
 
 
                                                             <!-- latest posts-->
@@ -627,6 +673,8 @@
                                                             </a>
                                                         </li>
                                                     </ul>
+
+
                                                     <!--                                                </div>-->
                                                     <script>
                                                         $(document).ready(function() {
