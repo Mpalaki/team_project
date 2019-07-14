@@ -10,6 +10,7 @@ import com.team.project.repos.FriendshipRepo;
 import com.team.project.repos.PmRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
+import com.team.project.service.FriendshipService;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
@@ -37,6 +38,8 @@ public class ProfileController {
     PmRepo pmr;
     @Autowired
     FriendshipRepo fr;
+    @Autowired
+    FriendshipService fs;
 
     
     // TODO: pairnei ton user ap to session opote an kanei update photo den fainetai sto profile an den kanei logout kai login pali
@@ -73,7 +76,9 @@ public class ProfileController {
         List pms = pmr.getCommentsByIdreceiver(artist);
         List frs = fr.getAllFriendRequests(artist);
         List friends = fr.getFriends(artist);
+        List tests = fs.usersNotEligibleToSendFriendRequest(artist);
         mm.addAttribute("posts", posts);
+        mm.addAttribute("tests", tests);
         mm.addAttribute("friends", friends);
         mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);

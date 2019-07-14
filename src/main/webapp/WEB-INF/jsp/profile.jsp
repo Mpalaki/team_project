@@ -138,12 +138,13 @@
                                                                 <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Send</button>
                                                             </form>
                                                             <!--button that sends a friend request -->
-                                                            <form action="friendrequest" method="post">                                                                
-                                                                <input type=hidden id="idfriend1" name="idfriend1" value="${iduser}">
-                                                                <input type=hidden id="idfriend2" name="idfriend2" value="${user.iduser}">                                                                                                                               
-                                                                <button type="submit" class="btn btn-info" style="margin-top: 20px;">friend request</button>
-                                                            </form>
-
+                                                            <c:if test="${!tests.contains(iduser)}">
+                                                                <form action="friendrequest" method="post">                                                                
+                                                                    <input type=hidden id="idfriend1" name="idfriend1" value="${iduser}">
+                                                                    <input type=hidden id="idfriend2" name="idfriend2" value="${user.iduser}">                                                                                                                               
+                                                                    <button type="submit" class="btn btn-info" style="margin-top: 20px;">friend request</button>
+                                                                </form>
+                                                            </c:if>
                                                         </c:if><hr>
                                                         <a class="btn btn-primary btn-twitter btn-sm" href="${user.twitter}">
                                                             <i class="fa fa-twitter"></i>

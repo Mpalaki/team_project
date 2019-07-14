@@ -78,7 +78,7 @@
                                             <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
                                         </p>-->
                     <p class="divider-text">
-                        <span class="bg-light">Fields marked with (*) are required</span>
+                        <span class="bg-light">Fields marked with * are required</span>
                     </p>
                     <form id="foid" action="RegisterController" enctype="multipart/form-data" method="post">
                         <div class="form-group input-group">
@@ -98,14 +98,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                             </div>
-                            <input name="username" class="form-control" placeholder="Username( * )" type="text" required>
+                            <input name="username" class="form-control" placeholder="Username* " type="text" required>
                         </div> 
                         <!-- form-group// -->
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                             </div>
-                            <input name="emailAddress" class="form-control" placeholder="Email address( * )" type="email" required>
+                            <input name="emailAddress" class="form-control" placeholder="Email address* " type="email" required>
                         </div> 
                         <!-- form-group// -->
                         <div class="form-group input-group">
@@ -119,13 +119,13 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                             </div>
-                            <input id="pass1"  name="password" class="form-control" placeholder="Create password( * )" type="password" required>
+                            <input id="pass1"  name="password" class="form-control" placeholder="Create password*" type="password" required>
                         </div> <!-- form-group// -->
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                             </div>
-                            <input id="pass2" name="wordpass" class="form-control" placeholder="Repeat password( * )" type="password" required>
+                            <input id="pass2" name="wordpass" class="form-control" placeholder="Repeat password*" type="password" required>
                         </div> <!-- form-group// -->       
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="file" name="photo1">
@@ -254,7 +254,7 @@
                         .on("focus", function () {
                             // reset the error message when they go to make a change
                             resetPasswordEr();
-                        })
+                        });
 
             });
 
