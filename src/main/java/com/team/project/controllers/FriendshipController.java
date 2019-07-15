@@ -52,6 +52,8 @@ public class FriendshipController {
         List posts = pr.findByIduser(friend2);
         List friends = fr.getFriends(friend2);
         List friendRequestedList = fs.usersNotEligibleToSendFriendRequest(friend2); // returns all the ids of the users that are either friends or a friend request is pending with the profile ownwer
+        String success = "fr sent";
+        mm.addAttribute("success", success);
         mm.addAttribute("posts", posts);
         mm.addAttribute("friendRequestedList", friendRequestedList);
         mm.addAttribute("friends", friends);
@@ -117,6 +119,8 @@ public class FriendshipController {
         List pms = pmr.getCommentsByIdreceiver(deleter);
         List frs = fr.getAllFriendRequests(deleter);
         List friends = fr.getFriends(deleter);
+        String success = "fr deleted";
+        mm.addAttribute("success", success);
         mm.addAttribute("posts", posts);
         mm.addAttribute("friends", friends);
         mm.addAttribute("friendrequests", frs);

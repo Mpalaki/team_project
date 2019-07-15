@@ -52,6 +52,8 @@ public class PmController {
         List friends = fr.getFriends(idreceiver);
         List frs = fr.getAllFriendRequests(idreceiver);
         List friendRequestedList = fs.usersNotEligibleToSendFriendRequest(idreceiver); // returns all the ids of the users that are either friends or a friend request is pending with the profile ownwer
+        String success = "pm sent";
+        mm.addAttribute("success", success);
         mm.addAttribute("posts", posts);
         mm.addAttribute("friendRequestedList", friendRequestedList);
         mm.addAttribute("friends", friends);
@@ -59,6 +61,7 @@ public class PmController {
         mm.addAttribute("pms", pms);
         return "profile";
     }
+
     @RequestMapping(value = "reply", method = RequestMethod.POST)
     public String reply(@RequestParam("idsender") User idsender, @RequestParam("idreceiver") User idreceiver,
             @RequestParam("title") String title, @RequestParam("text") String text, ModelMap mm) {
@@ -70,6 +73,8 @@ public class PmController {
         List pms = pmr.getCommentsByIdreceiver(idsender);
         List friends = fr.getFriends(idsender);
         List frs = fr.getAllFriendRequests(idsender);
+        String success = "pm sent";
+        mm.addAttribute("success", success);
         mm.addAttribute("posts", posts);
         mm.addAttribute("friends", friends);
         mm.addAttribute("friendrequests", frs);
@@ -102,6 +107,8 @@ public class PmController {
         List pms = pmr.getCommentsByIdreceiver(receiver);
         List frs = fr.getAllFriendRequests(receiver);
         List friends = fr.getFriends(receiver);
+        String success = "removal";
+        mm.addAttribute("success", success);
         mm.addAttribute("posts", posts);
         mm.addAttribute("friends", friends);
         mm.addAttribute("friendrequests", frs);

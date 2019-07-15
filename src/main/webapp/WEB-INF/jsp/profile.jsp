@@ -83,7 +83,35 @@
                                                                                         </li> -->
                                     </ul>
                                 </div>  
+
                             </nav>
+
+                            <!-- Success Alerts -->
+                            <c:if test="${success=='pm sent'}">
+                                <div class="alert alert-success alert-dismissible fade show">
+                                    <strong>Success!</strong> Your message has been sent successfully.
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                </div>
+                            </c:if>
+                            <c:if test="${success=='removal'}">
+                                <div class="alert alert-success alert-dismissible fade show">
+                                    <strong>Success!</strong> Your message has been deleted successfully.
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                </div>
+                            </c:if>
+                            <c:if test="${success=='fr sent'}">
+                                <div class="alert alert-success alert-dismissible fade show">
+                                    <strong>Success!</strong> Your friend request has been sent successfully.
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                </div>
+                            </c:if>
+                            <c:if test="${success=='fr deleted'}">
+                                <div class="alert alert-success alert-dismissible fade show">
+                                    <strong>Success!</strong> Friend has been removed.
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                </div>
+                            </c:if>
+                            
                             <% }%>
 
                             <div class="container">
@@ -124,7 +152,7 @@
                                                         <!--   tests if there is a user logged in, so that a visitor does not see the below buttons-->
                                                         <c:if test = "${iduser!=null}" >
                                                             <!--when he presses the button the form shows up -->
-                                                            <button type="button" id="pmbtn" class="btn btn-success" style="margin-top: 20px"><i style="font-size:24px" class="fa">&#xf0e0;</i> message</button>
+                                                            <button type="button" id="pmbtn" class="btn btn-warning badge badge-light badge-pill" style="margin-bottom: 8px;margin-top: 8px; margin-left: 0px"><i style="font-size:24px" class="fa">&#xf0e0;</i> message</button>
 
                                                             <form action="pm" id="pmform" class="was-validated" method="post"  style="display:none;">
                                                                 <div class="form-group">
@@ -133,9 +161,10 @@
                                                                     <input type="text" id="uname" class="form-control"  name="title" placeholder="title">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <textarea rows = "6" cols = "50" class="form-control"  name = "text" required></textarea></br>
+                                                                    <textarea rows = "5" cols = "40" class="form-control"  name = "text" required></textarea></br>
                                                                 </div>
-                                                                <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Send</button>
+                                                                <button type="submit" class="btn btn-info badge badge-light badge-pill" >Send</button>
+                                                                <hr>
                                                             </form>
                                                             <!-- if the session user has already sent a friend request to the profile owner or he is the profile owner, he will not see the below button -->
                                                             <c:if test="${!(friendRequestedList.contains(iduser) or user.iduser==iduser)}">
@@ -143,10 +172,10 @@
                                                                 <form action="friendrequest" method="post">                                                                
                                                                     <input type=hidden id="idfriend1" name="idfriend1" value="${iduser}">
                                                                     <input type=hidden id="idfriend2" name="idfriend2" value="${user.iduser}">                                                                                                                               
-                                                                    <button type="submit" class="btn btn-info" style="margin-top: 20px;"><i style="font-size:24px" class="fa">&#xf234;</i> add</button>
+                                                                    <button type="submit" class="btn btn-warning badge badge-light badge-pill" style="margin-bottom: 8px;margin-top: 8px; margin-left: 0px"><i style="font-size:24px" class="fa">&#xf234;</i> add</button>
                                                                 </form>
-                                                            </c:if>
-                                                        </c:if><hr>
+                                                            </c:if><hr>
+                                                        </c:if>
                                                         <c:if test="${user.email!=null and (user.email!='')}">
                                                             email address: ${user.email}<hr>
                                                         </c:if>                                                        
@@ -156,7 +185,7 @@
                                                             </a>
                                                         </c:if>                                                        
                                                         <c:if test="${user.facebook!=null and (user.facebook!='')}">
-                                                            <a class="btn btn-primary btn-sm" rel="publisher"
+                                                            <a class="btn btn-info btn-sm" rel="publisher"
                                                                href="${user.facebook}">
                                                                 <i class="fa fa-facebook"></i>
                                                             </a>
@@ -196,11 +225,11 @@
 
                                                                         <a  href=" <c:url value="deletepost">
                                                                                 <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
-                                                                            </c:url>">Delete |</a>
+                                                                            </c:url>">Delete </a>|
 
                                                                         <a  href="<c:url value="editpost">
                                                                                 <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
-                                                                            </c:url>">Edit |</a>
+                                                                            </c:url>">Edit </a>|
 
                                                                     </c:if>
 
@@ -327,14 +356,14 @@
                                                                         <input type=hidden id="idsender" name="idsender" value="${pms.idreceiver.iduser}">
                                                                         <input type=hidden id="idreceiver" name="idreceiver" value="${pms.idsender.iduser}">
                                                                         <input type=hidden id="title" name="title" value="${pms.title}">
-                                                                        <textarea rows = "2" cols = "50" class="custom-file-textarea" style="border-radius: 4px;"  name = "text"></textarea><br>
-                                                                        <input type = "submit" class="btn btn-warning" value = "reply" />
+                                                                        <textarea rows = "2" cols = "50" class="custom-file-textarea" style="border-radius: 4px; background-color: #fafbc5"  name = "text" required></textarea><br>
+                                                                        <button type="submit" class="btn btn-info badge badge-light badge-pill" >reply</button>
                                                                     </form>
-                                                                   
 
-                                                        </td>
-                                                        </tr>                                                        
-                                                    </c:forEach>
+
+                                                                </td>
+                                                            </tr>                                                        
+                                                        </c:forEach>
                                                     </tbody> 
                                                 </table>
                                             </div>
@@ -413,10 +442,10 @@
                                             <h6 class="mt-2">Upload a different photo ( max size: 1 KB)</h6>
                                             <form action="updatephoto" enctype="multipart/form-data" method="post">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="file" name="avatar" >
+                                                    <input type="file" class="custom-file-input" id="file" name="avatar" required>
                                                     <input type=hidden id="iduser" name="iduser" value="${iduser}">
                                                     <label class="custom-file-label" for="customFile">Choose file</label>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="submit" class="btn btn-light">Submit</button>
                                                 </div>
                                             </form>
 
