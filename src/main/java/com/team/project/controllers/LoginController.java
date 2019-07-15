@@ -14,13 +14,20 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,7 +65,7 @@ public class LoginController {
             mm.addAttribute("user", u);
             List<Post> posts = ps.getTenLastsPosts();
             mm.addAttribute("posts", posts);
-            return "welcome";
+            return "redirect:home";
         }
     }
 
@@ -68,7 +75,7 @@ public class LoginController {
         session.invalidate();
         List<Post> posts = ps.getTenLastsPosts();
         mm.addAttribute("posts", posts);
-        return "welcome";
+        return "redirect:home";
     }
 
     @RequestMapping("SignupController")
@@ -76,11 +83,46 @@ public class LoginController {
         return "registerform";
     }
 
-    @RequestMapping("home")
-    public String homePage(ModelMap mm) {
-        List<Post> posts = ps.getTenLastsPosts();
-        mm.addAttribute("posts", posts);
+    @RequestMapping("artists")
+    public String reditToSignupForm() {
+        return "artists";
+    }
+
+    @RequestMapping(value = "home", method = RequestMethod.GET)
+
+    public String listPostPages(
+            Model model,
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size) {
+
+        int currentPage = page.orElse(1);
+
+        int pageSize = size.orElse(5);
+
+        Page<Post> postsPage = ps.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        System.out.println(postsPage.hasContent());
+
+        System.out.println(postsPage.getContent().stream());
+
+        model.addAttribute("postsPage", postsPage);
+
+        int totalPages = postsPage.getTotalPages();
+
+        System.out.println(totalPages);
+
+        if (totalPages > 0) {
+
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+
+            model.addAttribute("pageNumbers", pageNumbers);
+
+        }
+
         return "welcome";
+
     }
 
     @RequestMapping("RegisterController")
@@ -108,5 +150,5 @@ public class LoginController {
             }
         }
     }
-    
+
 }

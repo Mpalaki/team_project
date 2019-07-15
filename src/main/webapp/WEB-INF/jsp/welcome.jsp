@@ -170,7 +170,7 @@
 
 
 
-                                                            <c:forEach var = "l" items="${posts}">
+                                                            <c:forEach var = "l"  items="${postsPage.content}">
                                                                 <div class="col-sm-8" id="even">
                                                                     <!--  theto tin id tou user pou einai sundedemenos-->
                                                                     <%int role = (Integer) session.getAttribute("role");%>
@@ -258,47 +258,15 @@
                                                                 <span class="sr-only">Previous</span>
                                                             </a>
                                                         </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="getLastPosts">1</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="2"/>
-                                                               </c:url>">2</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="3"/>
-                                                               </c:url>">3</a>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="4"/>
-                                                               </c:url>">4</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="5"/>
-                                                               </c:url>">5</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="6"/>
-                                                               </c:url>">6</a>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="7"/>
-                                                               </c:url>">7</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="8"/>
-                                                               </c:url>">8</a>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href=" <c:url value="nextpage">
-                                                                   <c:param name="pagenumber" value="9"/>
-                                                               </c:url>">9</a>
-                                                        </li>
+                                                        <c:if test="${postsPage.totalPages> 0}">
+                                                            <%--                                                            <div class="pagination">--%>
+                                                            <c:forEach var="pageNumber" items="${pageNumbers}">
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="home?size=${postsPage.size}&page=${pageNumber}">${pageNumber}</a>
+                                                                </li>
+                                                            </c:forEach>
+                                                            <%--                                                            </div>--%>
+                                                        </c:if>
                                                         <li class="page-item">
                                                             <a class="page-link" href="#" aria-label="Next">
                                                                 <span aria-hidden="true">&raquo;</span>

@@ -16,10 +16,16 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -100,9 +106,36 @@ public class PostController {
     }
 
     @RequestMapping("/")
-    public String index(ModelMap mm) {
-        List<Post> posts = ps.getTenLastsPosts();
-        mm.addAttribute("posts", posts);
+    public String listPostPages(
+            Model model,
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size) {
+
+        int currentPage = page.orElse(1);
+
+        int pageSize = size.orElse(5);
+
+        Page<Post> postsPage = ps.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        System.out.println(postsPage.hasContent());
+
+        System.out.println(postsPage.getContent().stream());
+
+        model.addAttribute("postsPage", postsPage);
+
+        int totalPages = postsPage.getTotalPages();
+
+        System.out.println(totalPages);
+
+        if (totalPages > 0) {
+
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+
+            model.addAttribute("pageNumbers", pageNumbers);
+
+        }
 
         return "welcome";
     }
