@@ -128,7 +128,7 @@
                             <input id="pass2" name="wordpass" class="form-control" placeholder="Repeat password*" type="password" required>
                         </div> <!-- form-group// -->       
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="file" name="photo1">
+                            <input type="file" class="custom-file-input" id="file" name="photo">
                             <!--                            <div class="valid-feedback">Valid.</div>
                                                         <div class="invalid-feedback">Upload an image to continue.</div>-->
                             <label class="custom-file-label" for="customFile">Choose avatar</label><br>

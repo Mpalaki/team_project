@@ -96,7 +96,7 @@ public class ProfileController {
 //        User u = (User) session.getAttribute("user");
 //        session.setAttribute("username", u.getUsername());
         mm.addAttribute("artists", artists);
-        return "welcome";
+        return "artists";
     }
 
     @RequestMapping(value = "updatephoto", method = RequestMethod.POST)

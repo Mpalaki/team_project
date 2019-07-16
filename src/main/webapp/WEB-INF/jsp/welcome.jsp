@@ -176,7 +176,7 @@
                                                                     <%int role = (Integer) session.getAttribute("role");%>
 
                                                                     <h2>${l.title}</h2>
-                                                                    <h5>post #${l.idpost}, ${l.dispDate}, by 
+                                                                    <h5>artis opus #${l.idpost}, ${l.dispDate}, by 
 
                                                                         <!--                                                                    avatar - should not be null-->
                                                                         <img src="data:image/jpg;base64,${l.iduser.base64Avatar}" style="vertical-align: middle;
@@ -251,7 +251,7 @@
                                                     </div>
 
                                                     <!--                                                <div class="jumbotron text-center" style="margin-bottom:0">-->
-                                                    <ul class="pagination justify-content-center">
+                                                    <ul class="pagination justify-content-center" style="margin-top: 5px">
                                                         <li class="page-item">
                                                             <a class="page-link" href="#" aria-label="Previous">
                                                                 <span aria-hidden="true">&laquo;</span>

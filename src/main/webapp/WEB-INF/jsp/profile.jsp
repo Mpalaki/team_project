@@ -196,8 +196,8 @@
                                                             </a>
                                                         </c:if>
                                                         <hr>
-                                                        <span class="badge badge-primary" style="margin-bottom: 20px"><i class="fa fa-photo"></i> ${user.postsNo} posts</span>
-                                                        <span class="badge badge-success" style="margin-bottom: 20px"><i class="fa fa-comment"></i> ${user.commentsNo} comments</span>
+                                                        <span class="badge badge-warning" style="margin-bottom: 20px"><i class="fa fa-photo"></i> ${user.postsNo} posts</span>
+                                                        <span class="badge badge-warning" style="margin-bottom: 20px"><i class="fa fa-comment"></i> ${user.commentsNo} comments</span>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <h3 class="mt-2">Artwork</h3>

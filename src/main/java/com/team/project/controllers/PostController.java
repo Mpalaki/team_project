@@ -63,15 +63,8 @@ public class PostController {
         post.setIduser(u);
         java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
         post.setDate(date);
-        mm.addAttribute(post);
-        mm.addAttribute("username", username);
-        session.setAttribute("user", u);
-        session.setAttribute("username", username);
         pr.save(post);
-        List<Post> posts = ps.getTenLastsPosts();
-        mm.addAttribute("posts", posts);
-
-        return "welcome";
+        return "redirect:/";
     }
 
     @RequestMapping("getLastPosts")
@@ -110,33 +103,20 @@ public class PostController {
             Model model,
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size) {
-
         int currentPage = page.orElse(1);
-
         int pageSize = size.orElse(5);
-
         Page<Post> postsPage = ps.findPaginated(PageRequest.of(currentPage - 1, pageSize));
-
         System.out.println(postsPage.hasContent());
-
         System.out.println(postsPage.getContent().stream());
-
         model.addAttribute("postsPage", postsPage);
-
         int totalPages = postsPage.getTotalPages();
-
         System.out.println(totalPages);
-
         if (totalPages > 0) {
-
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                     .boxed()
                     .collect(Collectors.toList());
-
             model.addAttribute("pageNumbers", pageNumbers);
-
         }
-
         return "welcome";
     }
 // TODO: below i bring from jsp only the idpost and inside the method i create the post and then pass it to other jsp.
@@ -158,9 +138,7 @@ public class PostController {
         int idpost = Integer.parseInt(pw);
         Post p = pr.getPostByIdpost(idpost);
         pr.delete(p);
-        List<Post> posts = ps.getTenLastsPosts();
-        mm.addAttribute("posts", posts);
-        return "welcome";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "editpost", method = RequestMethod.GET)
@@ -191,14 +169,9 @@ public class PostController {
         post.setIdpost(idpost);
         post.setDescription(description);
         post.setTitle(title);
-        mm.addAttribute(post);
-        mm.addAttribute("username", username);
-        session.setAttribute("user", u);
-        session.setAttribute("username", username);
         pr.save(post);
-        List<Post> posts = ps.getTenLastsPosts();
-        mm.addAttribute("posts", posts);
-        return "welcome";
+
+        return "redirect:/";
     }
 
 }
