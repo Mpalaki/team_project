@@ -1,6 +1,6 @@
 
 #prologos{
-    background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
+    background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("resources/images/japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
     background-color: #cccccc; /* Used if the image is unavailable */
     height: 280px; /* You must set a specified height */
     background-position: center; /* Center the image */

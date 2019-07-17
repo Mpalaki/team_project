@@ -111,7 +111,7 @@
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 </div>
                             </c:if>
-                            
+
                             <% }%>
 
                             <div class="container">
@@ -448,6 +448,23 @@
                                                     <button type="submit" class="btn btn-light">Submit</button>
                                                 </div>
                                             </form>
+                                        </c:if>
+                                        <c:if test = "${user.iduser==iduser || role==1}" >
+                                            <form action="deleteme" style="margin-top: 7px">
+                                                <div class="custom-file">
+                                                    <input type=hidden id="iduser" name="iduser" value="${EncryptUtils.encrypt(user.iduser)}">
+                                                    <button type="submit" class="btn btn-danger badge badge-light badge-pill">Delete Account</button>
+                                                </div>
+                                            </form>
+
+                                        </c:if>
+                                        <c:if test = "${user.iduser!=iduser && role==1 && user.role!=1}" >
+                                            <form action="setAsAdmin" >
+                                                <div class="custom-file">
+                                                    <input type=hidden id="iduser" name="iduser" value="${EncryptUtils.encrypt(user.iduser)}">
+                                                    <button type="submit" class="btn btn-danger badge badge-light badge-pill">Set as administrator</button>
+                                                </div>
+                                            </form>
 
                                         </c:if>
 
@@ -464,12 +481,7 @@
                                 $("#pmbtn").click(function () {
                                     $("#pmform").toggle();
                                 });
-                                $("#pmbtn2").click(function () {
-                                    $("#pmform2").toggle();
-                                });
-
-
-
+                                
                             </script>
                             </body>
 

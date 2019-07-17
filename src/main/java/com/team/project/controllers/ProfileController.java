@@ -11,9 +11,11 @@ import com.team.project.repos.PmRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
 import com.team.project.service.FriendshipService;
+import com.team.project.utils.EncryptUtils;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -143,6 +145,24 @@ public class ProfileController {
         mm.addAttribute("friendrequests", frs);
         mm.addAttribute("pms", pms);
         return "profile";
+    }
+    
+    @RequestMapping(value = "deleteme", method = RequestMethod.GET)
+    public String deleteUser(HttpServletRequest req, ModelMap mm) {
+        String pw = EncryptUtils.decrypt(req.getParameter("iduser"));
+        int iduser = Integer.parseInt(pw);
+        User angryUser = ur.findByIduser(iduser);
+        ur.delete(angryUser);
+        return "welcome";
+    }
+    @RequestMapping(value = "setAsAdmin", method = RequestMethod.GET)
+    public String setAsAdmin(HttpServletRequest req, ModelMap mm) {
+        String pw = EncryptUtils.decrypt(req.getParameter("iduser"));
+        int iduser = Integer.parseInt(pw);
+        User newAdmin = ur.findByIduser(iduser);
+        newAdmin.setRole(1);
+        ur.save(newAdmin);
+        return "welcome";
     }
 
 }

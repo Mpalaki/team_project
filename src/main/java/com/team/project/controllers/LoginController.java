@@ -62,9 +62,6 @@ public class LoginController {
             session.setAttribute("iduser", iduser);
             session.setAttribute("username", username);
             session.setAttribute("role", role);
-            mm.addAttribute("user", u);
-            List<Post> posts = ps.getTenLastsPosts();
-            mm.addAttribute("posts", posts);
             return "redirect:home";
         }
     }
@@ -73,8 +70,6 @@ public class LoginController {
     public String logout(HttpSession session, ModelMap mm) {
         session.removeAttribute("username");
         session.invalidate();
-        List<Post> posts = ps.getTenLastsPosts();
-        mm.addAttribute("posts", posts);
         return "redirect:home";
     }
 

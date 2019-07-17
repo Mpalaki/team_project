@@ -77,7 +77,7 @@
                 <%int role = (Integer) session.getAttribute("role");%>
 
                 <h2>${post.title}</h2>
-                <h5>post #${post.idpost}, ${post.dispDate}, by 
+                <h5>artis opus #${post.idpost}, ${post.dispDate}, by 
                     <img src="data:image/jpg;base64,${post.iduser.base64Avatar}" style="vertical-align: middle;
                          width: 50px;
                          height: 50px;
@@ -85,7 +85,7 @@
                     <a  href=" <c:url value="profile">
                             <c:param name="unartist" value="${post.iduser.username}"/>
                         </c:url>">${post.iduser.username}</a>
-                    <!--                    vazo ena try catch gia na mporeso na emfaniso tin editdate an uparhei.trelo?-->
+                    <!--                    vazo ena try catch gia na mporeso na emfaniso tin editdate an uparhei-->
                     <% Post post = (Post) pageContext.findAttribute("post");
                         try {
                             String editdate = post.getDispeditDate();
