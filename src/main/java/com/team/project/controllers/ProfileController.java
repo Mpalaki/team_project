@@ -12,6 +12,7 @@ import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
 import com.team.project.service.FriendshipService;
 import com.team.project.utils.EncryptUtils;
+import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
@@ -43,7 +44,6 @@ public class ProfileController {
     @Autowired
     FriendshipService fs;
 
-    
     // TODO: pairnei ton user ap to session opote an kanei update photo den fainetai sto profile an den kanei logout kai login pali
     @RequestMapping("redirectToProfile")
     public String redirectToProfile(HttpSession session, ModelMap mm) {
@@ -51,9 +51,9 @@ public class ProfileController {
         // Mpaloma
         User u = ur.findByIduser(user.getIduser());
         mm.addAttribute("user", u);
-        byte[] avatar = u.getAvatar();
-        String avat = Base64.getEncoder().encodeToString(avatar);
-        u.setBase64Avatar(avat);
+//        byte[] avatar = u.getAvatar();
+//        String avat = Base64.getEncoder().encodeToString(avatar);
+//        u.setBase64Avatar(avat);
         mm.addAttribute("user", u);
         List posts = pr.findByIduser(u);
         List pms = pmr.getCommentsByIdreceiver(user);
@@ -70,9 +70,9 @@ public class ProfileController {
     public String viewOtherProfile(HttpSession session, ModelMap mm, @RequestParam("unartist") String unartist) {
 //        User onlineUser = (User) session.getAttribute("user");
         User artist = ur.findByUsername(unartist);
-        byte[] avatar = artist.getAvatar();
-        String avat = Base64.getEncoder().encodeToString(avatar);
-        artist.setBase64Avatar(avat);
+//        byte[] avatar = artist.getAvatar();
+//        String avat = Base64.getEncoder().encodeToString(avatar);
+//        artist.setBase64Avatar(avat);
         mm.addAttribute("user", artist);
         List posts = pr.findByIduser(artist);
         List pms = pmr.getCommentsByIdreceiver(artist);
@@ -90,11 +90,11 @@ public class ProfileController {
     @RequestMapping("viewArtists")
     public String showArtists(HttpSession session, ModelMap mm) {
         List<User> artists = ur.getUsersWherePostsNoGreaterThanZero();
-        for (int i = 0; i < artists.size(); i++) {
-            byte imageBytes[] = artists.get(i).getAvatar();
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            artists.get(i).setBase64Avatar(base64Image);
-        }
+//        for (int i = 0; i < artists.size(); i++) {
+//            byte imageBytes[] = artists.get(i).getAvatar();
+//            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+//            artists.get(i).setBase64Avatar(base64Image);
+//        }
 //        User u = (User) session.getAttribute("user");
 //        session.setAttribute("username", u.getUsername());
         mm.addAttribute("artists", artists);
@@ -102,10 +102,17 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "updatephoto", method = RequestMethod.POST)
-    public String updateAvatar(ModelMap mm, @RequestParam("iduser") int iduser, @RequestParam("avatar") MultipartFile avatar ) throws IOException {
+    public String updateAvatar(HttpServletRequest request, ModelMap mm, @RequestParam("iduser") int iduser, @RequestParam("avatar") MultipartFile avatar) throws IOException {
         User user = ur.findByIduser(iduser);
-        byte [] image = avatar.getBytes();
-        user.setAvatar(image);
+//        byte [] image = avatar.getBytes();
+//        user.setAvatar(image);
+        String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
+        String saveDirectory = fileName2 + "../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
+        String fileName = avatar.getOriginalFilename();
+        String fileUrl = "resources/avatars/" + fileName;
+        avatar.transferTo(new File(saveDirectory + fileName));
+        user.setStringAvatar(fileUrl);
+
         ur.save(user);
         mm.addAttribute("user", user);
         List posts = pr.findByIduser(user);
@@ -118,12 +125,12 @@ public class ProfileController {
         mm.addAttribute("pms", pms);
         return "profile";
     }
-    
+
     @RequestMapping(value = "updateprofile", method = RequestMethod.POST)
     public String updateProfile(ModelMap mm, HttpSession session, @RequestParam("firstName") String firstname,
-            @RequestParam("lastName") String lastname, @RequestParam("email") String email, 
-            @RequestParam("facebook") String facebook, @RequestParam("instagram") String instagram, @RequestParam("twitter") String twitter, 
-            @RequestParam("aboutme") String aboutme ) {
+            @RequestParam("lastName") String lastname, @RequestParam("email") String email,
+            @RequestParam("facebook") String facebook, @RequestParam("instagram") String instagram, @RequestParam("twitter") String twitter,
+            @RequestParam("aboutme") String aboutme) {
         User u = (User) session.getAttribute("user");
         // Mpaloma
         User user = ur.findByIduser(u.getIduser());
@@ -146,7 +153,7 @@ public class ProfileController {
         mm.addAttribute("pms", pms);
         return "profile";
     }
-    
+
     @RequestMapping(value = "deleteme", method = RequestMethod.GET)
     public String deleteUser(HttpServletRequest req, ModelMap mm) {
         String pw = EncryptUtils.decrypt(req.getParameter("iduser"));
@@ -155,6 +162,7 @@ public class ProfileController {
         ur.delete(angryUser);
         return "welcome";
     }
+
     @RequestMapping(value = "setAsAdmin", method = RequestMethod.GET)
     public String setAsAdmin(HttpServletRequest req, ModelMap mm) {
         String pw = EncryptUtils.decrypt(req.getParameter("iduser"));

@@ -23,7 +23,7 @@
         <title>artists</title>
         <style>
             body{
-                background-image:  linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)), url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
+                background-image:  linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)), url("resources/css/images/japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
                 background-color: #cccccc; /* Used if the image is unavailable */
                 /* Full height */
                 height: 100%;
@@ -133,9 +133,9 @@
                                     <c:forEach var = "artists" items="${artists}">                                        
                                         <div class="col-xl-3 col-md-6 mb-4" style="margin-top: 3px;">
                                             <div class="card border-0 shadow">
-                                                <img src="data:image/jpg;base64,${artists.base64Avatar}" style="
-                                                     height: 220px; /* You must set a specified height */
-                                                     width: auto;
+                                                <img src="${artists.stringAvatar}" style="
+                                                     height: auto; /* You must set a specified height */
+/*                                                     width: auto;*/
                                                      background-position: center; /* Center the image */
                                                      background-repeat: no-repeat; /* Do not repeat the image */
                                                      background-size: cover;

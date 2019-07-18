@@ -16,7 +16,7 @@
         <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet"> 
         <style>
             body{
-                background-image:  url("japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
+                background-image:  url("resources/css/images/japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
                 background-color: #cccccc; /* Used if the image is unavailable */
                 /* Full height */
                 height: 100%;
@@ -68,7 +68,7 @@
     <body>
         <!--        nikos-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-        <div class="container">
+        <div class="container" style="margin-top:20px">
             <div class="card bg-light">
                 <article class="card-body mx-auto" style="max-width: 400px;">
                     <h4 class="card-title mt-3 text-center">Create Account in <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h2>Calendart  Gallery</h2></a></h4>

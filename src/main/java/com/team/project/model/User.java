@@ -119,6 +119,8 @@ public class User implements Serializable {
     private String aboutme;
     @Column(name = "email")
     private String email;
+    @Column(name = "string_avatar")
+    private String stringAvatar;
     @Transient
     private String base64Avatar;
     @Transient
@@ -141,6 +143,14 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public String getStringAvatar() {
+        return stringAvatar;
+    }
+
+    public void setStringAvatar(String stringAvatar) {
+        this.stringAvatar = stringAvatar;
+    }
+    
     public String getBase64Avatar() {
         base64Avatar = Base64.getEncoder().encodeToString(this.avatar);
         return base64Avatar;

@@ -12,7 +12,6 @@ import com.team.project.repos.UserRepo;
 import com.team.project.service.PostService;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,8 +36,6 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 public class LoginController {
-
-    File imgfile = new File("defav.png");
 
     @Autowired
     UserRepo ur;
@@ -113,13 +110,23 @@ public class LoginController {
             return "registerform";
         } else {
             if (password.equals(wordpass)) {
-                if (image != null) {
+                if (!image.isEmpty()) {
                     byte[] img = image.getBytes();
                     user.setAvatar(img);
+                    String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
+                    String saveDirectory = fileName2+"../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
+                    String fileName = image.getOriginalFilename();
+                    String fileUrl = "resources/avatars/" + fileName;
+                    image.transferTo(new File(saveDirectory + fileName));
+                    user.setStringAvatar(fileUrl);
 //                    an den valei avatar na mpainei ena default
-                } else {
-                    byte[] fileContent = Files.readAllBytes(imgfile.toPath());
-                    user.setAvatar(fileContent);
+                } else {    
+                    String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
+                    String saveDirectory = fileName2+"../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
+                    String fileName = "defav.png";
+                    String fileUrl = "resources/avatars/" + fileName;
+                    image.transferTo(new File(saveDirectory + fileName));
+                    user.setStringAvatar(fileUrl);                    
                 }
                 user.setRole(2); // eisagontai oloi os aploi users, oi admins tha prostithentai kateutheian stin vasi
                 java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());

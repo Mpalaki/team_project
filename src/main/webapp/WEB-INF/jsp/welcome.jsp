@@ -14,7 +14,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="welcome.css">
+        <link rel="stylesheet" href="resources/css/welcome.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -115,7 +115,7 @@
                                                 <a class="nav-link" href="redirectToProfile">My profile</a>
                                             </li>
                                             <li class="nav-item">
-                                                <img src="data:image/jpg;base64,${user.base64Avatar}" style="vertical-align: middle;
+                                                <img src="${user.stringAvatar}" style="vertical-align: middle;
                                                      width: 50px;
                                                      height: 50px;
                                                      border-radius: 50%;"/>
@@ -179,7 +179,7 @@
                                                                     <h5>artis opus #${l.idpost}, ${l.dispDate}, by 
 
                                                                         <!--                                                                    avatar - should not be null-->
-                                                                        <img src="data:image/jpg;base64,${l.iduser.base64Avatar}" style="vertical-align: middle;
+                                                                        <img src="${l.iduser.stringAvatar}" style="vertical-align: middle;
                                                                              width: 50px;
                                                                              height: 50px;
                                                                              border-radius: 50%;"/>
@@ -187,7 +187,7 @@
                                                                                 <c:param name="unartist" value="${l.iduser.username}"/>
                                                                             </c:url>">${l.iduser.username}</a>
                                                                     </h5>
-                                                                    <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" style="max-width: 80%; height: auto;"/></div>
+                                                                    <div class="fakeimg"><img src="${l.urlImage}" style="max-width: 80%; height: auto;"/></div>
                                                                     <p>${l.description}</p>
                                                                     <br>
 
@@ -231,7 +231,7 @@
                                                                         <div class="col-md-7">
                                                                             <a href="#">
 
-                                                                                <img class="img-fluid rounded mb-3 mb-md-0" src="data:image/jpg;base64,${artists.base64Avatar}" alt="">
+                                                                                <img class="img-fluid rounded mb-3 mb-md-0" src="${artists.stringAvatar}" alt="">
                                                                             </a>
                                                                         </div>
                                                                         <div class="col-md-5">                            

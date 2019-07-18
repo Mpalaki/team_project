@@ -12,6 +12,7 @@ import com.team.project.repos.CommentRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.service.PostService;
 import com.team.project.utils.EncryptUtils;
+import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Date;
@@ -58,8 +59,14 @@ public class PostController {
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
         String username = u.getUsername();
-        byte[] img = image.getBytes();
-        post.setPhoto(img);
+//        byte[] img = image.getBytes();
+//        post.setPhoto(img);
+        String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
+        String saveDirectory = fileName2 + "../../src/main/webapp/resources/posts/";// goes back to NetBeansProjects\project and the enters src/main...
+        String fileName = image.getOriginalFilename();
+        String fileUrl = "resources/posts/" + fileName;
+        image.transferTo(new File(saveDirectory + fileName));
+        post.setUrlImage(fileUrl);
         post.setIduser(u);
         java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
         post.setDate(date);
@@ -68,35 +75,28 @@ public class PostController {
     }
 
     @RequestMapping("getLastPosts")
-    public String getLastPosts(ModelMap mm) {
-        List<Post> posts = ps.getTenLastsPosts();
-        for (int i = 0; i < posts.size(); i++) {
-            byte imageBytes[] = posts.get(i).getPhoto();
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            posts.get(i).setBase64Photo(base64Image);
-        }
-        mm.addAttribute("posts", posts);
+    public String getLastPosts(ModelMap mm) {        
 
-        return "welcome";
+        return "redirect:/";
     }
 
-    @RequestMapping("nextpage")
-    public String getNext10Posts(ModelMap mm, HttpServletRequest request, @RequestParam("pagenumber") int pagenumber) {
-        try {
-            List<Post> posts = ps.getTenNextPosts(pagenumber);
-            for (int i = 0; i < posts.size(); i++) {
-                byte imageBytes[] = posts.get(i).getPhoto();
-                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-                posts.get(i).setBase64Photo(base64Image);
-            }
-            mm.addAttribute("posts", posts);
-        } catch (NullPointerException e) {
-            getLastPosts(mm);
-        } finally {
-            return "welcome";
-        }
-
-    }
+//    @RequestMapping("nextpage")
+//    public String getNext10Posts(ModelMap mm, HttpServletRequest request, @RequestParam("pagenumber") int pagenumber) {
+//        try {
+//            List<Post> posts = ps.getTenNextPosts(pagenumber);
+//            for (int i = 0; i < posts.size(); i++) {
+//                byte imageBytes[] = posts.get(i).getPhoto();
+//                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+//                posts.get(i).setBase64Photo(base64Image);
+//            }
+//            mm.addAttribute("posts", posts);
+//        } catch (NullPointerException e) {
+//            getLastPosts(mm);
+//        } finally {
+//            return "welcome";
+//        }
+//
+//    }
 
     @RequestMapping("/")
     public String listPostPages(
@@ -160,8 +160,14 @@ public class PostController {
         User u = (User) session.getAttribute("user");
         Date initialdate = post.getDate();
         String username = u.getUsername();
-        byte[] img = image.getBytes();
-        post.setPhoto(img);
+//        byte[] img = image.getBytes();
+//        post.setPhoto(img);
+        String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
+        String saveDirectory = fileName2 + "../../src/main/webapp/resources/posts/";// goes back to NetBeansProjects\project and the enters src/main...
+        String fileName = image.getOriginalFilename();
+        String fileUrl = "resources/posts/" + fileName;
+        image.transferTo(new File(saveDirectory + fileName));
+        post.setUrlImage(fileUrl);
         post.setIduser(u);
         java.sql.Timestamp editdate = new java.sql.Timestamp(new java.util.Date().getTime());
         post.setDate(initialdate);

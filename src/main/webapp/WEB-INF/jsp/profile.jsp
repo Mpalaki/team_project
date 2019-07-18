@@ -210,11 +210,11 @@
                                                                     <% int role = (Integer) session.getAttribute("role");%>
 
                                                                     <h2>${l.title}</h2>
-                                                                    <h5>post #${l.idpost}, ${l.dispDate}, by 
+                                                                    <h5>artis opus #${l.idpost}, ${l.dispDate}, by 
 
 
                                                                         ${l.iduser.username}</h5>
-                                                                    <div class="fakeimg"><img src="data:image/jpg;base64,${l.base64Photo}" style="max-width: 100%; height: auto;"/></div>
+                                                                    <div class="fakeimg"><img src="${l.urlImage}" style="max-width: 100%; height: auto;"/></div>
                                                                     <p>${l.description}</p>
                                                                     <br>
 
@@ -281,7 +281,7 @@
                                                                     <!-- user.iduser is the profile owner's id-->
                                                                     <c:if test = "${user.iduser!=friends.user1.iduser}" >
                                                                         <span class="float-left font-weight-bold">
-                                                                            <img src="data:image/jpg;base64,${friends.user1.base64Avatar}" style="vertical-align: middle;
+                                                                            <img src="${friends.user1.stringAvatar}" style="vertical-align: middle;
                                                                                  width: 50px;
                                                                                  height: 50px;
                                                                                  border-radius: 50%;"/>
@@ -305,7 +305,7 @@
 
                                                                     <c:if test = "${user.iduser!=friends.user.iduser}" >
                                                                         <span class="float-left font-weight-bold">
-                                                                            <img src="data:image/jpg;base64,${friends.user.base64Avatar}" style="vertical-align: middle;
+                                                                            <img src="${friends.user.stringAvatar}" style="vertical-align: middle;
                                                                                  width: 50px;
                                                                                  height: 50px;
                                                                                  border-radius: 50%;"/>
@@ -341,7 +341,7 @@
                                                                                                                                          <c:param name="idpm" value="${EncryptUtils.encrypt(pms.idpm)}"/>
                                                                                                                                          <c:param name="idreceiver" value="${pms.idreceiver.iduser}"/>
                                                                                                                                      </c:url>">Delete</a></span> from:
-                                                                    <img src="data:image/jpg;base64,${pms.idsender.base64Avatar}" style="vertical-align: middle;
+                                                                    <img src="${pms.idsender.stringAvatar}" style="vertical-align: middle;
                                                                          width: 40px;
                                                                          height: 40px;
                                                                          border-radius: 50%;"/> 
@@ -437,7 +437,7 @@
                                     </div>
                                     <div class="col-lg-4 order-lg-1 text-center">
                                         <h2 class="mt-2" style="background-color: #fafbc5; color:black; font-family: 'Barriecito', cursive;">${user.username}</h2>
-                                        <img src="data:image/jpg;base64,${user.base64Avatar}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+                                        <img src="${user.stringAvatar}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
                                         <c:if test = "${user.iduser==iduser}" >
                                             <h6 class="mt-2">Upload a different photo ( max size: 1 KB)</h6>
                                             <form action="updatephoto" enctype="multipart/form-data" method="post">

@@ -61,6 +61,8 @@ public class Post implements Serializable {
     @Size(min = 1, max = 1845)
     @Column(name = "description")
     private String description;
+    @Column(name = "url_image")
+    private String urlImage;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpost")
     private Collection<Comment> commentCollection;
 
@@ -100,6 +102,14 @@ public class Post implements Serializable {
         this.idpost = idpost;
         this.title = title;
         this.date = date;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
     }
 
     public String getBase64Photo() {
