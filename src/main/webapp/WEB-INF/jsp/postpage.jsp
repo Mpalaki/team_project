@@ -24,16 +24,17 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="welcome.css">
+        <link rel="stylesheet" href="resources/css/welcome.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet"> 
         <title>Index</title>
 
     </head>
     <body>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <a class="navbar-brand" href="home"><h5>Calendart Gallery</h5></a>
+            <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart  Gallery</h5></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -61,6 +62,12 @@
                         <a class="nav-link" href="redirectToProfile">My profile</a>
                     </li>
                     <li class="nav-item">
+                        <img src="${user.stringAvatar}" style="vertical-align: middle;
+                             width: 50px;
+                             height: 50px;
+                             border-radius: 50%;"/>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="redirectToProfile">${user.username}</a>                                                    
                     </li>
                     <% } %>
@@ -70,7 +77,7 @@
         </nav>
 
 
-        <div class="container">
+                    <div class="container" style="margin-top: 5px;">
 
             <div class="col-sm-8" id="even">
                 <!--  theto tin id tou user pou einai sundedemenos-->
@@ -78,7 +85,7 @@
 
                 <h2>${post.title}</h2>
                 <h5>artis opus #${post.idpost}, ${post.dispDate}, by 
-                    <img src="data:image/jpg;base64,${post.iduser.base64Avatar}" style="vertical-align: middle;
+                    <img src="${post.iduser.stringAvatar}" style="vertical-align: middle;
                          width: 50px;
                          height: 50px;
                          border-radius: 50%;"/>
@@ -93,7 +100,7 @@
                             } catch (NullPointerException e) {
                             } finally { %>
                 </h5>
-                <div class="fakeimg"><img src="data:image/jpg;base64,${post.base64Photo}" style="max-width: 100%; height: auto;"/></div>
+                <div class="fakeimg"><img src="${post.urlImage}" style="max-width: 100%; height: auto;"/></div>
                 <p>${post.description}</p>
 
                 <% if (username != null) {%>
@@ -101,13 +108,13 @@
                 <div class="col-md-5">                            
                     <form action="insertcomment" method="post">
 
-                        <div class="form-group">
+                        <div class="form-group" >
                             <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
                             <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
-                            <textarea rows = "2" cols = "50" class="custom-file-textarea"  name = "description">Enter your comment</textarea></br>  
+                            <textarea rows = "2" cols = "50" class="custom-file-textarea" style="border-radius: 4px; "  name = "description">Add a public comment</textarea></br>  
 
                         </div>                     
-                        <input type="submit"></br>
+                            <button type="submit" class="btn btn-warning badge badge-light badge-pill">reply</button></br>
 
                         </div>
                         <%}%>
@@ -115,9 +122,13 @@
                         <hr>
                         <table>
                             <c:forEach var = "comments" items="${comments}">
-                                <div class="media border p-3" style="background-color: #e0f9f9">
+                                <div class="col-md-8" style="background-color: aliceblue ;border-radius: 4px; padding: 2px;">
                                     <div class="media-body">
-                                        <h5><a  href=" <c:url value="profile">
+                                        <h5><img src="${comments.iduser.stringAvatar}" style="vertical-align: middle;
+                                                                         width: 40px;
+                                                                         height: 40px;
+                                                                         border-radius: 50%;"/>
+                                        <a  href=" <c:url value="profile">
                                                     <c:param name="unartist" value="${comments.iduser.username}"/>
                                                 </c:url>">${comments.iduser.username}</a>
                                             <small><i> commented on ${comments.dispDate}</i></small></h5>

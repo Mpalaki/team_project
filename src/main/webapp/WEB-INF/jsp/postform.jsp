@@ -64,7 +64,7 @@
                             <a class="nav-link" href="redirectToProfile">My profile</a>
                         </li>
                         <li class="nav-item">
-                            <img src="data:image/jpg;base64,${user.base64Avatar}" style="vertical-align: middle;
+                            <img src="${user.stringAvatar}" style="vertical-align: middle;
                                  width: 50px;
                                  height: 50px;
                                  border-radius: 50%;"/>

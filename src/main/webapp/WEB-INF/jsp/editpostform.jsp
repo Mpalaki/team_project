@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="addpost.css">
+        <link rel="stylesheet" href="resources/css/addpost.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -24,16 +24,19 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet"> 
+
         <title>edit post</title>
     </head>
     <body>
+
+        <!--        proto kouti pano me prologo kai backround photo-->
         <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
-            <h1>A website dedicated to artists and art lovers.</h1>
-            <h2 class="keimeno">Post in Calendart and exhibit your artwork.</h2> 
+
         </div>
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <a class="navbar-brand" href="home"><h5>Calendart Gallery</h5></a>
+            <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart  Gallery</h5></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -59,6 +62,12 @@
                         <a class="nav-link" href="redirectToProfile">My profile</a>
                     </li>
                     <li class="nav-item">
+                        <img src="${user.stringAvatar}" style="vertical-align: middle;
+                             width: 50px;
+                             height: 50px;
+                             border-radius: 50%;"/>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="redirectToProfile">${user.username}</a>                                                    
                     </li>
 
@@ -66,7 +75,7 @@
             </div>  
         </nav>
 
-                    <div class="container" style="width: 50%">
+        <div class="container" style="width: 50%">
             </br><p>Edit your post.</p>
             <form action="updatepost" enctype="multipart/form-data"  class="was-validated" method="post">
                 <div class="form-group">
@@ -80,23 +89,16 @@
                 <div class="form-group">
                     <textarea rows = "6" cols = "50" name = "description">${post.description}</textarea></br>
                 </div>
-                <div class="form-group">
-                    <input class="form-control-file" type="file" name="photo1" required> 
+                <div class="custom-file">
+                    <input class="custom-file-input" type="file" name="photo1" required> 
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Upload an image to continue.</div>
-                    </label>
+                    <label class="custom-file-label" for="customFile">Choose file</label><br>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Submit</button>
+
             </form>
         </div>
 
-        <!--        <form  class="formapost" action="insertpost" enctype="multipart/form-data" method="post">
-                    <input type="text" name="title" placeholder="insert post title"></br>
-                    <textarea rows = "10" cols = "50" name = "description">
-                    Enter your description
-                    </textarea></br>  
-                    <input type="file" name="photo1">
-        
-                    <input type="submit">  -->
     </body>
 </html>
