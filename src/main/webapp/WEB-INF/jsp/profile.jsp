@@ -439,13 +439,14 @@
                                         <h2 class="mt-2" style="background-color: #fafbc5; color:black; font-family: 'Barriecito', cursive;">${user.username}</h2>
                                         <img src="${user.stringAvatar}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
                                         <c:if test = "${user.iduser==iduser}" >
-                                            <h6 class="mt-2">Upload a different photo ( max size: 1 KB)</h6>
+                                            <h6 class="mt-2">Upload a different photo ( max size: 1 MB)</h6>
                                             <form action="updatephoto" enctype="multipart/form-data" method="post">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="file" name="avatar" required>
+                                                    <input type="file" class="custom-file-input" id="file" name="avatar" onchange="GetFileSize()" required>
                                                     <input type=hidden id="iduser" name="iduser" value="${iduser}">
                                                     <label class="custom-file-label" for="customFile">Choose file</label>
-                                                    <button type="submit" class="btn btn-light">Submit</button>
+                                                    <h6 id="toobig" style="margin-top: 7px"></h6>
+                                                    <button type="submit" class="btn btn-light" id="disable">Submit</button>
                                                 </div>
                                             </form>
                                         </c:if>
@@ -481,7 +482,29 @@
                                 $("#pmbtn").click(function () {
                                     $("#pmform").toggle();
                                 });
-                                
+
+                                function GetFileSize() {
+                                    var fi = document.getElementById('file'); // GET THE FILE INPUT.
+
+                                    // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+                                    if (fi.files.length > 0) {
+                                        // RUN A LOOP TO CHECK EACH SELECTED FILE.
+                                        for (var i = 0; i <= fi.files.length - 1; i++) {
+
+                                            var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                                            if (fsize / 1024 > 100) {
+                                                document.getElementById('toobig').innerHTML = 'image is too big';
+                                                document.getElementById('toobig').style.color = "red";
+                                                document.getElementById('disable').disabled = true;
+                                            } else {
+                                                document.getElementById('toobig').innerHTML = 'valid size';
+                                                document.getElementById('toobig').style.color = "green";
+                                                document.getElementById('disable').disabled = false;
+                                            }
+                                        }
+                                    }
+                                }
+
                             </script>
                             </body>
 

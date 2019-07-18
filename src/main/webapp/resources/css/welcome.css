@@ -34,7 +34,7 @@ input[type=text],input[type=password] {
 li{
     padding-left: 10px;
     padding-right: 10px;
-    
+
 }
 #even:nth-child(odd){
     background:#fafbc5;
@@ -65,16 +65,27 @@ textarea {
     cursor: pointer;
     padding: 15px;
     border-radius: 4px;
-  }
-  #myBtn:hover {
+}
+#myBtn:hover {
     background-color: #555;
-  }
+}
 
-  #message{
+#message{
     font-family: 'Lobster', cursive;
     color: black;
 
-  }
+}
+@media screen and (min-width: 601px) {
+    #message {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #message {
+        font-size: 30px;
+    }
+}
 #calendart{   
 
     font-family: 'Barriecito', cursive;

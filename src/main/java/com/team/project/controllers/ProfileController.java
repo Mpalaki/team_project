@@ -14,7 +14,6 @@ import com.team.project.service.FriendshipService;
 import com.team.project.utils.EncryptUtils;
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
