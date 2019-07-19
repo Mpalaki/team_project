@@ -53,6 +53,7 @@ public class CommentController {
         comment.setKeimeno(description);
         cr.save(comment);
         List<Comment> comments = cr.getCommentsByIdpost(post);
+        post = pr.getPostByIdpost(idpost);
         mm.addAttribute("post",post);
         mm.addAttribute("comments",comments);
         return "postpage";

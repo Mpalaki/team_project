@@ -492,7 +492,7 @@
                                         for (var i = 0; i <= fi.files.length - 1; i++) {
 
                                             var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
-                                            if (fsize / 1024 > 100) {
+                                            if (fsize / 1024 > 1000) {
                                                 document.getElementById('toobig').innerHTML = 'image is too big';
                                                 document.getElementById('toobig').style.color = "red";
                                                 document.getElementById('disable').disabled = true;

@@ -155,11 +155,8 @@ public class PostController {
             @RequestParam("description") String description,
             @RequestParam("title") String title, ModelMap mm,
             @RequestParam("photo1") MultipartFile image) throws IOException {
-        HttpSession session = request.getSession();
         Post post = pr.getPostByIdpost(idpost);
-        User u = (User) session.getAttribute("user");
         Date initialdate = post.getDate();
-        String username = u.getUsername();
 //        byte[] img = image.getBytes();
 //        post.setPhoto(img);
         String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
@@ -168,7 +165,6 @@ public class PostController {
         String fileUrl = "resources/posts/" + fileName;
         image.transferTo(new File(saveDirectory + fileName));
         post.setUrlImage(fileUrl);
-        post.setIduser(u);
         java.sql.Timestamp editdate = new java.sql.Timestamp(new java.util.Date().getTime());
         post.setDate(initialdate);
         post.setEditdate(editdate);

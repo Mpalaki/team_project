@@ -77,7 +77,7 @@
         </nav>
 
 
-                    <div class="container" style="margin-top: 5px;">
+        <div class="container" style="margin-top: 5px;">
 
             <div class="col-sm-8" id="even">
                 <!--  theto tin id tou user pou einai sundedemenos-->
@@ -103,42 +103,43 @@
                 <div class="fakeimg"><img src="${post.urlImage}" style="max-width: 100%; height: auto;"/></div>
                 <p>${post.description}</p>
 
-                <% if (username != null) {%>
+            </div> 
+            <% if (username != null) {%>
+            <div class="col-md-5">                            
+                <form action="insertcomment" method="post">
 
-                <div class="col-md-5">                            
-                    <form action="insertcomment" method="post">
+                    <div class="form-group" >
+                        <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
+                        <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
+                        <textarea rows = "2" cols = "50" class="custom-file-textarea" style="border-radius: 4px; "  name = "description">Add a public comment</textarea></br>  
 
-                        <div class="form-group" >
-                            <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
-                            <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
-                            <textarea rows = "2" cols = "50" class="custom-file-textarea" style="border-radius: 4px; "  name = "description">Add a public comment</textarea></br>  
+                    </div>                     
+                    <button type="submit" class="btn btn-warning badge badge-light badge-pill">reply</button></br>
 
-                        </div>                     
-                            <button type="submit" class="btn btn-warning badge badge-light badge-pill">reply</button></br>
+            </div>
+            <%}%>
+            ${post.commentsNo} Comments 
 
+            <hr>
+            <table>
+                <c:forEach var = "comments" items="${comments}">
+                    <div class="col-md-8" style="background-color: aliceblue ;border-radius: 4px; padding: 2px;">
+                        <div class="media-body">
+                            <h5><img src="${comments.iduser.stringAvatar}" style="vertical-align: middle;
+                                     width: 40px;
+                                     height: 40px;
+                                     border-radius: 50%;"/>
+                                <a  href=" <c:url value="profile">
+                                        <c:param name="unartist" value="${comments.iduser.username}"/>
+                                    </c:url>">${comments.iduser.username}</a>
+                                <small><i> commented on ${comments.dispDate}</i></small></h5>
+                            <p>${comments.keimeno}</p>
                         </div>
-                        <%}%>
-                        </div>
-                        <hr>
-                        <table>
-                            <c:forEach var = "comments" items="${comments}">
-                                <div class="col-md-8" style="background-color: aliceblue ;border-radius: 4px; padding: 2px;">
-                                    <div class="media-body">
-                                        <h5><img src="${comments.iduser.stringAvatar}" style="vertical-align: middle;
-                                                                         width: 40px;
-                                                                         height: 40px;
-                                                                         border-radius: 50%;"/>
-                                        <a  href=" <c:url value="profile">
-                                                    <c:param name="unartist" value="${comments.iduser.username}"/>
-                                                </c:url>">${comments.iduser.username}</a>
-                                            <small><i> commented on ${comments.dispDate}</i></small></h5>
-                                        <p>${comments.keimeno}</p>
-                                    </div>
-                                </div>
-                                <hr>
-                            </c:forEach>
-                        </table>
-                        <%}%>
+                    </div>
+                    <hr>
+                </c:forEach>
+            </table>
+            <%}%>
 
-                        </body>
-                        </html>
+    </body>
+</html>

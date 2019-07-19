@@ -83,13 +83,15 @@ public class Post implements Serializable {
     @JoinColumn(name = "iduser", referencedColumnName = "iduser")
     @ManyToOne(optional = false)
     private User iduser;
+    @Column(name = "comments_no")
+    private Integer commentsNo;
     @Transient
     private String base64Photo;
+
     @Transient
     private String dispDate;
     @Transient
     private String dispeditDate;
-    
 
     public Post() {
     }
@@ -102,6 +104,14 @@ public class Post implements Serializable {
         this.idpost = idpost;
         this.title = title;
         this.date = date;
+    }
+
+    public Integer getCommentsNo() {
+        return commentsNo;
+    }
+
+    public void setCommentsNo(Integer commentsNo) {
+        this.commentsNo = commentsNo;
     }
 
     public void setUrlImage(String urlImage) {
@@ -120,7 +130,7 @@ public class Post implements Serializable {
     public void setBase64Photo(String base64Image) {
         this.base64Photo = base64Image;
     }
-    
+
     public Integer getIdpost() {
         return idpost;
     }
@@ -142,16 +152,16 @@ public class Post implements Serializable {
         String dispdate1 = sdf.format(this.editdate);
         return dispdate1;
     }
-    
-    public String getDispDate(){
+
+    public String getDispDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY HH:mm");
         String dispdate = sdf.format(this.date);
-        return dispdate;}   
+        return dispdate;
+    }
 
     public void setEditdate(Date editdate) {
         this.editdate = editdate;
     }
-    
 
     public void setDate(Date date) {
         this.date = date;
