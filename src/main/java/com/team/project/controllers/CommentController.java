@@ -56,8 +56,12 @@ public class CommentController {
         comment.setIduser(user);
         comment.setKeimeno(description);
         cr.save(comment);
+         long likes = lr.countLikes(post);
         List<Comment> comments = cr.getCommentsByIdpost(post);
+        List<User> likers = lr.usersThatHaveLikedThePost(post);
         mm.addAttribute("post",post);
+        mm.addAttribute("likers",likers);
+        mm.addAttribute("likes",likes);
         mm.addAttribute("comments",comments);
         return "postpage";
     }

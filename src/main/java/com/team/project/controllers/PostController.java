@@ -9,12 +9,12 @@ import com.team.project.model.Comment;
 import com.team.project.model.Post;
 import com.team.project.model.User;
 import com.team.project.repos.CommentRepo;
+import com.team.project.repos.LikeRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.service.PostService;
 import com.team.project.utils.EncryptUtils;
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +46,8 @@ public class PostController {
     PostService ps;
     @Autowired
     CommentRepo cr;
+    @Autowired
+    LikeRepo lr;
 
     @RequestMapping("addpost")
     public String redirectToInsertPostForm(HttpSession session, ModelMap mm) {
@@ -80,24 +82,6 @@ public class PostController {
         return "redirect:/";
     }
 
-//    @RequestMapping("nextpage")
-//    public String getNext10Posts(ModelMap mm, HttpServletRequest request, @RequestParam("pagenumber") int pagenumber) {
-//        try {
-//            List<Post> posts = ps.getTenNextPosts(pagenumber);
-//            for (int i = 0; i < posts.size(); i++) {
-//                byte imageBytes[] = posts.get(i).getPhoto();
-//                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-//                posts.get(i).setBase64Photo(base64Image);
-//            }
-//            mm.addAttribute("posts", posts);
-//        } catch (NullPointerException e) {
-//            getLastPosts(mm);
-//        } finally {
-//            return "welcome";
-//        }
-//
-//    }
-
     @RequestMapping("/")
     public String listPostPages(
             Model model,
@@ -128,6 +112,11 @@ public class PostController {
         Post post = pr.getPostByIdpost(idpost);
         mm.addAttribute("post", post);
         List<Comment> comments = cr.getCommentsByIdpost(post);
+        long likes = lr.countLikes(post);
+        List<User> likers = lr.usersThatHaveLikedThePost(post);
+        mm.addAttribute("post",post);
+        mm.addAttribute("likers",likers);
+        mm.addAttribute("likes",likes);
         mm.addAttribute("comments", comments);
         return "postpage";
     }

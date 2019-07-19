@@ -104,15 +104,15 @@
                             } finally { %>
                 </h5>
                 <div class="fakeimg"><img src="${post.urlImage}" style="max-width: 100%; height: auto;"/></div>
-                <p>${post.description}</p>
+                <p>${post.description}</p><hr>
+                <span id="likes"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i>${likes}</span><br>
 
             </div> 
-            <span id="likes"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i>${likes}</span>
 
             <% if (username != null) {%>
-            <div id="likers" style="display: none">
+            <div id="likers" style="display: none; ">
                 <c:forEach var = "l" items="${likers}">
-                    ${l.username}<br>
+                    ${l.username}, 
                 </c:forEach>
             </div>
             <c:if test="${!likers.contains(user)}">               
@@ -127,7 +127,7 @@
 
                         <div class="form-group" >
                             <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
-                            <textarea rows = "2" cols = "50" class="custom-file-textarea" style="border-radius: 4px; "  name = "description">Add a public comment</textarea></br>  
+                            <textarea rows = "2" cols = "50" class="custom-file-textarea badge badge-light" style="border-radius: 8px; "  name = "description">Add a public comment</textarea></br>  
 
                         </div>                     
                         <button type="submit" class="btn btn-warning badge badge-light badge-pill">reply</button></br>
