@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="com.team.project.model.User"%>
 <%@page import="com.team.project.model.Post"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -29,10 +30,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Index</title>
 
     </head>
     <body>
+        <% User user = (User) session.getAttribute("user"); %>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart  Gallery</h5></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -92,7 +95,7 @@
                     <a  href=" <c:url value="profile">
                             <c:param name="unartist" value="${post.iduser.username}"/>
                         </c:url>">${post.iduser.username}</a>
-                    <!--                    vazo ena try catch gia na mporeso na emfaniso tin editdate an uparhei-->
+                    <!-- vazo ena try catch gia na mporeso na emfaniso tin editdate an uparhei-->
                     <% Post post = (Post) pageContext.findAttribute("post");
                         try {
                             String editdate = post.getDispeditDate();
@@ -104,42 +107,64 @@
                 <p>${post.description}</p>
 
             </div> 
-            <% if (username != null) {%>
-            <div class="col-md-5">                            
-                <form action="insertcomment" method="post">
+            <span id="likes"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i>${likes}</span>
 
+            <% if (username != null) {%>
+            <div id="likers" style="display: none">
+                <c:forEach var = "l" items="${likers}">
+                    ${l.username}<br>
+                </c:forEach>
+            </div>
+            <c:if test="${!likers.contains(user)}">               
+                <form action="like" method="post">
                     <div class="form-group" >
                         <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
-                        <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
-                        <textarea rows = "2" cols = "50" class="custom-file-textarea" style="border-radius: 4px; "  name = "description">Add a public comment</textarea></br>  
-
-                    </div>                     
-                    <button type="submit" class="btn btn-warning badge badge-light badge-pill">reply</button></br>
-
-            </div>
-            <%}%>
-            ${post.commentsNo} Comments 
-
-            <hr>
-            <table>
-                <c:forEach var = "comments" items="${comments}">
-                    <div class="col-md-8" style="background-color: aliceblue ;border-radius: 4px; padding: 2px;">
-                        <div class="media-body">
-                            <h5><img src="${comments.iduser.stringAvatar}" style="vertical-align: middle;
-                                     width: 40px;
-                                     height: 40px;
-                                     border-radius: 50%;"/>
-                                <a  href=" <c:url value="profile">
-                                        <c:param name="unartist" value="${comments.iduser.username}"/>
-                                    </c:url>">${comments.iduser.username}</a>
-                                <small><i> commented on ${comments.dispDate}</i></small></h5>
-                            <p>${comments.keimeno}</p>
-                        </div>
                     </div>
-                    <hr>
-                </c:forEach>
-            </table>
-            <%}%>
+                    <button type="submit" class="btn btn-success badge badge-light badge-pill"><i style="font-size:24px" class="fa">&#xf087;</i>Like!</button></br>
+                </c:if>
+                <div class="col-md-5">                            
+                    <form action="insertcomment" method="post">
 
-    </body>
-</html>
+                        <div class="form-group" >
+                            <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
+                            <textarea rows = "2" cols = "50" class="custom-file-textarea" style="border-radius: 4px; "  name = "description">Add a public comment</textarea></br>  
+
+                        </div>                     
+                        <button type="submit" class="btn btn-warning badge badge-light badge-pill">reply</button></br>
+
+                </div>
+                <%}%>
+                ${post.commentsNo} Comments 
+
+                <hr>
+                <table>
+                    <c:forEach var = "comments" items="${comments}">
+                        <div class="col-md-8" style="background-color: aliceblue ;border-radius: 4px; padding: 2px;">
+                            <div class="media-body">
+                                <h5><img src="${comments.iduser.stringAvatar}" style="vertical-align: middle;
+                                         width: 40px;
+                                         height: 40px;
+                                         border-radius: 50%;"/>
+                                    <a  href=" <c:url value="profile">
+                                            <c:param name="unartist" value="${comments.iduser.username}"/>
+                                        </c:url>">${comments.iduser.username}</a>
+                                    <small><i> commented on ${comments.dispDate}</i></small></h5>
+                                <p>${comments.keimeno}</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </c:forEach>
+                </table>
+                <%}%>
+
+                <script>
+                    $("#likes").mouseover(function () {
+                        $("#likers").show();
+                    });
+                    $("#likes").mouseout(function () {
+                        $("#likers").hide();
+                    });
+                </script>
+
+                </body>
+                </html>

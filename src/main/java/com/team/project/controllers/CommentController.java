@@ -6,9 +6,11 @@
 package com.team.project.controllers;
 
 import com.team.project.model.Comment;
+import com.team.project.model.Likes;
 import com.team.project.model.Post;
 import com.team.project.model.User;
 import com.team.project.repos.CommentRepo;
+import com.team.project.repos.LikeRepo;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
 import java.util.List;
@@ -35,6 +37,8 @@ public class CommentController {
     
     @Autowired
     UserRepo ur;
+    @Autowired
+    LikeRepo lr;
     
     
     
@@ -53,8 +57,24 @@ public class CommentController {
         comment.setKeimeno(description);
         cr.save(comment);
         List<Comment> comments = cr.getCommentsByIdpost(post);
-        post = pr.getPostByIdpost(idpost);
         mm.addAttribute("post",post);
+        mm.addAttribute("comments",comments);
+        return "postpage";
+    }
+    @RequestMapping("like")
+    public String likePost(ModelMap mm, HttpServletRequest req, Likes like, @RequestParam("idpost") int idpost) {
+        HttpSession session = req.getSession();
+        Post post = pr.getPostByIdpost(idpost);
+        User user = (User) session.getAttribute("user");
+        like.setIdpost(post);
+        like.setIduser(user);
+        lr.save(like);
+        long likes = lr.countLikes(post);
+        List<Comment> comments = cr.getCommentsByIdpost(post);
+        List<User> likers = lr.usersThatHaveLikedThePost(post);
+        mm.addAttribute("post",post);
+        mm.addAttribute("likers",likers);
+        mm.addAttribute("likes",likes);
         mm.addAttribute("comments",comments);
         return "postpage";
     }
