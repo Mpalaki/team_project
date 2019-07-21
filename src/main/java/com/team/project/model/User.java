@@ -125,6 +125,8 @@ public class User implements Serializable {
     private String base64Avatar;
     @Transient
     private String dispDate;
+    @Transient
+    private String confirmPassword;
 
     public User() {
     }
@@ -143,6 +145,14 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
     public String getStringAvatar() {
         return stringAvatar;
     }
@@ -150,7 +160,7 @@ public class User implements Serializable {
     public void setStringAvatar(String stringAvatar) {
         this.stringAvatar = stringAvatar;
     }
-    
+
     public String getBase64Avatar() {
         base64Avatar = Base64.getEncoder().encodeToString(this.avatar);
         return base64Avatar;

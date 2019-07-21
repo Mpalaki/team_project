@@ -4,6 +4,7 @@
     Author     : Makis
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +14,7 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet"> 
         <style>
             body{
@@ -69,7 +71,38 @@
         <!--        nikos-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
         <div class="container" style="margin-top:20px">
+
             <div class="card bg-light">
+                <c:if test="${message=='username exists'}">
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <strong>Sorry!</strong> The username already exists.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </c:if>
+                <c:if test="${message=='email exists'}">
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <strong>Sorry!</strong> There is already an account with this email address.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </c:if>
+                <c:if test="${message=='pw short'}">
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <strong>Sorry!</strong> Password too short.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </c:if>
+                <c:if test="${message=='pw dont match'}">
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <strong>Sorry!</strong> Passwords do not match.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </c:if>
+                <c:if test="${message=='no such username'}">
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <strong>Sorry!</strong> Username does not exist.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </c:if>
                 <article class="card-body mx-auto" style="max-width: 400px;">
                     <h4 class="card-title mt-3 text-center">Create Account in <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h2>Calendart  Gallery</h2></a></h4>
                     <p class="text-center">Get started with your free account</p>

@@ -112,7 +112,7 @@
             <% if (username != null) {%>
             <div id="likers" style="display: none; ">
                 <c:forEach var = "l" items="${likers}">
-                    ${l.username}, 
+                    ${l.username}<br>
                 </c:forEach>
             </div>
             <c:if test="${!likers.contains(user)}">               

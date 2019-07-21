@@ -10,6 +10,9 @@ import com.team.project.model.User;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
 import com.team.project.service.PostService;
+import static com.team.project.utils.EncryptUtils.checkPass;
+import static com.team.project.utils.EncryptUtils.hashPassword;
+import com.team.project.validators.UserValidator;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +28,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,23 +47,31 @@ public class LoginController {
     PostRepo pr;
     @Autowired
     PostService ps;
+    @Autowired
+    UserValidator userValidator;
 
     @RequestMapping("LoginController")
     public String login(HttpServletRequest request, ModelMap mm) {
         String username = request.getParameter("username");
         String givenpass = request.getParameter("password");
-        User u = ur.findByUsernameAndPassword(username, givenpass);
+        User u = ur.findByUsername(username);
         if (u == null) {
+            String message = "no such username";
             return "registerform";
         } else {
-            int iduser = u.getIduser();
-            int role = u.getRole();
-            HttpSession session = request.getSession();
-            session.setAttribute("user", u);
-            session.setAttribute("iduser", iduser);
-            session.setAttribute("username", username);
-            session.setAttribute("role", role);
-            return "redirect:home";
+            if (checkPass(givenpass, u.getPassword())) {
+                int iduser = u.getIduser();
+                int role = u.getRole();
+                HttpSession session = request.getSession();
+                session.setAttribute("user", u);
+                session.setAttribute("iduser", iduser);
+                session.setAttribute("username", username);
+                session.setAttribute("role", role);
+                return "redirect:home";
+            } else {
+                String message = "incorrect password";
+                return "redirect:home";
+            }
         }
     }
 
@@ -105,40 +117,42 @@ public class LoginController {
 
     @RequestMapping("RegisterController")
     public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
-            @RequestParam("wordpass") String wordpass, @RequestParam("photo") MultipartFile image) throws IOException, ServletException {
-        if (ur.countUsers(givenun) > 0) {
+            @RequestParam("wordpass") String wordpass, @RequestParam("emailAddress") String emailAddress, @RequestParam("photo") MultipartFile image, ModelMap mm) throws IOException, ServletException {
+        user.setUsername(givenun);
+        user.setPassword(password);
+        user.setConfirmPassword(wordpass);
+        user.setEmailAddress(emailAddress);
+        String validation = userValidator.validate1(user);
+        if (!validation.equals("success")) {
+            mm.addAttribute("message", validation);
             return "registerform";
         } else {
-            if (password.equals(wordpass)) {
-                if (!image.isEmpty()) {
-                    byte[] img = image.getBytes();
-                    user.setAvatar(img);
-                    String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
-                    String saveDirectory = fileName2+"../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
-                    String fileName = image.getOriginalFilename();
-                    String fileUrl = "resources/avatars/" + fileName;
-                    image.transferTo(new File(saveDirectory + fileName));
-                    user.setStringAvatar(fileUrl);
-//                    an den valei avatar na mpainei ena default
-                } else {    
-                    String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
-                    String saveDirectory = fileName2+"../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
-                    String fileName = "defav.png";
-                    String fileUrl = "resources/avatars/" + fileName;
-                    image.transferTo(new File(saveDirectory + fileName));
-                    user.setStringAvatar(fileUrl);                    
-                }
-                user.setRole(2); // eisagontai oloi os aploi users, oi admins tha prostithentai kateutheian stin vasi
-                java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
-                user.setSignupDate(date);
-                user.setPostsNo(0);
-                user.setCommentsNo(0);
-                ur.save(user);
-                return "redirect:home";
-            } else {
-                return "registerform";
+            String cryptedPw = hashPassword(password);
+            user.setPassword(cryptedPw);
+            if (!image.isEmpty()) {
+                String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
+                String saveDirectory = fileName2 + "../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
+                String fileName = image.getOriginalFilename();
+                String fileUrl = "resources/avatars/" + fileName;
+                image.transferTo(new File(saveDirectory + fileName));
+                user.setStringAvatar(fileUrl);
+            } else {// an den valei avatar na mpainei ena default
+                String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
+                String saveDirectory = fileName2 + "../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
+                String fileName = "defav.png";
+                String fileUrl = "resources/avatars/" + fileName;
+                image.transferTo(new File(saveDirectory + fileName));
+                user.setStringAvatar(fileUrl);
             }
+            user.setRole(2); // eisagontai oloi os aploi users, oi admins tha prostithentai kateutheian stin vasi
+            java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+            user.setSignupDate(date);
+            user.setPostsNo(0);
+            user.setCommentsNo(0);
+            ur.save(user);
+            return "redirect:home";
         }
+
     }
 
 }
