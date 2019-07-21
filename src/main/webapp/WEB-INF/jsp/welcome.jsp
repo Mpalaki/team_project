@@ -71,7 +71,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <form  class="nav-item" action="LoginController" method="post">
+                        <form  class="nav-item" action="login" method="post">
 
                             <input type="text" name="username" placeholder="username" required>
                             <input type="password" name="password" placeholder="password" required>
@@ -112,16 +112,13 @@
                                             </li>
 
                                             <li class="nav-item">
-                                                <a class="nav-link" href="redirectToProfile">My profile</a>
-                                            </li>
-                                            <li class="nav-item">
                                                 <img src="${user.stringAvatar}" style="vertical-align: middle;
                                                      width: 50px;
                                                      height: 50px;
                                                      border-radius: 50%;"/>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="redirectToProfile">${user.username}</a>
+                                                <a class="nav-link" href="myProfile">${user.username}</a>
                                             </li>
                                             <li class="nav-item">
                                                 <form class="nav-item" action="logout" method="post">            
@@ -173,11 +170,11 @@
 
                                                                         <a  href=" <c:url value="deletepost">
                                                                                 <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
-                                                                            </c:url>">Delete |</a>
+                                                                            </c:url>">Delete </a>|
 
                                                                         <a  href="<c:url value="editpost">
                                                                                 <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
-                                                                            </c:url>">Edit |</a>
+                                                                            </c:url>">Edit  </a>|
 
                                                                     </c:if>
 

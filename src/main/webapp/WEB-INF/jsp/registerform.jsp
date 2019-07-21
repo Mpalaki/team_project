@@ -113,7 +113,7 @@
                     <p class="divider-text">
                         <span class="bg-light">Fields marked with * are required</span>
                     </p>
-                    <form id="foid" action="RegisterController" enctype="multipart/form-data" method="post">
+                    <form id="foid" action="register" enctype="multipart/form-data" method="post">
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>

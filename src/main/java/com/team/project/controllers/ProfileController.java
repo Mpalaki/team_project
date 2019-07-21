@@ -44,15 +44,12 @@ public class ProfileController {
     FriendshipService fs;
 
     // TODO: pairnei ton user ap to session opote an kanei update photo den fainetai sto profile an den kanei logout kai login pali
-    @RequestMapping("redirectToProfile")
+    @RequestMapping("myProfile")
     public String redirectToProfile(HttpSession session, ModelMap mm) {
         User user = (User) session.getAttribute("user");
         // Mpaloma
         User u = ur.findByIduser(user.getIduser());
         mm.addAttribute("user", u);
-//        byte[] avatar = u.getAvatar();
-//        String avat = Base64.getEncoder().encodeToString(avatar);
-//        u.setBase64Avatar(avat);
         mm.addAttribute("user", u);
         List posts = pr.findByIduser(u);
         List pms = pmr.getCommentsByIdreceiver(user);
@@ -69,9 +66,6 @@ public class ProfileController {
     public String viewOtherProfile(HttpSession session, ModelMap mm, @RequestParam("unartist") String unartist) {
 //        User onlineUser = (User) session.getAttribute("user");
         User artist = ur.findByUsername(unartist);
-//        byte[] avatar = artist.getAvatar();
-//        String avat = Base64.getEncoder().encodeToString(avatar);
-//        artist.setBase64Avatar(avat);
         mm.addAttribute("user", artist);
         List posts = pr.findByIduser(artist);
         List pms = pmr.getCommentsByIdreceiver(artist);
@@ -89,13 +83,6 @@ public class ProfileController {
     @RequestMapping("viewArtists")
     public String showArtists(HttpSession session, ModelMap mm) {
         List<User> artists = ur.getUsersWherePostsNoGreaterThanZero();
-//        for (int i = 0; i < artists.size(); i++) {
-//            byte imageBytes[] = artists.get(i).getAvatar();
-//            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-//            artists.get(i).setBase64Avatar(base64Image);
-//        }
-//        User u = (User) session.getAttribute("user");
-//        session.setAttribute("username", u.getUsername());
         mm.addAttribute("artists", artists);
         return "artists";
     }
@@ -103,8 +90,6 @@ public class ProfileController {
     @RequestMapping(value = "updatephoto", method = RequestMethod.POST)
     public String updateAvatar(HttpServletRequest request, ModelMap mm, @RequestParam("iduser") int iduser, @RequestParam("avatar") MultipartFile avatar) throws IOException {
         User user = ur.findByIduser(iduser);
-//        byte [] image = avatar.getBytes();
-//        user.setAvatar(image);
         String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
         String saveDirectory = fileName2 + "../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
         String fileName = avatar.getOriginalFilename();

@@ -39,7 +39,6 @@ public class EncryptUtils {
     }
 
     public static boolean checkPass(String plainPassword, String hashedPassword) {
-
         return encryptor.checkpw(plainPassword, hashedPassword);
     }
 

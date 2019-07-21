@@ -463,7 +463,7 @@
                                             <form action="setAsAdmin" >
                                                 <div class="custom-file">
                                                     <input type=hidden id="iduser" name="iduser" value="${EncryptUtils.encrypt(user.iduser)}">
-                                                    <button type="submit" class="btn btn-danger badge badge-light badge-pill">Set as administrator</button>
+                                                    <button type="submit" class="btn btn-warning badge badge-light badge-pill">Set as administrator</button>
                                                 </div>
                                             </form>
 

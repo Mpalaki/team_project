@@ -50,13 +50,14 @@ public class LoginController {
     @Autowired
     UserValidator userValidator;
 
-    @RequestMapping("LoginController")
+    @RequestMapping("login")
     public String login(HttpServletRequest request, ModelMap mm) {
         String username = request.getParameter("username");
         String givenpass = request.getParameter("password");
         User u = ur.findByUsername(username);
         if (u == null) {
             String message = "no such username";
+            mm.addAttribute("message", message);
             return "registerform";
         } else {
             if (checkPass(givenpass, u.getPassword())) {
@@ -115,7 +116,7 @@ public class LoginController {
 
     }
 
-    @RequestMapping("RegisterController")
+    @RequestMapping("register")
     public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
             @RequestParam("wordpass") String wordpass, @RequestParam("emailAddress") String emailAddress, @RequestParam("photo") MultipartFile image, ModelMap mm) throws IOException, ServletException {
         user.setUsername(givenun);
