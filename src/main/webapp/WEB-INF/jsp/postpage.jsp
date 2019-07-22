@@ -61,9 +61,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="addpost">Post your artwork</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="redirectToProfile">My profile</a>
-                    </li>
+
                     <li class="nav-item">
                         <img src="${user.stringAvatar}" style="vertical-align: middle;
                              width: 50px;
@@ -71,7 +69,7 @@
                              border-radius: 50%;"/>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="redirectToProfile">${user.username}</a>                                                    
+                        <a class="nav-link" href="myProfile">${user.username}</a>                                                    
                     </li>
                     <% } %>
 
@@ -105,16 +103,19 @@
                 </h5>
                 <div class="fakeimg"><img src="${post.urlImage}" style="max-width: 100%; height: auto;"/></div>
                 <p>${post.description}</p><hr>
-                <span id="likes"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i>${likes}</span><br>
+                <span id="likes"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i>${likes}<div id="likers" style="display: none; background-color: lightblue;
+                                                                                                      width: 110px;
+                                                                                                      height: 110px;
+                                                                                                      overflow: auto ">
+                        <c:forEach var = "l" items="${likers}">
+                            ${l.username}<br>
+                        </c:forEach>
+                    </div></span><br>
 
             </div> 
 
             <% if (username != null) {%>
-            <div id="likers" style="display: none; ">
-                <c:forEach var = "l" items="${likers}">
-                    ${l.username}<br>
-                </c:forEach>
-            </div>
+
             <c:if test="${!likers.contains(user)}">               
                 <form action="like" method="post">
                     <div class="form-group" >
