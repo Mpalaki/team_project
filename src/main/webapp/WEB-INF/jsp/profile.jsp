@@ -45,7 +45,7 @@
                         <a class="nav-link" href="home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="SignupController">Sign up</a>
+                        <a class="nav-link" href="signup">Sign up</a>
                     </li>
                     <li class="nav-item">
                         <form  class="nav-item" action="LoginController" method="post">

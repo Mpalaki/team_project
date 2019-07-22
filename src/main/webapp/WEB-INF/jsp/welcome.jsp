@@ -67,7 +67,7 @@
                         <a class="nav-link" href="viewArtists">Artists</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="SignupController">Sign up</a>
+                        <a class="nav-link" href="signup">Sign up</a>
                     </li>
 
                     <li class="nav-item">
