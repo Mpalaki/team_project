@@ -83,7 +83,7 @@ public class LoginController {
         return "redirect:home";
     }
 
-    @RequestMapping("SignupController")
+    @RequestMapping("signup")
     public String redirectToSignupForm() {
         return "registerform";
     }

@@ -103,7 +103,7 @@
                 </h5>
                 <div class="fakeimg"><img src="${post.urlImage}" style="max-width: 100%; height: auto;"/></div>
                 <p>${post.description}</p><hr>
-                <span id="likes"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i>${likes}<div id="likers" style="display: none; background-color: lightblue;
+                <span id="likes"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i>${likes}<div id="likers" style="display: none; background-color: grey;
                                                                                                       width: 110px;
                                                                                                       height: 110px;
                                                                                                       overflow: auto ">
