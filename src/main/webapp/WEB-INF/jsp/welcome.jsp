@@ -20,19 +20,14 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet"> 
-        <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet">
 
     </head>
     <body>       
         <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
 
-        <!--        proto kouti pano me prologo kai backround photo-->
-        <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
-            <!--            view port width-->
-            <h1 id="message">A website dedicated to artists and art lovers<br>
-                Post in Calendart and exhibit your artwork  </h1>
-        </div>
+
 
         <!--        gia to logout ruthmiseis-->
         <%
@@ -46,12 +41,12 @@
 
         <!--        to navbar an den einai logged in-->
 
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <nav class="navbar navbar-expand-sm fixed-top">
             <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart  Gallery</h5></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <div class="collapse navbar-collapse floatLeft" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="home">Home</a>
@@ -76,15 +71,21 @@
                             <input type="text" name="username" placeholder="username" required>
                             <input type="password" name="password" placeholder="password" required>
                             <input type="submit" value="Sign in">
-                            </li>    
+                    </li>
 
                             </ul>
-                            </div>  
-                            </nav>
+                            </div>
+                            </nav>  <!--        proto kouti pano me prologo kai backround photo-->
+        <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
+            <!--            view port width-->
+            <h1 id="message">A website dedicated to artists and art lovers<br>
+                Post in Calendart and exhibit your artwork  </h1>
+        </div>
 
                             <!--            an ehei kanei login-->
                             <% } else {%>
-                            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<%--                                                                    bg-dark navbar-dark--%>
+                            <nav class="navbar navbar-expand-sm ">
                                 <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart  Gallery</h5></a>
 
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -123,12 +124,18 @@
                                             <li class="nav-item">
                                                 <form class="nav-item" action="logout" method="post">            
                                                     <input type="submit" value="logout">
-                                                    </li> 
+                                            </li>
 
 
                                                     </ul>
                                                     </div>  
-                                                    </nav>
+                            </nav>
+        <!--        proto kouti pano me prologo kai backround photo-->
+        <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
+            <!--            view port width-->
+            <h1 id="message">A website dedicated to artists and art lovers<br>
+                Post in Calendart and exhibit your artwork  </h1>
+        </div>
 
                                                     <% }%>
 
@@ -139,52 +146,100 @@
                                                         <hr>
 
                                                     </div>
+        
                                                     <div class="container" style="margin-top:0px">
                                                         <div class="row">
 
                                                             <c:forEach var = "l"  items="${postsPage.content}">
-                                                                <div class="col-sm-8" id="even">
-                                                                    <!--  theto tin id tou user pou einai sundedemenos-->
-                                                                    <%int role = (Integer) session.getAttribute("role");%>
+                                                                <div class="col-md-6 col-lg-8 text">
+                                                                    <img class="img-responsive" src="${l.urlImage}" alt="Pineapple">
+                                                                    <div class="middle">
+                                                                        <div class="text">${l.title}</div>
+                                                                        <div class="text">
+                                                                            <!--  theto tin id tou user pou einai sundedemenos-->
+                                                                            <%int role = (Integer) session.getAttribute("role");%>
 
-                                                                    <h2>${l.title}</h2>
-                                                                    <h5>artis opus #${l.idpost}, ${l.dispDate}, by 
+                                                                                <h5>artis opus #${l.idpost}, ${l.dispDate}, by
 
-                                                                        <!--                                                                    avatar - should not be null-->
-                                                                        <img src="${l.iduser.stringAvatar}" style="vertical-align: middle;
+                                                                                <!--                                                                    avatar - should not be null-->
+                                                                                <img src="${l.iduser.stringAvatar}" style="vertical-align: middle;
                                                                              width: 50px;
                                                                              height: 50px;
                                                                              border-radius: 50%;"/>
-                                                                        <a  href=" <c:url value="profile">
+                                                                                <a  href=" <c:url value="profile">
                                                                                 <c:param name="unartist" value="${l.iduser.username}"/>
                                                                             </c:url>">${l.iduser.username}</a>
-                                                                    </h5>
-                                                                    <div class="fakeimg"><img src="${l.urlImage}" style="max-width: 80%; height: auto;"/></div>
-                                                                    <p>${l.description}</p>
-                                                                    <br>
+                                                                            </h5>
+<%--                                                                            <div class="fakeimg"><img src="${l.urlImage}" /></div>--%>
+                                                                            <p>${l.description}</p>
+                                                                            <br>
 
 
-                                                                    <!-- an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
-                                                                    <c:if test = "${l.iduser.iduser==iduser || role==1 }" >                            
+                                                                            <!-- an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
+                                                                            <c:if test = "${l.iduser.iduser==iduser || role==1 }" >
 
 
-                                                                        <a  href=" <c:url value="deletepost">
+                                                                                <a  href=" <c:url value="deletepost">
                                                                                 <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
                                                                             </c:url>">Delete </a>|
 
-                                                                        <a  href="<c:url value="editpost">
+                                                                                <a  href="<c:url value="editpost">
                                                                                 <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
                                                                             </c:url>">Edit  </a>|
 
-                                                                    </c:if>
+                                                                            </c:if>
 
-                                                                    <a  href="<c:url value="viewPost">
+                                                                            <a  href="<c:url value="viewPost">
                                                                             <c:param name="idpost" value="${l.idpost}"/>
                                                                         </c:url>">View artwork</a>
 
 
-                                                                    <hr>
+                                                                            <hr>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+<%--                                                                <div class="col-sm-8" id="even">--%>
+<%--                                                                    <!--  theto tin id tou user pou einai sundedemenos-->--%>
+<%--                                                                    <%int role = (Integer) session.getAttribute("role");%>--%>
+
+<%--                                                                    <h2>${l.title}</h2>--%>
+<%--                                                                    <h5>artis opus #${l.idpost}, ${l.dispDate}, by --%>
+
+<%--                                                                        <!--                                                                    avatar - should not be null-->--%>
+<%--                                                                        <img src="${l.iduser.stringAvatar}" style="vertical-align: middle;--%>
+<%--                                                                             width: 50px;--%>
+<%--                                                                             height: 50px;--%>
+<%--                                                                             border-radius: 50%;"/>--%>
+<%--                                                                        <a  href=" <c:url value="profile">--%>
+<%--                                                                                <c:param name="unartist" value="${l.iduser.username}"/>--%>
+<%--                                                                            </c:url>">${l.iduser.username}</a>--%>
+<%--                                                                    </h5>--%>
+<%--                                                                    <div class="fakeimg"><img src="${l.urlImage}" style="max-width: 80%; height: auto;"/></div>--%>
+<%--                                                                    <p>${l.description}</p>--%>
+<%--                                                                    <br>--%>
+
+
+<%--                                                                    <!-- an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->--%>
+<%--                                                                    <c:if test = "${l.iduser.iduser==iduser || role==1 }" >                            --%>
+
+
+<%--                                                                        <a  href=" <c:url value="deletepost">--%>
+<%--                                                                                <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>--%>
+<%--                                                                            </c:url>">Delete </a>|--%>
+
+<%--                                                                        <a  href="<c:url value="editpost">--%>
+<%--                                                                                <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>--%>
+<%--                                                                            </c:url>">Edit  </a>|--%>
+
+<%--                                                                    </c:if>--%>
+
+<%--                                                                    <a  href="<c:url value="viewPost">--%>
+<%--                                                                            <c:param name="idpost" value="${l.idpost}"/>--%>
+<%--                                                                        </c:url>">View artwork</a>--%>
+
+
+<%--                                                                    <hr>--%>
+<%--                                                                </div>--%>
                                                             </c:forEach>
 
 
@@ -221,8 +276,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <!--                                                <div class="jumbotron text-center" style="margin-bottom:0">-->
+        <!--                                                <div class="jumbotron text-center" style="margin-bottom:0">-->
                                                     <ul class="pagination justify-content-center" style="margin-top: 5px">
                                                         <li class="page-item">
                                                             <a class="page-link" href="#" aria-label="Previous">
@@ -252,11 +306,28 @@
                                                         window.onscroll = function () {
                                                             scrollFunction()
                                                         };
+                                                        $(window).on("scroll", function() {
+                                                            if($(window).scrollTop()) {
+                                                                $('nav').addClass('bg-dark navbar-dark');
+                                                                $('ul li a').css({
+                                                                    'color': '#F8A500',
+                                                                    // 'text-shadow' : '2px 2px 4px #F8A500'
+                                                                });
+                                                            }else {
+                                                                $('nav').removeClass('bg-dark navbar-dark');
+                                                                $('ul li a').css({
+                                                                    'color': '#343A40',
+                                                                    // 'text-shadow': ''
+                                                                });
 
+                                                            }
+                                                        })
                                                         function scrollFunction() {
                                                             if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+
                                                                 document.getElementById("myBtn").style.display = "block";
                                                             } else {
+                                                                $('nav').addClass('transparent');
                                                                 document.getElementById("myBtn").style.display = "none";
                                                             }
                                                         }
@@ -266,6 +337,8 @@
                                                             document.body.scrollTop = 0;
                                                             document.documentElement.scrollTop = 0;
                                                         }
+
+
                                                     </script>
                                                     </body>
                                                     </html>
