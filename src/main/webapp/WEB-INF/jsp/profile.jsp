@@ -470,8 +470,8 @@
                                                                 </div>
                                                                 <div class="modal-footer">
 
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                    <button type="submit" class="btn btn-primary">Delete Account</button>
+                                                                    <button type="button" class="btn btn-success badge badge-light badge-pill" data-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-danger badge badge-light badge-pill">Delete Account</button>
                                                                 </div>
                                                             </div>
                                                         </div>
