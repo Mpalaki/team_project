@@ -21,6 +21,9 @@
         <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     </head>
     <body>       
@@ -41,12 +44,12 @@
 
         <!--        to navbar an den einai logged in-->
 
-        <nav class="navbar navbar-expand-sm fixed-top">
+        <nav class="navbar navbar-expand-sm fixed-top       k">
             <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart  Gallery</h5></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse floatLeft" id="collapsibleNavbar">
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="home">Home</a>
@@ -85,11 +88,11 @@
                             <!--            an ehei kanei login-->
                             <% } else {%>
 <%--                                                                    bg-dark navbar-dark--%>
-                            <nav class="navbar navbar-expand-sm ">
-                                <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart  Gallery</h5></a>
+                            <nav class="navbar navbar-expand-sm nav-fill w-100 fixed-top">
+                                <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive; "><h5>Calendart  Gallery</h5></a>
 
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                                    <span class="navbar-toggler-icon"></span></h5></a>
+                                    <span class="navbar-toggler-icon"></span></a>
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                                         <span class="navbar-toggler-icon"></span>
                                     </button>
@@ -151,7 +154,7 @@
                                                         <div class="row">
 
                                                             <c:forEach var = "l"  items="${postsPage.content}">
-                                                                <div class="col-md-6 col-lg-8 text">
+                                                                <div class="col-md-4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         col-lg-8 text">
                                                                     <img class="img-responsive" src="${l.urlImage}" alt="Pineapple">
                                                                     <div class="middle">
                                                                         <div class="text">${l.title}</div>
@@ -168,15 +171,15 @@
                                                                              border-radius: 50%;"/>
                                                                                 <a  href=" <c:url value="profile">
                                                                                 <c:param name="unartist" value="${l.iduser.username}"/>
-                                                                            </c:url>">${l.iduser.username}</a>
-                                                                            </h5>
-<%--                                                                            <div class="fakeimg"><img src="${l.urlImage}" /></div>--%>
-                                                                            <p>${l.description}</p>
-                                                                            <br>
+                                                                                                                                                                                                                                                                                                                </c:url>">${l.iduser.username}</a>
+                                                                                                                                                                                                                                                                                                                </h5>
+                                                                                                                                                                                                                                    <%--                                                                            <div class="fakeimg"><img src="${l.urlImage}" /></div>--%>
+                                                                                                                                                                                                                                                                                                                <p>${l.description}</p>
+                                                                                                                                                                                                                                                                                                                <br>
 
 
-                                                                            <!-- an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
-                                                                            <c:if test = "${l.iduser.iduser==iduser || role==1 }" >
+                                                                                                                                                                                                                                                                                                                <!-- an to post ehei ginei ap ton hristi pou einai sundedemenos, na ehei epiloges edit,delete      -->
+                                                                                                                                                                                                                                                                                                                <c:if test = "${l.iduser.iduser==iduser || role==1 }" >
 
 
                                                                                 <a  href=" <c:url value="deletepost">
