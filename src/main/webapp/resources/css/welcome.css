@@ -30,9 +30,10 @@ a.navbar-brand{
 #prologos{
 
     /*position: relative;*/
+    padding-top: 180px;
     background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("images/japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
     background-color: #cccccc; /* Used if the image is unavailable */
-    height: 380px; /* You must set a specified height */
+    height: 480px; /* You must set a specified height */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
@@ -114,6 +115,7 @@ textarea {
     #message {
         font-size: 40px;
     }
+
     /*a.navbar-brand{*/
     /*    margin-right: 8rem;*/
     /*}*/
@@ -145,7 +147,7 @@ textarea {
 
 img {
     /*-webkit-filter: opacity(0.4%); !* Safari 6.0 - 9.0 *!*/
-    /*filter: opacity(44.4%);*/
+    /*fi                                elter: opacity(44.4%);*/
     opacity: 1;
     display: block;
     width: 100%;
@@ -168,7 +170,8 @@ img:hover{
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    text-align: center;
+    text-align: left;
+    text-align: -webkit-left;
 }
 .text:hover .middle {
     opacity: 1;
