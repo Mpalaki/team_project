@@ -139,11 +139,16 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "deleteme", method = RequestMethod.GET)
-    public String deleteUser(HttpServletRequest req, ModelMap mm) {
+    public String deleteUser(HttpSession session, HttpServletRequest req, ModelMap mm) {
         String pw = EncryptUtils.decrypt(req.getParameter("iduser"));
         int iduser = Integer.parseInt(pw);
         User angryUser = ur.findByIduser(iduser);
         ur.delete(angryUser);
+        User sessionUser = (User) session.getAttribute("user");
+        if (angryUser.equals(sessionUser)) { // if the session user deletes his own account, invalidate session. If an admin deletes an account admin session remains
+            session.removeAttribute("username");
+            session.invalidate();
+        }
         return "welcome";
     }
 
