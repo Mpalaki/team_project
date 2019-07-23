@@ -454,7 +454,28 @@
                                             <form action="deleteme" style="margin-top: 7px">
                                                 <div class="custom-file">
                                                     <input type=hidden id="iduser" name="iduser" value="${EncryptUtils.encrypt(user.iduser)}">
-                                                    <button type="submit" class="btn btn-danger badge badge-light badge-pill">Delete Account</button>
+                                                    <button type="button" class="btn btn-danger badge badge-light badge-pill" data-toggle="modal" data-target="#exampleModal">Delete Account</button>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel" style="color: red"><b>Warning!</b></h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to delete this account?
+                                                                </div>
+                                                                <div class="modal-footer">
+
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-primary">Delete Account</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </form>
 
