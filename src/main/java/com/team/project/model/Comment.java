@@ -99,7 +99,7 @@ public class Comment implements Serializable {
     }
     
     public String getDispDate(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY, HH:mm");
         String dispdate = sdf.format(this.date);
         return dispdate;} 
 

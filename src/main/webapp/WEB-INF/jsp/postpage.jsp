@@ -123,6 +123,13 @@
                     </div>
                     <button type="submit" class="btn btn-success badge badge-light badge-pill"><i style="font-size:24px" class="fa">&#xf087;</i>Like!</button></br>
                 </c:if>
+            <c:if test="${likers.contains(user)}">               
+                <form action="unlike" method="post">
+                    <div class="form-group" >
+                        <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
+                    </div>
+                    <button type="submit" class="btn btn-danger badge badge-light badge-pill"><i style="font-size:24px" class="fa">&#xf165;</i>Unlike!</button></br>
+                </c:if>
                 <div class="col-md-5">                            
                     <form action="insertcomment" method="post">
 
