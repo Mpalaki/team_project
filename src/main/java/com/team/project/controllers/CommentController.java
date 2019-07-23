@@ -82,6 +82,25 @@ public class CommentController {
         mm.addAttribute("comments",comments);
         return "postpage";
     }
+    
+    @RequestMapping("unlike")
+    public String unlikePost(ModelMap mm, HttpServletRequest req, @RequestParam("idpost") int idpost) {
+        HttpSession session = req.getSession();
+        Post post = pr.getPostByIdpost(idpost);
+        User user = (User) session.getAttribute("user");
+        Likes like = lr.findByIduserAndIdpost(user, post);
+        lr.delete(like);
+        long likes = lr.countLikes(post);
+        List<Comment> comments = cr.getCommentsByIdpost(post);
+        List<User> likers = lr.usersThatHaveLikedThePost(post);
+        mm.addAttribute("post",post);
+        mm.addAttribute("likers",likers);
+        mm.addAttribute("likes",likes);
+        mm.addAttribute("comments",comments);
+        return "postpage";
+    }
+    
+    
 
 //    @RequestMapping("insertpost")
 //    public String addPost(HttpServletRequest request, Post post, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {

@@ -24,4 +24,6 @@ public interface LikeRepo  extends JpaRepository<Likes, Integer>{
     @Query("SELECT l.iduser FROM Likes l WHERE l.idpost=?1")
     public List<User> usersThatHaveLikedThePost(Post post);
     
+    public Likes findByIduserAndIdpost(User user, Post post);
+    
 }

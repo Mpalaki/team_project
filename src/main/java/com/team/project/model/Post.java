@@ -148,13 +148,13 @@ public class Post implements Serializable {
     }
 
     public String getDispeditDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY, HH:mm");
         String dispdate1 = sdf.format(this.editdate);
         return dispdate1;
     }
 
     public String getDispDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY, HH:mm");
         String dispdate = sdf.format(this.date);
         return dispdate;
     }
