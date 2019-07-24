@@ -9,6 +9,7 @@ import com.team.project.model.User;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -30,5 +31,8 @@ public interface UserRepo  extends JpaRepository<User,Integer>{
     
     @Query("SELECT u from User u where u.postsNo>0 ORDER BY u.postsNo DESC")
     public List<User> getUsersWherePostsNoGreaterThanZero();
+    
+    @Query("Select u from User u where u.username LIKE CONCAT('%',:username,'%')")
+    public List<User> getUsersWhereUsernameLike(@Param("username") String username);
     
 }
