@@ -21,6 +21,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     </head>
     <body>       
@@ -121,11 +122,17 @@
                                                 <a class="nav-link" href="myProfile">${user.username}</a>
                                             </li>
                                             <li class="nav-item">
+                                                <div class="search-container">
+                                                    <form action="search">
+                                                        <input type="text" placeholder="Search.." name="search">
+                                                        <button type="submit"><i class="fa fa-search"></i></button>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                            <li class="nav-item">
                                                 <form class="nav-item" action="logout" method="post">            
                                                     <input type="submit" value="logout">
-                                                    </li> 
-
-
+                                                    </li>                                                
                                                     </ul>
                                                     </div>  
                                                     </nav>
@@ -134,6 +141,26 @@
 
                                                     <!-- latest posts-->
                                                     <!-- start here-->
+                                                    <c:if test="${!users.isEmpty()}">
+                                                        <c:forEach var = "u"  items="${users}">
+                                                            <img src="${u.stringAvatar}" style="vertical-align: middle;
+                                                                             width: 50px;
+                                                                             height: 50px;
+                                                                             border-radius: 50%;"/>
+                                                            <a  href="<c:url value="profile">
+                                                                    <c:param name="unartist" value="${u.username}"/>
+                                                                </c:url>">${u.username}</a>
+                                                            <br>
+                                                        </c:forEach>
+                                                    </c:if>
+                                                    <c:if test="${!searchPosts.isEmpty()}">
+                                                        <c:forEach var = "searchPost"  items="${searchPosts}">
+                                                            <a  href="<c:url value="viewPost">
+                                                                    <c:param name="idpost" value="${searchPost.idpost}"/>
+                                                                </c:url>">${searchPost.title}</a>, artis opus #${searchPost.idpost}, ${searchPost.description}
+                                                            <br>
+                                                        </c:forEach>
+                                                    </c:if>
                                                     <div class="container" style="margin-top:10px">
                                                         <h2>Latest posts</h2></br>
                                                         <hr>

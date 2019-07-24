@@ -156,4 +156,13 @@ public class LoginController {
 
     }
 
+    @RequestMapping("search")
+    public String searchDb(@RequestParam("search") String searchtext, ModelMap mm) {
+        List<User> users = ur.getUsersWhereUsernameLike(searchtext);
+        List<Post> searchPosts = pr.getPostsLike(searchtext);
+        mm.addAttribute("users", users);
+        mm.addAttribute("searchPosts",searchPosts);
+        return "welcome";
+    }
+
 }

@@ -90,11 +90,8 @@ public class PostController {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(5);
         Page<Post> postsPage = ps.findPaginated(PageRequest.of(currentPage - 1, pageSize));
-        System.out.println(postsPage.hasContent());
-        System.out.println(postsPage.getContent().stream());
         model.addAttribute("postsPage", postsPage);
         int totalPages = postsPage.getTotalPages();
-        System.out.println(totalPages);
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                     .boxed()
