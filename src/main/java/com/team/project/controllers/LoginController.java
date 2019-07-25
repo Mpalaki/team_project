@@ -138,7 +138,6 @@ public class LoginController {
                 String saveDirectory = fileName2 + "../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
                 String fileName = "defav.png";
                 String fileUrl = "resources/avatars/" + fileName;
-                image.transferTo(new File(saveDirectory + fileName));
                 user.setStringAvatar(fileUrl);
             }
             user.setRole(2); // eisagontai oloi os aploi users, oi admins tha prostithentai kateutheian stin vasi

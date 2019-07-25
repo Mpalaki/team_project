@@ -22,6 +22,7 @@
         <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
     </head>
     <body>       
@@ -129,7 +130,7 @@
                                                     </form>
                                                 </div>
                                             </li>
-                                            <li><a href="https://www.paypal.com/pools/c/8gMhCrFluG"><i class="fa fa-money" style="font-size:36px;color:greenyellow"></i></a></li>
+                                            <li><a href="https://www.paypal.com/pools/c/8gMhCrFluG"><i class='fas fa-donate' style='font-size:36px;color:greenyellow'></i></a></li>
                                             <li class="nav-item">
                                                 <form class="nav-item" action="logout" method="post">            
                                                     <input type="submit" value="logout">
