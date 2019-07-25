@@ -29,9 +29,9 @@
     </head>
     <body>
         <!--        proto kouti pano me prologo kai backround photo-->
-        <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
+<!--        <div class="jumbotron text-center" id="prologos" style="margin-bottom:0">
 
-        </div>
+        </div>-->
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart  Gallery</h5></a>
