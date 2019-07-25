@@ -129,6 +129,7 @@
                                                     </form>
                                                 </div>
                                             </li>
+                                            <li><a href="https://www.paypal.com/pools/c/8gMhCrFluG"><i class="fa fa-money" style="font-size:36px;color:greenyellow"></i></a></li>
                                             <li class="nav-item">
                                                 <form class="nav-item" action="logout" method="post">            
                                                     <input type="submit" value="logout">
@@ -144,9 +145,9 @@
                                                     <c:if test="${!users.isEmpty()}">
                                                         <c:forEach var = "u"  items="${users}">
                                                             <img src="${u.stringAvatar}" style="vertical-align: middle;
-                                                                             width: 50px;
-                                                                             height: 50px;
-                                                                             border-radius: 50%;"/>
+                                                                 width: 50px;
+                                                                 height: 50px;
+                                                                 border-radius: 50%;"/>
                                                             <a  href="<c:url value="profile">
                                                                     <c:param name="unartist" value="${u.username}"/>
                                                                 </c:url>">${u.username}</a>
@@ -160,6 +161,9 @@
                                                                 </c:url>">${searchPost.title}</a>, artis opus #${searchPost.idpost}, ${searchPost.description}
                                                             <br>
                                                         </c:forEach>
+                                                    </c:if>
+                                                    <c:if test="${searchPosts.isEmpty() && users.isEmpty()}">
+                                                        <h3>No results!</h3>
                                                     </c:if>
                                                     <div class="container" style="margin-top:10px">
                                                         <h2>Latest posts</h2></br>

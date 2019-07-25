@@ -20,6 +20,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="jquery-3.2.1.js"></script>
 
     </head>
@@ -340,7 +341,7 @@
                                                                     <span class="float-right font-weight-bold">${pms.dispDate} | <a  href=" <c:url value="deletepm">
                                                                                                                                          <c:param name="idpm" value="${EncryptUtils.encrypt(pms.idpm)}"/>
                                                                                                                                          <c:param name="idreceiver" value="${pms.idreceiver.iduser}"/>
-                                                                                                                                     </c:url>">Delete</a></span> from:
+                                                                                                                                     </c:url>"><i class="fa fa-trash" style="font-size:24px;color:orange"></i></a></span> from:
                                                                     <img src="${pms.idsender.stringAvatar}" style="vertical-align: middle;
                                                                          width: 40px;
                                                                          height: 40px;
