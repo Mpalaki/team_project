@@ -57,15 +57,15 @@
                         <a class="nav-link" href="home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="SignupController">Sign up</a>
+                        <a class="nav-link" href="signup">Sign up</a>
                     </li>
-                    <li class="nav-item">
-                        <form  class="nav-item" action="LoginController" method="post">
+<!--                    <li class="nav-item">
+                        <form  class="nav-item" action="login" method="post">
 
                             <input type="text" name="username" placeholder="username" required>
                             <input type="password" name="password" placeholder="password" required>
                             <input type="submit" value="Sign in">
-                            </li>    
+                            </li>    -->
 
                             </ul>
                             </div>  
@@ -134,7 +134,8 @@
                                         <div class="col-xl-3 col-md-6 mb-4" style="margin-top: 3px;">
                                             <div class="card border-0 shadow">
                                                 <img src="${artists.stringAvatar}" style="
-                                                     height: auto; /* You must set a specified height */
+                                                     height: 200px; /* You must set a specified height */
+                                                     width: auto;
 /*                                                     width: auto;*/
                                                      background-position: center; /* Center the image */
                                                      background-repeat: no-repeat; /* Do not repeat the image */

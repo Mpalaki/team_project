@@ -47,11 +47,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="aboutus">About us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="getLastPosts">Latest posts</a>
-                    </li>
-
+                    </li>                    
                     <li class="nav-item">
                         <a class="nav-link" href="viewArtists">Artists</a>
                     </li>
@@ -95,7 +91,7 @@
                     <div class="invalid-feedback">Upload an image to continue.</div>
                     <label class="custom-file-label" for="customFile">Choose file</label><br>
                 </div>
-                <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Submit</button>
+                <button type="submit" class="btn btn-primary badge badge-light badge-pill" style="margin-top: 30px;">Submit</button>
 
             </form>
         </div>
