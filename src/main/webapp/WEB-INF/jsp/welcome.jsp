@@ -166,10 +166,11 @@
                                                     <c:if test="${searchPosts.isEmpty() && users.isEmpty()}">
                                                         <h3>No results!</h3>
                                                     </c:if>
-                                                    <div class="container" style="margin-top:10px">
-                                                        <h2>Latest posts</h2></br>
-                                                        <hr>
-
+                                                    <c:if test="${postsPage.content!=null}">
+                                                        <div class="container" style="margin-top:10px">
+                                                            <h2>Latest posts</h2></br>
+                                                            <hr>
+                                                        </c:if>
                                                     </div>
                                                     <div class="container" style="margin-top:0px">
                                                         <div class="row">
@@ -256,12 +257,14 @@
 
                                                     <!--                                                <div class="jumbotron text-center" style="margin-bottom:0">-->
                                                     <ul class="pagination justify-content-center" style="margin-top: 5px">
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="#" aria-label="Previous">
-                                                                <span aria-hidden="true">&laquo;</span>
-                                                                <span class="sr-only">Previous</span>
-                                                            </a>
-                                                        </li>
+                                                        <c:if test="${postsPage.totalPages!=null}">
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Previous">
+                                                                    <span aria-hidden="true">&laquo;</span>
+                                                                    <span class="sr-only">Previous</span>
+                                                                </a>
+                                                            </li>
+                                                        </c:if>
                                                         <c:if test="${postsPage.totalPages> 0}">
                                                             <%--                                                            <div class="pagination">--%>
                                                             <c:forEach var="pageNumber" items="${pageNumbers}">
@@ -271,12 +274,14 @@
                                                             </c:forEach>
                                                             <%--                                                            </div>--%>
                                                         </c:if>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="#" aria-label="Next">
-                                                                <span aria-hidden="true">&raquo;</span>
-                                                                <span class="sr-only">Next</span>
-                                                            </a>
-                                                        </li>
+                                                        <c:if test="${postsPage.totalPages!=null}">
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="#" aria-label="Next">
+                                                                    <span aria-hidden="true">&raquo;</span>
+                                                                    <span class="sr-only">Next</span>
+                                                                </a>
+                                                            </li>
+                                                        </c:if>
                                                     </ul>
                                                     <!--                                                </div>-->
                                                     <script>
