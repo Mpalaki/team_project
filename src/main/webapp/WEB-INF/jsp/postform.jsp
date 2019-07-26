@@ -57,7 +57,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="redirectToProfile">My profile</a>
+                            <a class="nav-link" href="myProfile">My profile</a>
                         </li>
                         <li class="nav-item">
                             <img src="${user.stringAvatar}" style="vertical-align: middle;
@@ -66,7 +66,7 @@
                                  border-radius: 50%;"/>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="redirectToProfile">${user.username}</a>
+                            <a class="nav-link" href="myProfile">${user.username}</a>
                         </li>
                     </ul>
                 </div>  

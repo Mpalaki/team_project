@@ -123,56 +123,60 @@
                     </div>
                     <button type="submit" class="btn btn-success badge badge-light badge-pill"><i style="font-size:24px" class="fa">&#xf087;</i>Like!</button></br>
                 </c:if>
-            <c:if test="${likers.contains(user)}">               
-                <form action="unlike" method="post">
-                    <div class="form-group" >
-                        <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
-                    </div>
-                    <button type="submit" class="btn btn-danger badge badge-light badge-pill"><i style="font-size:24px" class="fa">&#xf165;</i>Unlike!</button></br>
-                </c:if>
-                <div class="col-md-5">                            
-                    <form action="insertcomment" method="post">
-
+                <c:if test="${likers.contains(user)}">               
+                    <form action="unlike" method="post">
                         <div class="form-group" >
                             <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
-                            <textarea rows = "2" cols = "50" class="custom-file-textarea badge badge-light" style="border-radius: 8px; "  name = "description">Add a public comment</textarea></br>  
-
-                        </div>                     
-                        <button type="submit" class="btn btn-warning badge badge-light badge-pill">add</button></br>
-
-                </div>
-                <%}%>
-                ${post.commentsNo} Comments 
-
-                <hr>
-                <table>
-                    <c:forEach var = "comments" items="${comments}">
-                        <div class="col-md-8" style="background-color: aliceblue ;border-radius: 4px; padding: 2px;">
-                            <div class="media-body">
-                                <h5><img src="${comments.iduser.stringAvatar}" style="vertical-align: middle;
-                                         width: 40px;
-                                         height: 40px;
-                                         border-radius: 50%;"/>
-                                    <a  href=" <c:url value="profile">
-                                            <c:param name="unartist" value="${comments.iduser.username}"/>
-                                        </c:url>">${comments.iduser.username}</a>
-                                    <small><i> commented on ${comments.dispDate}</i></small></h5>
-                                <p>${comments.keimeno}</p>
-                            </div>
                         </div>
-                        <hr>
-                    </c:forEach>
-                </table>
-                <%}%>
+                        <button type="submit" class="btn btn-danger badge badge-light badge-pill"><i style="font-size:24px" class="fa">&#xf165;</i>Unlike!</button></br>
+                    </c:if>
+                    <div class="col-md-5">                            
+                        <form action="insertcomment" method="post">
 
-                <script>
-                    $("#likes").mouseover(function () {
-                        $("#likers").show();
-                    });
-                    $("#likes").mouseout(function () {
-                        $("#likers").hide();
-                    });
-                </script>
+                            <div class="form-group" >
+                                <input type=hidden id="idpost" name="idpost" value="${post.idpost}">
+                                <img src="${user.stringAvatar}" style="vertical-align: middle;
+                                     width: 50px;
+                                     height: 50px;
+                                     border-radius: 50%;"/>
+                                <textarea rows = "3" cols = "30" class="custom-file-textarea badge badge-light" style="border-radius: 8px; "  name = "description">Add a public comment</textarea></br>  
 
-                </body>
-                </html>
+                            </div>                     
+                            <button type="submit" class="btn btn-warning badge badge-light badge-pill">add</button></br>
+
+                    </div>
+                    <%}%>
+                    ${post.commentsNo} Comments 
+
+                    <hr>
+                    <table>
+                        <c:forEach var = "comments" items="${comments}">
+                            <div class="col-md-8" style="background-color: aliceblue ;border-radius: 4px; padding: 2px;">
+                                <div class="media-body">
+                                    <h5><img src="${comments.iduser.stringAvatar}" style="vertical-align: middle;
+                                             width: 40px;
+                                             height: 40px;
+                                             border-radius: 50%;"/>
+                                        <a  href=" <c:url value="profile">
+                                                <c:param name="unartist" value="${comments.iduser.username}"/>
+                                            </c:url>">${comments.iduser.username}</a>
+                                        <small><i> commented on ${comments.dispDate}</i></small></h5>
+                                    <p>${comments.keimeno}</p>
+                                </div>
+                            </div>
+                            <hr>
+                        </c:forEach>
+                    </table>
+                    <%}%>
+
+                    <script>
+                        $("#likes").mouseover(function () {
+                            $("#likers").show();
+                        });
+                        $("#likes").mouseout(function () {
+                            $("#likers").hide();
+                        });
+                    </script>
+
+                    </body>
+                    </html>
