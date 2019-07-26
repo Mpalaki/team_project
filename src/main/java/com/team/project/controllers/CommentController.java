@@ -99,24 +99,5 @@ public class CommentController {
         mm.addAttribute("comments",comments);
         return "postpage";
     }
-    
-    
 
-//    @RequestMapping("insertpost")
-//    public String addPost(HttpServletRequest request, Post post, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {
-//        HttpSession session = request.getSession();
-//        User u = (User) session.getAttribute("user");
-//        String username = u.getUsername();
-//        byte[] img = image.getBytes();
-//        post.setPhoto(img);
-//        post.setIduser(u);
-//        java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
-//        post.setDate(date);
-//        mm.addAttribute(post);
-//        mm.addAttribute("username", username);
-//        session.setAttribute("user", u);
-//        session.setAttribute("username", username);
-//        pr.save(post);
-//        return "welcome";
-//    }
 }

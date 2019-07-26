@@ -138,7 +138,7 @@
                             <textarea rows = "2" cols = "50" class="custom-file-textarea badge badge-light" style="border-radius: 8px; "  name = "description">Add a public comment</textarea></br>  
 
                         </div>                     
-                        <button type="submit" class="btn btn-warning badge badge-light badge-pill">reply</button></br>
+                        <button type="submit" class="btn btn-warning badge badge-light badge-pill">add</button></br>
 
                 </div>
                 <%}%>
