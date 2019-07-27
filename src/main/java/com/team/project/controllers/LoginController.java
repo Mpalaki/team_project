@@ -70,7 +70,8 @@ public class LoginController {
                 return "redirect:home";
             } else {
                 String message = "incorrect password";
-                return "redirect:home";
+                mm.addAttribute("message",message);
+                return "registerform";
             }
         }
     }

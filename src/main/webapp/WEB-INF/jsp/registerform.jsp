@@ -103,6 +103,18 @@
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                     </div>
                 </c:if>
+                <c:if test="${message=='incorrect password'}">
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <strong>Sorry!</strong> Invalid password.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </c:if>
+                <c:if test="${message=='no such username'}">
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <strong>Sorry!</strong> Username does not exist.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </c:if>
                 <article class="card-body mx-auto" style="max-width: 400px;">
                     <h4 class="card-title mt-3 text-center">Create Account in <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h2>Calendart  Gallery</h2></a></h4>
                     <p class="text-center">Get started with your free account</p>
