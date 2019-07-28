@@ -16,8 +16,9 @@ import org.springframework.data.repository.query.Param;
  * @author Makis
  */
 public interface UserRepo  extends JpaRepository<User,Integer>{
-    
     public User findByUsername(String username);
+
+    public User findUserBySerial(String serial);
     
     public User findByIduser(int iduser);
         

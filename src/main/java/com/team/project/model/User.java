@@ -75,6 +75,7 @@ public class User implements Serializable {
     @Column(name = "signup_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date signupDate;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Collection<Friendship> friendshipCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user1")
@@ -83,7 +84,10 @@ public class User implements Serializable {
     private Collection<Pm> pmCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idsender")
     private Collection<Pm> pmCollection1;
-
+    @Column(name = "serial")
+    private String serial;
+    @Column(name = "active")
+    private Integer active;
     @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
@@ -270,6 +274,30 @@ public class User implements Serializable {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
         String dispdate = sdf.format(this.signupDate);
         return dispdate;
+    }
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
+    public Integer getActive() {
+        return active;
+    }
+
+    public void setActive(Integer active) {
+        this.active = active;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public void setDispDate(String dispDate) {
+        this.dispDate = dispDate;
     }
 
     @Override
