@@ -14,7 +14,7 @@ public class FeedbackController {
         MimeMessageHelper helper = new MimeMessageHelper(mailMessage, true);
         helper.setSubject(feedback.getFeedback());
         helper.setTo(feedback.getEmail());
-        helper.setText("Hey "+feedback.getName()+" Click the link bellow to activate your account on Calendart!\n" +
+        helper.setText("Hey "+feedback.getName()+". Click the link bellow to activate your account on Calendart!\n" +
                 "" +
                 "Calendart is A website dedicated to artists and art lovers\n" +
                 "                Post in Calendart and exhibit your artwork\n" +

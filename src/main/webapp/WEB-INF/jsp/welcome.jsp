@@ -23,6 +23,8 @@
         <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     </head>
     <body>       
@@ -130,7 +132,7 @@
                                                     </form>
                                                 </div>
                                             </li>
-                                            <li><a href="https://www.paypal.com/pools/c/8gMhCrFluG"><i class='fas fa-donate' style='font-size:36px;color:greenyellow'></i></a></li>
+                                            <li><a class="donate" href="https://www.paypal.com/pools/c/8gMhCrFluG"><i class='fas fa-donate' style='font-size:36px;color: #f9d7ed'></i></a></li>
                                             <li class="nav-item">
                                                 <form class="nav-item" action="logout" method="post">            
                                                     <input type="submit" value="logout">
@@ -220,19 +222,19 @@
                                                                     <c:if test = "${l.iduser.iduser==iduser || role==1 }" >                            
 
 
-                                                                        <a  href=" <c:url value="deletepost">
+                                                                        <a  class="deletepost" href=" <c:url value="deletepost">
                                                                                 <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
-                                                                            </c:url>">Delete </a>|
+                                                                            </c:url>"><i class="fa fa-trash" style="font-size:20px;color:red"></i> </a>|
 
-                                                                        <a  href="<c:url value="editpost">
+                                                                        <a  class="editpost" href="<c:url value="editpost">
                                                                                 <c:param name="idpost" value="${EncryptUtils.encrypt(l.idpost)}"/>
-                                                                            </c:url>">Edit  </a>|
+                                                                            </c:url>"><i class="fa fa-pencil" style="font-size:20px;color:orange"></i>  </a>|
 
                                                                     </c:if>
 
-                                                                    <a  href="<c:url value="viewPost">
+                                                                    <a  class="viewPost" href="<c:url value="viewPost">
                                                                             <c:param name="idpost" value="${l.idpost}"/>
-                                                                        </c:url>">View artwork</a>
+                                                                        </c:url>"><i class="fa fa-eye" style="font-size:20px;color:blue"></i></a>
 
 
                                                                     <hr>
@@ -322,6 +324,11 @@
                                                             document.body.scrollTop = 0;
                                                             document.documentElement.scrollTop = 0;
                                                         }
+
+                                                        $(".editpost").attr('title', 'edit post');
+                                                        $(".deletepost").attr('title', 'delete post');
+                                                        $(".viewPost").attr('title', 'view post');
+                                                        $(".donate").attr('title', 'donate to Calendart');
                                                     </script>
                                                     </body>
                                                     </html>
