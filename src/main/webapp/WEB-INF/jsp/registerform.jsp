@@ -109,12 +109,7 @@
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                     </div>
                 </c:if>
-                <c:if test="${message=='no such username'}">
-                    <div class="alert alert-danger alert-dismissible fade show">
-                        <strong>Sorry!</strong> Username does not exist.
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    </div>
-                </c:if>
+                
                 <article class="card-body mx-auto" style="max-width: 400px;">
                     <h4 class="card-title mt-3 text-center">Create Account in <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h2>Calendart  Gallery</h2></a></h4>
                     <p class="text-center">Get started with your free account</p>
@@ -173,16 +168,17 @@
                             <input id="pass2" name="wordpass" class="form-control" placeholder="Repeat password*" type="password" required>
                         </div> <!-- form-group// -->       
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="file" name="photo">
+                            <input type="file" class="custom-file-input" id="file" onchange="GetFileSize()" name="photo">
                             <!--                            <div class="valid-feedback">Valid.</div>
                                                         <div class="invalid-feedback">Upload an image to continue.</div>-->
                             <label class="custom-file-label" for="customFile">Choose avatar</label><br>
+                            <h6 id="toobig" style="margin-top: 7px"></h6>
                         </div> <!-- form-group// -->  
                         <div class="custom-file">
 
                         </div> <!-- form-group// -->  
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+                            <button type="submit" class="btn btn-primary btn-block"  id="disable"> Create Account  </button>
                         </div> <!-- form-group// -->      
                         <p class="text-center">Have an account? <a href="">Log In</a> </p>                                                                 
                     </form>
@@ -302,6 +298,28 @@
                         });
 
             });
+            
+            function GetFileSize() {
+                var fi = document.getElementById('file'); // GET THE FILE INPUT.
+
+                // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+                if (fi.files.length > 0) {
+                    // RUN A LOOP TO CHECK EACH SELECTED FILE.
+                    for (var i = 0; i <= fi.files.length - 1; i++) {
+
+                        var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                        if (fsize / 1024 > 1000) {
+                            document.getElementById('toobig').innerHTML = 'image size exceeds allowed limit';
+                            document.getElementById('toobig').style.color = "red";
+                            document.getElementById('disable').disabled = true;
+                        } else {
+                            document.getElementById('toobig').innerHTML = 'valid size';
+                            document.getElementById('toobig').style.color = "green";
+                            document.getElementById('disable').disabled = false;
+                        }
+                    }
+                }
+            }
 
             //-----------edw   
         </script>
