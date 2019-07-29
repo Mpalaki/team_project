@@ -5,13 +5,17 @@
  */
 package com.team.project.controllers;
 
+import com.team.project.email.Feedback;
+import com.team.project.email.FeedbackController;
 import com.team.project.model.Post;
 import com.team.project.model.User;
 import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
 import com.team.project.service.PostService;
-import static com.team.project.utils.EncryptUtils.checkPass;
-import static com.team.project.utils.EncryptUtils.hashPassword;
+
+
+import static com.team.project.utils.EncryptUtils.*;
+
 import com.team.project.validators.UserValidator;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -49,6 +54,9 @@ public class LoginController {
     @Autowired
     UserValidator userValidator;
 
+    @Autowired
+    FeedbackController feedbackController;
+
     @RequestMapping("login")
     public String login(HttpServletRequest request, ModelMap mm) {
         String username = request.getParameter("username");
@@ -74,6 +82,25 @@ public class LoginController {
                 return "registerform";
             }
         }
+    }
+
+    @RequestMapping("activate")
+    public String activateAccount(HttpServletRequest request, ModelMap mm,@RequestParam("serial") String serial){
+        User u = ur.findUserBySerial(serial);
+            u.setActive(1);
+            ur.save(u);
+
+            int iduser = u.getIduser();
+            int role = u.getRole();
+
+            HttpSession session = request.getSession();
+            session.setAttribute("user", u);
+            session.setAttribute("iduser", iduser);
+            session.setAttribute("username", u.getUsername());
+            session.setAttribute("role", role);
+            return "redirect:home";
+
+
     }
 
     @RequestMapping("logout")
@@ -115,7 +142,7 @@ public class LoginController {
 
     @RequestMapping("register")
     public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
-            @RequestParam("wordpass") String wordpass, @RequestParam("emailAddress") String emailAddress, @RequestParam("photo") MultipartFile image, ModelMap mm) throws IOException, ServletException {
+            @RequestParam("wordpass") String wordpass, @RequestParam("emailAddress") String emailAddress, @RequestParam("photo") MultipartFile image, ModelMap mm) throws IOException, ServletException, MessagingException {
         user.setUsername(givenun);
         user.setPassword(password);
         user.setConfirmPassword(wordpass);
@@ -127,6 +154,9 @@ public class LoginController {
         } else {
             String cryptedPw = hashPassword(password);
             user.setPassword(cryptedPw);
+            String serial = encrypt(givenun);
+            user.setSerial(serial);
+
             if (!image.isEmpty()) {
                 String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
                 String saveDirectory = fileName2 + "../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
@@ -146,7 +176,14 @@ public class LoginController {
             user.setSignupDate(date);
             user.setPostsNo(0);
             user.setCommentsNo(0);
+            user.setActive(0);
+
+            Feedback feedback =new Feedback(user.getFirstName(),emailAddress,serial,"Activate your Account");
+//            FeedbackController feedbackController = new FeedbackController();
+            feedbackController.sendSimpleMessage(feedback);
+
             ur.save(user);
+
             return "redirect:home";
         }
 
