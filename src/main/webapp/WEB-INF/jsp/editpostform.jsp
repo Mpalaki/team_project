@@ -36,7 +36,7 @@
         </div>-->
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h5>Calendart  Gallery</h5></a>
+            <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h3>Calendart Gallery</h3></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -86,12 +86,11 @@
                     <textarea rows = "6" cols = "50" name = "description">${post.description}</textarea></br>
                 </div>
                 <div class="custom-file">
-                    <input class="custom-file-input" type="file" name="photo1" required> 
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Upload an image to continue.</div>
+                    <input class="custom-file-input" type="file" onchange="GetFileSize()" id="file" name="photo1" required> 
+                    <h6 id="toobig" style="margin-top: 7px"></h6>
                     <label class="custom-file-label" for="customFile">Choose file</label><br>
                 </div>
-                <button type="submit" class="btn btn-primary badge badge-light badge-pill" style="margin-top: 30px;">Submit</button>
+                <button type="submit" class="btn btn-primary badge badge-light badge-pill" id="disable" style="margin-top: 30px;">Submit</button>
 
             </form>
         </div>
@@ -101,6 +100,28 @@
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
+            
+            function GetFileSize() {
+                var fi = document.getElementById('file'); // GET THE FILE INPUT.
+
+                // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+                if (fi.files.length > 0) {
+                    // RUN A LOOP TO CHECK EACH SELECTED FILE.
+                    for (var i = 0; i <= fi.files.length - 1; i++) {
+
+                        var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                        if (fsize / 1024 > 1000) {
+                            document.getElementById('toobig').innerHTML = 'image size exceeds allowed limit';
+                            document.getElementById('toobig').style.color = "red";
+                            document.getElementById('disable').disabled = true;
+                        } else {
+                            document.getElementById('toobig').innerHTML = 'valid size';
+                            document.getElementById('toobig').style.color = "green";
+                            document.getElementById('disable').disabled = false;
+                        }
+                    }
+                }
+            }
         </script>
 
     </body>
