@@ -13,12 +13,13 @@ import com.team.project.repos.PostRepo;
 import com.team.project.repos.UserRepo;
 import com.team.project.service.PostService;
 
-
 import static com.team.project.utils.EncryptUtils.*;
 
 import com.team.project.validators.UserValidator;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,39 +68,46 @@ public class LoginController {
             mm.addAttribute("message", message);
             return "registerform";
         } else {
-            if (checkPass(givenpass, u.getPassword())) {
-                int iduser = u.getIduser();
-                int role = u.getRole();
-                HttpSession session = request.getSession();
-                session.setAttribute("user", u);
-                session.setAttribute("iduser", iduser);
-                session.setAttribute("username", username);
-                session.setAttribute("role", role);
-                return "redirect:home";
+            if (u.getActive() == 1) {
+                if (checkPass(givenpass, u.getPassword())) {
+                    int iduser = u.getIduser();
+                    int role = u.getRole();
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", u);
+                    session.setAttribute("iduser", iduser);
+                    session.setAttribute("username", username);
+                    session.setAttribute("role", role);
+                    return "redirect:home";
+                } else {
+                    String message = "incorrect password";
+                    mm.addAttribute("message", message);
+                    return "registerform";
+                }
             } else {
-                String message = "incorrect password";
-                mm.addAttribute("message",message);
-                return "registerform";
+                String message = "activate account";
+                mm.addAttribute("message", message);
+                return "welcome";
             }
         }
     }
 
     @RequestMapping("activate")
-    public String activateAccount(HttpServletRequest request, ModelMap mm,@RequestParam("serial") String serial){
-        User u = ur.findUserBySerial(serial);
-            u.setActive(1);
-            ur.save(u);
-
-            int iduser = u.getIduser();
-            int role = u.getRole();
-
-            HttpSession session = request.getSession();
-            session.setAttribute("user", u);
-            session.setAttribute("iduser", iduser);
-            session.setAttribute("username", u.getUsername());
-            session.setAttribute("role", role);
-            return "redirect:home";
-
+    public String activateAccount(HttpServletRequest request, ModelMap mm, @RequestParam("serial") String UrlSerial) throws UnsupportedEncodingException {
+//        String serial = java.net.URLDecoder.decode(UrlSerial, StandardCharsets.UTF_8.name());
+        User u = ur.findUserBySerial(UrlSerial);
+        u.setActive(1);
+        u.setSerial("alreadyactive");// so that the activate account link is no longer valid
+        ur.save(u);
+        int iduser = u.getIduser();
+        int role = u.getRole();
+        HttpSession session = request.getSession();
+        session.setAttribute("user", u);
+        session.setAttribute("iduser", iduser);
+        session.setAttribute("username", u.getUsername());
+        session.setAttribute("role", role);
+        String message = "active account";
+        mm.addAttribute("message", message);
+        return "welcome";
 
     }
 
@@ -154,7 +162,8 @@ public class LoginController {
         } else {
             String cryptedPw = hashPassword(password);
             user.setPassword(cryptedPw);
-            String serial = encrypt(givenun);
+            String serial = encrypt(givenun);// stored in DB
+            String UrlSerial = java.net.URLEncoder.encode(serial, StandardCharsets.UTF_8.name());// sent to user by email
             user.setSerial(serial);
 
             if (!image.isEmpty()) {
@@ -178,13 +187,14 @@ public class LoginController {
             user.setCommentsNo(0);
             user.setActive(0);
 
-            Feedback feedback =new Feedback(user.getFirstName(),emailAddress,serial,"Activate your Account");
+            Feedback feedback = new Feedback(user.getFirstName(), emailAddress, UrlSerial, "Activate your Account");
 //            FeedbackController feedbackController = new FeedbackController();
             feedbackController.sendSimpleMessage(feedback);
 
             ur.save(user);
-
-            return "redirect:home";
+            String message = "email sent";
+            mm.addAttribute("message", message);
+            return "welcome";
         }
 
     }
@@ -194,7 +204,7 @@ public class LoginController {
         List<User> users = ur.getUsersWhereUsernameLike(searchtext);
         List<Post> searchPosts = pr.getPostsLike(searchtext);
         mm.addAttribute("users", users);
-        mm.addAttribute("searchPosts",searchPosts);
+        mm.addAttribute("searchPosts", searchPosts);
         return "welcome";
     }
 
