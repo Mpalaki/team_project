@@ -14,10 +14,10 @@ public class FeedbackController {
         MimeMessageHelper helper = new MimeMessageHelper(mailMessage, true);
         helper.setSubject(feedback.getFeedback());
         helper.setTo(feedback.getEmail());
-        helper.setText("<h1>Hey "+feedback.getName()+" Click the link bellow to activate your account on Calendart!</h1>" +
-                "<br>" +
-                "<h3>Calendart is A website dedicated to artists and art lovers<br>\n" +
-                "                Post in Calendart and exhibit your artwork</h3>\n" +
+        helper.setText("Hey "+feedback.getName()+" Click the link bellow to activate your account on Calendart!\n" +
+                "" +
+                "Calendart is A website dedicated to artists and art lovers\n" +
+                "                Post in Calendart and exhibit your artwork\n" +
                 "http://localhost:8080/project/activate?serial="+feedback.getSerial());
         // Send mail
         

@@ -140,6 +140,25 @@
                                                     </nav>
 
                                                     <% }%>
+                                                    <!-- Success Alerts -->
+                                                    <c:if test="${message=='email sent'}">
+                                                        <div class="alert alert-info alert-dismissible fade show">
+                                                            <strong>An email has been sent!</strong> Click the link in the email you received to activate your account.
+                                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${message=='active account'}">
+                                                        <div class="alert alert-success alert-dismissible fade show">
+                                                            <strong>Success!</strong> Your account is now active.
+                                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${message=='activate account'}">
+                                                        <div class="alert alert-warning alert-dismissible fade show">
+                                                            <strong>Warning!</strong> Please activate your account by clicking the link in the email we sent you upon registration.
+                                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                        </div>
+                                                    </c:if>
 
                                                     <!-- latest posts-->
                                                     <!-- start here-->
