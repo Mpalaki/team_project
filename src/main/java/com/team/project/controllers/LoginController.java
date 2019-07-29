@@ -198,6 +198,15 @@ public class LoginController {
         }
 
     }
+    
+//    @RequestMapping("forgotPassword")
+//    public String generateNewPass(String username) throws UnsupportedEncodingException{
+//        User u = ur.findByUsername(username);
+//        String email = u.getEmail();
+//        String hashedUn = encrypt(username);
+//        String UrlSerial = java.net.URLEncoder.encode(hashedUn, StandardCharsets.UTF_8.name());// sent to user by email
+//                    
+//    return "newPassForm";}
 
     @RequestMapping("search")
     public String searchDb(@RequestParam("search") String searchtext, ModelMap mm) {

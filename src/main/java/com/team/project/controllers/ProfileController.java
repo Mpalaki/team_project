@@ -50,7 +50,6 @@ public class ProfileController {
         // Mpaloma
         User u = ur.findByIduser(user.getIduser());
         mm.addAttribute("user", u);
-        mm.addAttribute("user", u);
         List posts = pr.findByIduser(u);
         List pms = pmr.getCommentsByIdreceiver(user);
         List frs = fr.getAllFriendRequests(user);
