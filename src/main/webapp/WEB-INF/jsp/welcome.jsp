@@ -60,12 +60,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="home">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="aboutus">About us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="getLastPosts">Latest posts</a>
-                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="viewArtists">Artists</a>
@@ -80,6 +74,7 @@
                             <input type="text" name="username" placeholder="username" required>
                             <input type="password" name="password" placeholder="password" required>
                             <input type="submit" value="Sign in">
+                        </form>
                             </li>    
 
                             </ul>
@@ -100,12 +95,6 @@
                                         <ul class="navbar-nav">
                                             <li class="nav-item">
                                                 <a class="nav-link" href="home">Home</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="aboutus">About us</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="getLastPosts">Latest posts</a>
                                             </li>
 
                                             <li class="nav-item">
@@ -136,6 +125,7 @@
                                             <li class="nav-item">
                                                 <form class="nav-item" action="logout" method="post">            
                                                     <input type="submit" value="logout">
+                                                </form>
                                                     </li>                                                
                                                     </ul>
                                                     </div>  
@@ -162,8 +152,6 @@
                                                         </div>
                                                     </c:if>
 
-                                                    <!-- latest posts-->
-                                                    <!-- start here-->
                                                     <c:if test="${!users.isEmpty()}">
                                                         <c:forEach var = "u"  items="${users}">
                                                             <img src="${u.stringAvatar}" style="vertical-align: middle;
@@ -184,9 +172,13 @@
                                                             <br>
                                                         </c:forEach>
                                                     </c:if>
+
                                                     <c:if test="${searchPosts.isEmpty() && users.isEmpty()}">
                                                         <h3>No results!</h3>
                                                     </c:if>
+
+                                                    <!-- latest posts-->
+                                                    <!-- start here-->
                                                     <c:if test="${postsPage.content!=null}">
                                                         <div class="container" style="margin-top:10px">
                                                             <h2>Latest posts</h2></br>
@@ -245,34 +237,6 @@
                                                             <!-- latest posts-->
                                                             <!-- end here-->
 
-                                                            <div class="col-sm-8">
-
-                                                                <c:forEach var = "artists" items="${artists}">
-                                                                    <tr>
-                                                                    <div class="row">
-                                                                        <div class="col-md-5">
-                                                                            <h3>${artists.firstName}</h3>
-                                                                            <h3>${artists.lastName}</h3>
-                                                                        </div>
-                                                                        <div class="col-md-7">
-                                                                            <a href="#">
-
-                                                                                <img class="img-fluid rounded mb-3 mb-md-0" src="${artists.stringAvatar}" alt="">
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="col-md-5">                            
-                                                                            <p>${l.username}</p>
-                                                                            <a class="btn btn-primary" href="#">View Artist</a>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    </tr>
-                                                                    <hr>
-
-                                                                </c:forEach>
-
-
-                                                            </div>
                                                         </div>
                                                     </div>
 
