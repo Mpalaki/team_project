@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.mail.MessagingException;
@@ -88,18 +89,18 @@ public class LoginController {
     @RequestMapping("activate")
     public String activateAccount(HttpServletRequest request, ModelMap mm,@RequestParam("serial") String serial){
         User u = ur.findUserBySerial(serial);
-            u.setActive(1);
-            ur.save(u);
+        u.setActive(1);
+        ur.save(u);
 
-            int iduser = u.getIduser();
-            int role = u.getRole();
+        int iduser = u.getIduser();
+        int role = u.getRole();
 
-            HttpSession session = request.getSession();
-            session.setAttribute("user", u);
-            session.setAttribute("iduser", iduser);
-            session.setAttribute("username", u.getUsername());
-            session.setAttribute("role", role);
-            return "redirect:home";
+        HttpSession session = request.getSession();
+        session.setAttribute("user", u);
+        session.setAttribute("iduser", iduser);
+        session.setAttribute("username", u.getUsername());
+        session.setAttribute("role", role);
+        return "redirect:/home";
 
 
     }
@@ -108,15 +109,15 @@ public class LoginController {
     public String logout(HttpSession session, ModelMap mm) {
         session.removeAttribute("username");
         session.invalidate();
-        return "redirect:home";
+        return "redirect:/home";
     }
 
-    @RequestMapping("signup")
+    @RequestMapping("/signup")
     public String redirectToSignupForm() {
         return "registerform";
     }
 
-    @RequestMapping("artists")
+    @RequestMapping("/artists")
     public String reditToSignupForm() {
         return "artists";
     }
@@ -141,7 +142,7 @@ public class LoginController {
 
     }
 
-    @RequestMapping("register")
+    @RequestMapping("singup")
     public String register(HttpServletRequest request, User user, @RequestParam("username") String givenun, @RequestParam("password") String password,
             @RequestParam("wordpass") String wordpass, @RequestParam("emailAddress") String emailAddress, @RequestParam("photo") MultipartFile image, ModelMap mm) throws IOException, ServletException, MessagingException {
         user.setUsername(givenun);
@@ -155,7 +156,7 @@ public class LoginController {
         } else {
             String cryptedPw = hashPassword(password);
             user.setPassword(cryptedPw);
-            String serial = encrypt(givenun);
+            String serial = UUID.randomUUID().toString();
             user.setSerial(serial);
 
             if (!image.isEmpty()) {
