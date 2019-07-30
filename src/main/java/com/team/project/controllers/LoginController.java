@@ -198,15 +198,45 @@ public class LoginController {
         }
 
     }
-    
-//    @RequestMapping("forgotPassword")
-//    public String generateNewPass(String username) throws UnsupportedEncodingException{
-//        User u = ur.findByUsername(username);
-//        String email = u.getEmail();
-//        String hashedUn = encrypt(username);
-//        String UrlSerial = java.net.URLEncoder.encode(hashedUn, StandardCharsets.UTF_8.name());// sent to user by email
-//                    
-//    return "newPassForm";}
+
+    @RequestMapping("resetPassword")
+    public String changePassword(HttpServletRequest request, User user,
+            @RequestParam("emailAddress") String emailAddress, ModelMap mm) throws IOException, ServletException, MessagingException {
+        try {
+            user = ur.findByEmailAddress(emailAddress);
+            String serial = encrypt(user.getUsername());
+            String UrlSerial = java.net.URLEncoder.encode(serial, StandardCharsets.UTF_8.name());// sent to user by email
+            Feedback feedback = new Feedback(user.getFirstName(), emailAddress, UrlSerial, "Reset Password");
+            feedbackController.sendSimpleMessageForResetPassword(feedback);
+            user.setSerial(serial);
+            ur.save(user);
+            String message = "new pass sent";
+            mm.addAttribute("message", message);
+            return "welcome";
+        } catch (NullPointerException e) {
+            String message = "invalid email";
+            mm.addAttribute("message", message);
+            return "registerform";
+        }
+    }
+
+    @RequestMapping("newPass")
+    public String goToForNewPasswordPage(HttpServletRequest request, ModelMap mm, @RequestParam("serial") String UrlSerial){
+        User u = ur.findUserBySerial(UrlSerial);
+        mm.addAttribute("iduser", u.getIduser());
+        return "fornewpass";
+    }
+
+    @RequestMapping("savenewpass")
+    public String saveNewPassword(ModelMap mm, @RequestParam("iduser") int iduser, @RequestParam("password") String password) {
+        User user = ur.findByIduser(iduser);
+        user.setPassword(hashPassword(password));
+        user.setSerial("alreadyactive");
+        ur.save(user);
+        String message = "pass changed";
+        mm.addAttribute("message", message);
+        return "welcome";
+    }
 
     @RequestMapping("search")
     public String searchDb(@RequestParam("search") String searchtext, ModelMap mm) {

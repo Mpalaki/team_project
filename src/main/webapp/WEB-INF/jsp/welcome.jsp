@@ -139,9 +139,21 @@
                                                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                                                         </div>
                                                     </c:if>
+                                                    <c:if test="${message=='new pass sent'}">
+                                                        <div class="alert alert-info alert-dismissible fade show">
+                                                            <strong>An email has been sent!</strong> Click the link in the email you received to reset your password.
+                                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                        </div>
+                                                    </c:if>
                                                     <c:if test="${message=='active account'}">
                                                         <div class="alert alert-success alert-dismissible fade show">
                                                             <strong>Success!</strong> Your account is now active.
+                                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${message=='pass changed'}">
+                                                        <div class="alert alert-success alert-dismissible fade show">
+                                                            <strong>Success!</strong> Your password has been changed. 
                                                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                                                         </div>
                                                     </c:if>

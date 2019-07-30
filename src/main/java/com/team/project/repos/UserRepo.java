@@ -22,6 +22,8 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     public User findUserBySerial(String serial);
 
     public User findByIduser(int iduser);
+    
+    public User findByEmailAddress(String emailAddress);
 
     @Query("SELECT COUNT(u) FROM User u WHERE u.username=?1")
     public Long countUsers(String username);
