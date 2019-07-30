@@ -46,34 +46,19 @@ public class PostService {
     }
 
     public Page<Post> findPaginated(Pageable pageable) {
-
         final List<Post> postsAllDesc = pr.getLastPosts();
-
         int pageSize = pageable.getPageSize();
-
         int currentPage = pageable.getPageNumber();
-
         int startItem = currentPage * pageSize;
-
         List<Post> list;
-
         if (postsAllDesc.size() < startItem) {
-
             list = Collections.emptyList();
-
         } else {
-
             int toIndex = Math.min(startItem + pageSize, postsAllDesc.size());
-
             list = postsAllDesc.subList(startItem, toIndex);
-
         }
-
-        Page<Post> postPage
-                = new PageImpl<Post>(list, PageRequest.of(currentPage, pageSize), postsAllDesc.size());
-
+        Page<Post> postPage = new PageImpl<Post>(list, PageRequest.of(currentPage, pageSize), postsAllDesc.size());
         return postPage;
-
     }
 
 }

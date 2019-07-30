@@ -63,7 +63,7 @@ public class CommentController {
         mm.addAttribute("likers",likers);
         mm.addAttribute("likes",likes);
         mm.addAttribute("comments",comments);
-        return "postpage";
+        return "redirect:viewPost";
     }
     @RequestMapping("like")
     public String likePost(ModelMap mm, HttpServletRequest req, Likes like, @RequestParam("idpost") int idpost) {

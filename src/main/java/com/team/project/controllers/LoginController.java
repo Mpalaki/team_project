@@ -134,7 +134,7 @@ public class LoginController {
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(6);
         Page<Post> postsPage = ps.findPaginated(PageRequest.of(currentPage - 1, pageSize));
         model.addAttribute("postsPage", postsPage);
         int totalPages = postsPage.getTotalPages();
@@ -221,7 +221,7 @@ public class LoginController {
     }
 
     @RequestMapping("newPass")
-    public String goToForNewPasswordPage(HttpServletRequest request, ModelMap mm, @RequestParam("serial") String UrlSerial){
+    public String goToForNewPasswordPage(HttpServletRequest request, ModelMap mm, @RequestParam("serial") String UrlSerial) {
         User u = ur.findUserBySerial(UrlSerial);
         mm.addAttribute("iduser", u.getIduser());
         return "fornewpass";

@@ -137,7 +137,7 @@
 
             <hr>
             <table>
-                <c:forEach var = "comments" items="${comments}">
+                <c:forEach var = "comments" items="${commentsPage.content}">
                     <div class="col-md-8" style="background-color: aliceblue ;border-radius: 4px; padding: 2px;">
                         <div class="media-body">
                             <h5><img src="${comments.iduser.stringAvatar}" style="vertical-align: middle;
@@ -154,6 +154,19 @@
                     <hr>
                 </c:forEach>
             </table>
+            <ul class="pagination justify-content-center" style="margin-top: 5px">
+
+                <c:if test="${commentsPage.totalPages> 0}">
+                    <%--                                                            <div class="pagination">--%>
+                    <c:forEach var="pageNumber" items="${pageNumbers}">
+                        <li class="page-item">
+                            <a class="page-link" href="viewPost?idpost=${post.idpost}&size=${commentsPage.size}&page=${pageNumber}">${pageNumber}</a>
+                        </li>
+                    </c:forEach>
+                    <%--                                                            </div>--%>
+                </c:if>
+
+            </ul>
             <%}%>
         </div>
 

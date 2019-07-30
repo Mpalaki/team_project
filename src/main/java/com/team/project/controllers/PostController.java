@@ -11,6 +11,7 @@ import com.team.project.model.User;
 import com.team.project.repos.CommentRepo;
 import com.team.project.repos.LikeRepo;
 import com.team.project.repos.PostRepo;
+import com.team.project.service.CommentService;
 import com.team.project.service.PostService;
 import com.team.project.utils.EncryptUtils;
 import java.io.File;
@@ -44,10 +45,13 @@ public class PostController {
     PostRepo pr;
     @Autowired
     PostService ps;
+    
     @Autowired
     CommentRepo cr;
     @Autowired
     LikeRepo lr;
+    @Autowired
+    CommentService cs;
 
     @RequestMapping("addpost")
     public String redirectToInsertPostForm(HttpSession session, ModelMap mm) {
@@ -77,7 +81,7 @@ public class PostController {
     }
 
     @RequestMapping("getLastPosts")
-    public String getLastPosts(ModelMap mm) {        
+    public String getLastPosts(ModelMap mm) {
 
         return "redirect:/";
     }
@@ -88,7 +92,7 @@ public class PostController {
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(6);
         Page<Post> postsPage = ps.findPaginated(PageRequest.of(currentPage - 1, pageSize));
         model.addAttribute("postsPage", postsPage);
         int totalPages = postsPage.getTotalPages();
@@ -104,18 +108,32 @@ public class PostController {
 // should check if there is a way to pass str8 the post from first jsp...(with session it didnt work)
 
     @RequestMapping("viewPost")
-    public String viewPost(HttpServletRequest req, ModelMap mm) {
+    public String viewPost(HttpServletRequest req, ModelMap mm,
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("size") Optional<Integer> size) {
         int idpost = Integer.parseInt(req.getParameter("idpost"));
         Post post = pr.getPostByIdpost(idpost);
         mm.addAttribute("post", post);
-        List<Comment> comments = cr.getCommentsByIdpost(post);
         long likes = lr.countLikes(post);
         List<User> likers = lr.usersThatHaveLikedThePost(post);
-        mm.addAttribute("post",post);
-        mm.addAttribute("likers",likers);
-        mm.addAttribute("likes",likes);
-        mm.addAttribute("comments", comments);
-        return "postpage";
+        mm.addAttribute("post", post);
+        mm.addAttribute("likers", likers);
+        mm.addAttribute("likes", likes);
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(6);
+        Page<Comment> commentsPage = cs.findPaginated(PageRequest.of(currentPage - 1, pageSize), post);
+        mm.addAttribute("commentsPage", commentsPage);
+        int totalPages = commentsPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            mm.addAttribute("pageNumbers", pageNumbers);
+            return "postpage";
+        } else {
+            return "postpage;";
+        }
     }
 
     @RequestMapping(value = "deletepost", method = RequestMethod.GET)
