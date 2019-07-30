@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 package com.team.project.controllers;
-
 import com.team.project.model.Comment;
 import com.team.project.model.Post;
 import com.team.project.model.User;
 import com.team.project.repos.CommentRepo;
 import com.team.project.repos.LikeRepo;
 import com.team.project.repos.PostRepo;
-import com.team.project.service.CommentService;
 import com.team.project.service.PostService;
 import com.team.project.utils.EncryptUtils;
 import java.io.File;
@@ -33,33 +31,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 /**
  *
  * @author Makis
  */
 @Controller
 public class PostController {
-
     @Autowired
     PostRepo pr;
     @Autowired
     PostService ps;
-    
     @Autowired
     CommentRepo cr;
     @Autowired
     LikeRepo lr;
-    @Autowired
-    CommentService cs;
-
     @RequestMapping("addpost")
     public String redirectToInsertPostForm(HttpSession session, ModelMap mm) {
         mm.addAttribute("session", session);
         return "postform";
     }
 ///////////// EHO VALEI TRIGGERS STIN VASI AFTER INSERT KAI DELETE NA THYMITHO NA TOUS ELEGKSO. EHO TSEKAREI MONO GIA AFTER INSERT POST//////////////
-
     @RequestMapping("insertpost")
     public String addPost(HttpServletRequest request, Post post, ModelMap mm, @RequestParam("photo1") MultipartFile image) throws IOException {
         HttpSession session = request.getSession();
@@ -79,13 +70,10 @@ public class PostController {
         pr.save(post);
         return "redirect:/";
     }
-
     @RequestMapping("getLastPosts")
-    public String getLastPosts(ModelMap mm) {
-
+    public String getLastPosts(ModelMap mm) {        
         return "redirect:/";
     }
-
     @RequestMapping("/")
     public String listPostPages(
             Model model,
@@ -106,36 +94,20 @@ public class PostController {
     }
 // TODO: below i bring from jsp only the idpost and inside the method i create the post and then pass it to other jsp.
 // should check if there is a way to pass str8 the post from first jsp...(with session it didnt work)
-
     @RequestMapping("viewPost")
-    public String viewPost(HttpServletRequest req, ModelMap mm,
-            @RequestParam("page") Optional<Integer> page,
-            @RequestParam("size") Optional<Integer> size) {
+    public String viewPost(HttpServletRequest req, ModelMap mm) {
         int idpost = Integer.parseInt(req.getParameter("idpost"));
         Post post = pr.getPostByIdpost(idpost);
         mm.addAttribute("post", post);
+        List<Comment> comments = cr.getCommentsByIdpost(post);
         long likes = lr.countLikes(post);
         List<User> likers = lr.usersThatHaveLikedThePost(post);
-        mm.addAttribute("post", post);
-        mm.addAttribute("likers", likers);
-        mm.addAttribute("likes", likes);
-
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(6);
-        Page<Comment> commentsPage = cs.findPaginated(PageRequest.of(currentPage - 1, pageSize), post);
-        mm.addAttribute("commentsPage", commentsPage);
-        int totalPages = commentsPage.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            mm.addAttribute("pageNumbers", pageNumbers);
-            return "postpage";
-        } else {
-            return "postpage;";
-        }
+        mm.addAttribute("post",post);
+        mm.addAttribute("likers",likers);
+        mm.addAttribute("likes",likes);
+        mm.addAttribute("comments", comments);
+        return "postpage";
     }
-
     @RequestMapping(value = "deletepost", method = RequestMethod.GET)
     public String deletePost(HttpServletRequest req, ModelMap mm) {
         String pw = EncryptUtils.decrypt(req.getParameter("idpost"));
@@ -144,7 +116,6 @@ public class PostController {
         pr.delete(p);
         return "redirect:/";
     }
-
     @RequestMapping(value = "editpost", method = RequestMethod.GET)
     public String editPost(HttpServletRequest req, ModelMap mm) {
         String pw = EncryptUtils.decrypt(req.getParameter("idpost"));
@@ -153,7 +124,6 @@ public class PostController {
         mm.addAttribute("post", p);
         return "editpostform";
     }
-
     @RequestMapping(value = "updatepost")
     public String updatePost(HttpServletRequest request, @RequestParam("idpost") int idpost,
             @RequestParam("description") String description,
@@ -176,8 +146,6 @@ public class PostController {
         post.setDescription(description);
         post.setTitle(title);
         pr.save(post);
-
         return "redirect:/";
     }
-
 }

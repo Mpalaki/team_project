@@ -27,20 +27,20 @@ public class CommentService {
     @Autowired
     CommentRepo cr;
 
-    public Page<Comment> findPaginated(Pageable pageable, Post post) {
-        final List<Comment> commentsAllDesc = cr.getCommentsByIdpost(post);
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-        List<Comment> list;
-        if (commentsAllDesc.size() < startItem) {
-            list = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, commentsAllDesc.size());
-            list = commentsAllDesc.subList(startItem, toIndex);
-        }
-        Page<Comment> postPage = new PageImpl<Comment>(list, PageRequest.of(currentPage, pageSize), commentsAllDesc.size());
-        return postPage;
-    }
+//    public Page<Comment> findPaginated(Pageable pageable, Post post) {
+//        final List<Comment> commentsAllDesc = cr.getCommentsByIdpost(post);
+//        int pageSize = pageable.getPageSize();
+//        int currentPage = pageable.getPageNumber();
+//        int startItem = currentPage * pageSize;
+//        List<Comment> list;
+//        if (commentsAllDesc.size() < startItem) {
+//            list = Collections.emptyList();
+//        } else {
+//            int toIndex = Math.min(startItem + pageSize, commentsAllDesc.size());
+//            list = commentsAllDesc.subList(startItem, toIndex);
+//        }
+//        Page<Comment> postPage = new PageImpl<Comment>(list, PageRequest.of(currentPage, pageSize), commentsAllDesc.size());
+//        return postPage;
+//    }
 
 }
