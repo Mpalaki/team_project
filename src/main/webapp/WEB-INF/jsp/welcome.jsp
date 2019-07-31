@@ -27,7 +27,7 @@
 
 
     </head>
-    <body>       
+    <body>
         <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
 
@@ -50,7 +50,8 @@
 
         <!--        to navbar an den einai logged in-->
 
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container">
+        <nav id="navigation-bar" class="navbar navbar-expand-md bg-dark navbar-dark navbar-transparent fixed-top ">
             <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h3>Calendart Gallery</h3></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -74,7 +75,7 @@
                         <a class="nav-link" href="signup">Sign up</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li id="navform" class="nav-item">
                         <form  class="nav-item" action="login" method="post">
 
                             <input type="text" name="username" placeholder="username" required>
@@ -88,7 +89,7 @@
 
                             <!--            an ehei kanei login-->
                             <% } else {%>
-                            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                            <nav id="navigation-bar" class="navbar navbar-expand-md bg-dark navbar-dark fixed-top ">
                                 <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h3>Calendart Gallery</h3></a>
 
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -97,7 +98,7 @@
                                         <span class="navbar-toggler-icon"></span>
                                     </button>
                                     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                                        <ul class="navbar-nav">
+                                        <ul class="navbar-nav ">
                                             <li class="nav-item">
                                                 <a class="nav-link" href="home">Home</a>
                                             </li>
@@ -140,7 +141,7 @@
                                                     </ul>
                                                     </div>  
                                                     </nav>
-
+        </div>
                                                     <% }%>
                                                     <!-- Success Alerts -->
                                                     <c:if test="${message=='email sent'}">
@@ -307,6 +308,11 @@
                                                     <!--                                                </div>-->
                                                     <script>
                                                         // When the user scrolls down 20px from the top of the document, show the button
+
+                                                        // scroll functions
+                                                        var nav = document.getElementById("navigation-bar");
+
+
                                                         window.onscroll = function () {
                                                             scrollFunction()
                                                         };
@@ -314,8 +320,14 @@
                                                         function scrollFunction() {
                                                             if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
                                                                 document.getElementById("myBtn").style.display = "block";
+                                                                nav.classList.remove("navbar-transparent");
+                                                                $("#navigation-bar ul li a").css({"color":"white"});
                                                             } else {
                                                                 document.getElementById("myBtn").style.display = "none";
+                                                                nav.classList.add("navbar-transparent");
+                                                                $("#navigation-bar ul li a").css({"color":"black"});
+
+
                                                             }
                                                         }
 

@@ -90,7 +90,7 @@ public class ProfileController {
     public String updateAvatar(HttpServletRequest request, ModelMap mm, @RequestParam("iduser") int iduser, @RequestParam("avatar") MultipartFile avatar) throws IOException {
         User user = ur.findByIduser(iduser);
         String fileName2 = request.getSession().getServletContext().getRealPath("/");// returns url NetBeansProjects\project\target\project-0.0.1-SNAPSHOT
-        String saveDirectory = fileName2 + "../../src/main/webapp/resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
+        String saveDirectory = fileName2 + "resources/avatars/";// goes back to NetBeansProjects\project and the enters src/main...
         String fileName = avatar.getOriginalFilename();
         String fileUrl = "resources/avatars/" + fileName;
         avatar.transferTo(new File(saveDirectory + fileName));

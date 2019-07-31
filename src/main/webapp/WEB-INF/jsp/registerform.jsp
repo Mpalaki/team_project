@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Calendart</title>
         <!--        nikos-->
@@ -72,7 +74,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
         <div class="container" style="margin-top:20px">
 
-            <div class="card bg-light">
+            <div class="card bg-light ">
                 <c:if test="${message=='username exists'}">
                     <div class="alert alert-danger alert-dismissible fade show">
                         <strong>Sorry!</strong> The username already exists.
