@@ -115,7 +115,7 @@
                             <li class="nav-item">
                                 <div class="search-container">
                                     <form action="search">
-                                        <input type="text" placeholder=" Search.." name="search" style="border-radius: 14px">
+                                        <input type="text" placeholder=" Search.." name="search" style="border-radius: 14px;background-color: aliceblue">
                                         <button type="submit" class="btn btn-info badge badge-light badge-pill" ><i class="fa fa-search"></i></button>
                                     </form>
                                 </div>
@@ -190,15 +190,15 @@
         </c:if>
         <c:if test="${postsPage.content!=null}">
             <div class="container" style="margin-top:10px">
-                <h2>Latest posts</h2></br>
+                <h2>Latest posts</h2>
                 <hr>
             </c:if>
         </div>
-        <div class="container" style="margin-top:0px">
+        <div class="container" style="margin-top:0px; ">
             <div class="row">
 
                 <c:forEach var = "l"  items="${postsPage.content}">
-                    <div class="col-sm-8" id="even">
+                    <div class="col-sm-12" id="even">
                         <!--  theto tin id tou user pou einai sundedemenos-->
                         <%int role = (Integer) session.getAttribute("role");%>
 
@@ -214,7 +214,7 @@
                                     <c:param name="unartist" value="${l.iduser.username}"/>
                                 </c:url>">${l.iduser.username}</a>
                         </h5>
-                        <div class="fakeimg"><img src="${l.urlImage}" style="max-width: 80%; height: auto;"/></div>
+                        <div class="fakeimg"><img src="${l.urlImage}" style="max-width: 60%; height: auto;"/></div>
                         <p>${l.description}</p>
                         <br>
 

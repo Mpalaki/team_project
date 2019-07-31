@@ -194,7 +194,7 @@
                                     <table class="table table-sm table-hover table-striped">
                                         <tbody>                                    
                                             <c:forEach var = "l" items="${posts}">
-                                            <div class="col-sm-10" id="even">
+                                            <div class="col-sm-12" id="even">
                                                 <!--  theto tin id tou user pou einai sundedemenos-->
                                                 <% int role = (Integer) session.getAttribute("role");%>
 
