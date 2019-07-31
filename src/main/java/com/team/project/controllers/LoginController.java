@@ -81,7 +81,7 @@ public class LoginController {
                 } else {
                     String message = "incorrect password";
                     mm.addAttribute("message", message);
-                    return "registerform";
+                    return "welcome";
                 }
             } else {
                 String message = "activate account";

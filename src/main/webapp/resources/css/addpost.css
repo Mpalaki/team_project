@@ -24,13 +24,12 @@ input[type=submit] {
     cursor: pointer;
 }
 textarea {
-    background-color: #fafbc5;
     color: black;
      text-decoration: none;
      cursor: pointer;
+     border-radius: 6px;
 }
 input[type=text] {
-    background-color:#fafbc5;
      color: black;
      margin: 4px 2px;
     cursor: pointer;
