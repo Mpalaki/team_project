@@ -20,7 +20,7 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="resources/css/welcome.css">
+        <link rel="stylesheet" href="resources/css/postpage.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -85,9 +85,9 @@
                 </h5>
                 <div class="fakeimg"><img src="${post.urlImage}" style="max-width: 100%; height: auto;"/></div>
                 <p>${post.description}</p><hr>
-                <span id="likes"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i>${likes}<div id="likers" style="display: none; background-color: grey;
+                <span id="likes"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i>${likes}<div id="likers" style="display: none; background-color: aliceblue;
                                                                                                       width: 110px;
-                                                                                                      height: 110px;
+                                                                                                      height: auto;
                                                                                                       overflow: auto ">
                         <c:forEach var = "l" items="${likers}">
                             ${l.username}<br>

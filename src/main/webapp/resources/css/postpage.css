@@ -1,7 +1,7 @@
 #prologos{
     background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("images/japan-galleries_blum-and-poe_1100x733.jpg"); /* The image used */
     background-color: #cccccc; /* Used if the image is unavailable */
-    height: 380px; /* You must set a specified height */
+    height: 280px; /* You must set a specified height */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
@@ -20,13 +20,6 @@ input[type=submit] {
     margin: 6px ;
     cursor: pointer;
 }
-
-.navbar-transparent {
-    background-color: transparent !important;
-    background: transparent !important;
-    border-width: 0px;
-}
-
 input[type=text],input[type=password] {
     background-color:#faf68a;
     border: none;
@@ -36,23 +29,6 @@ input[type=text],input[type=password] {
     margin: 4px 2px;
     cursor: pointer;
 }
-
-
-.navbar-nav {
-    display:inline-table;
-    width:100%;
-    margin: 0;
-}
-.navbar-nav > li {
-    float:none;
-    display:table-cell;
-    text-align:center;
-}
-.navbar-transparent ul li a{
-    color: #000 !important;}
-/*#navform{*/
-/*    float: right;*/
-/*}*/
 li{
     padding-left: 10px;
     padding-right: 10px;
@@ -61,16 +37,11 @@ li{
 #even:nth-child(odd){
     background:#fafbc5;
 }
+
 ul{
     text-align: center;
 }
 
-a:hover{
-    color: orange !important;
-}
-#navigation-bar ul li a{
-    color: #000;
-}
 textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -96,15 +67,10 @@ textarea {
 #myBtn:hover {
     background-color: #555;
 }
-#navigation-bar ul li a:hover{
-    background-color: rgba(0,0,0,0.4);
-}
 
 #message{
     font-family: 'Lobster', cursive;
     color: black;
-    align-content: center;
-    padding-top: 80px;
 
 }
 @media screen and (min-width: 601px) {
@@ -122,8 +88,4 @@ textarea {
 
     font-family: 'Barriecito', cursive;
 
-}
-
-*{
-    -moz-animation: 2.6s ease-in;
 }
