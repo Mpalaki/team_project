@@ -429,7 +429,6 @@
                         <form action="updatephoto" enctype="multipart/form-data" method="post">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="file" name="avatar" onchange="GetFileSize()" required>
-                                <input type=hidden id="iduser" name="iduser" value="${iduser}">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                 <h6 id="toobig" style="margin-top: 7px"></h6>
                                 <button type="submit" class="btn btn-light" id="disable">Submit</button>
