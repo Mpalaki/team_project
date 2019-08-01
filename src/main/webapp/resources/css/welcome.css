@@ -39,7 +39,7 @@ input[type=text],input[type=password] {
 
 
 .navbar-nav {
-    display:inline-table;
+/*    display:inline-table;*/
     width:100%;
     margin: 0;
 }
@@ -56,6 +56,7 @@ input[type=text],input[type=password] {
 li{
     padding-left: 10px;
     padding-right: 10px;
+    margin: 0 auto;
 
 }
 #even:nth-child(odd){

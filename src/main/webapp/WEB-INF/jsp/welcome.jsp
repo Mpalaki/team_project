@@ -107,8 +107,8 @@
                                 <a href="myProfile" style="
                                        background-color: rgba(0,0,0,0);">
                                        <img  src="${user.stringAvatar}" style="vertical-align: middle;
-                                             width: 70px;
-                                             height: 70px;
+                                             width: 45px;
+                                             height: 45px;
                                              border-radius: 50%;"/>
                                    </a>
                                 </li>
