@@ -47,7 +47,7 @@
                     </li>
                                         
                     <li class="nav-item">
-                        <a class="nav-link" href="viewArtists">Artists</a>
+                        <a class="nav-link" href="viewArtists">Our Artists</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="addpost">Post your artwork</a>

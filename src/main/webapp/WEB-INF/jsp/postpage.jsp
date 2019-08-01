@@ -42,7 +42,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="viewArtists">Artists</a>
+                        <a class="nav-link" href="viewArtists">Our Artists</a>
                     </li>
                     <%  String username = (String) session.getAttribute("username");
                         if (username != null) {%>
@@ -83,7 +83,7 @@
                             } catch (NullPointerException e) {
                             } finally { %>
                 </h5>
-                <div class="fakeimg"><img src="${post.urlImage}" style="max-width: 100%; height: auto;"/></div>
+                <div class="fakeimg"><img src="${post.urlImage}" style="max-width: 80%; height: auto;"/></div>
                 <p>${post.description}</p><hr>
                 <span id="likes"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i>${likes}<div id="likers" style="display: none; background-color: aliceblue;
                                                                                                       width: 110px;

@@ -36,8 +36,6 @@
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <a class="navbar-brand" href="home" style="color:orange; font-family: 'Barriecito', cursive;"><h3>Calendart Gallery</h3></a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span></h5></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -48,7 +46,7 @@
                         </li>
                                                
                         <li class="nav-item">
-                            <a class="nav-link" href="viewArtists">Artists</a>
+                            <a class="nav-link" href="viewArtists">Our Artists</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="addpost">Post your artwork</a>

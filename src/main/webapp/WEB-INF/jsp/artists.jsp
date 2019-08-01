@@ -117,6 +117,11 @@
 
         <!-- Page Content -->
         <div class="container">
+            <div class="container" style="margin-top:10px">
+                <h2>Our Artists</h2>
+                <hr>
+
+            </div>
             <div class="row">
                 <!-- Team Member 1 -->
                 <c:forEach var = "artists" items="${artists}">                                        
