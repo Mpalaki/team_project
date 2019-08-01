@@ -298,7 +298,7 @@
             <c:if test="${postsPage.totalPages> 0}">
                 <%--                                                            <div class="pagination">--%>
                 <c:forEach var="pageNumber" items="${pageNumbers}">
-                    <li class="page-item">
+                    <li class="page-item" style="margin: 0;">
                         <a class="page-link" href="home?size=${postsPage.size}&page=${pageNumber}">${pageNumber}</a>
                     </li>
                 </c:forEach>
